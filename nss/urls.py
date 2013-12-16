@@ -20,7 +20,6 @@ admin.autodiscover()
 from misc.dajaxice.core import dajaxice_autodiscover, dajaxice_config
 dajaxice_autodiscover()
 
-
 urlpatterns = patterns('',
     url(r'^$', 'nss.views.home', name='home'),
     #url(r'^nss/', include('nss.foo.urls')),

@@ -71,3 +71,15 @@ def valid_phone_number(num_string):
     data = "".join(num_string.split()).replace("+", "")
     return data.isdigit() and len(data) >= 10 and len(data) <= 13 
         
+#########################################################################################
+# Setup database commands
+def setup_groups():
+    GROUPS = (
+        (0, 'Professor'),
+        (1, 'Managerial'),
+        (2, 'Project Representative'),
+        (3, 'Organisation'),
+        (4, 'Helper'),
+        (5, 'Volunteer'),
+    )
+
