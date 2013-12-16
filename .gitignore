@@ -1,0 +1,25 @@
+# Numerous always-ignore extensions
+*.diff
+*.err
+*.orig
+*.log
+*.rej
+*.swo
+*.swp
+*.zip
+*.vi
+*~
+*.sass-cache
+*.pyc
+*.py~
+*.html~
+
+.AppleDouble
+nss/local-settings.py
+media/*
+static-files/*
+*.sublime-project
+*.sublime-workspace
+venv
+deps
+build
