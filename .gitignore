@@ -15,7 +15,7 @@
 *.html~
 
 .AppleDouble
-nss/local-settings.py
+nss/local_settings.py
 media/*
 static-files/*
 *.sublime-project

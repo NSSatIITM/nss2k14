@@ -1,17 +1,51 @@
+# Django
 from django.conf.urls import patterns, include, url
+from django.contrib import admin
 
-# Uncomment the next two lines to enable the admin:
-# from django.contrib import admin
-# admin.autodiscover()
+# Settings
+import nss.settings as settings
+
+# Models
+
+# Forms
+
+# Misc - Dajaxice
+
+# Python
+
+
+# Admin
+admin.autodiscover()
+# Dajaxice
+from misc.dajaxice.core import dajaxice_autodiscover, dajaxice_config
+dajaxice_autodiscover()
+
 
 urlpatterns = patterns('',
-    # Examples:
-    # url(r'^$', 'nss.views.home', name='home'),
-    # url(r'^nss/', include('nss.foo.urls')),
+    url(r'^$', 'nss.views.home', name='home'),
+    #url(r'^nss/', include('nss.foo.urls')),
 
-    # Uncomment the admin/doc line below to enable admin documentation:
-    # url(r'^admin/doc/', include('django.contrib.admindocs.urls')),
-
-    # Uncomment the next line to enable the admin:
-    # url(r'^admin/', include(admin.site.urls)),
+    # Admin
+    url(r'^admin/doc/', include('django.contrib.admindocs.urls')),
+    url(r'^admin/', include(admin.site.urls)),
+    
+    # Captcha urls
+    url(r'^captcha/', include('captcha.urls')),
+    # Social Auth
+    url(r'', include('social_auth.urls')),
+    # Dajaxice
+    url(dajaxice_config.dajaxice_url, include('misc.dajaxice.urls')), # For dajaxice to function corrently
+    # Media files
+    url(r'^media/(?P<path>.*)$', 'django.views.static.serve', { 'document_root': settings.MEDIA_ROOT }),
 )
+
+# 400 & 500
+#handler404 = 'bloodline_server.views.show404'
+#handler500 = 'bloodline_server.views.show500'
+
+# This is to test out DEBUG = False in localhost
+# REMEMBER : Should be commented out on server !
+if ( settings.SITE_URL.find("localhost") != -1 or settings.SITE_URL.find("127.0.") != -1 ) and not settings.DEBUG:
+    urlpatterns += patterns('',
+        url(r'^static/(?P<path>.*)$', 'django.views.static.serve', {'document_root': settings.STATIC_ROOT}),
+    )

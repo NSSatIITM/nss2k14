@@ -121,7 +121,7 @@ MIDDLEWARE_CLASSES = (
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 
     # Mobile checker from django_user_agents
-    'django_user_agents.middleware.UserAgentMiddleware',
+    #'django_user_agents.middleware.UserAgentMiddleware',
 )
 
 ROOT_URLCONF = 'nss.urls'
