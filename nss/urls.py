@@ -1,16 +1,13 @@
 # Django
 from django.conf.urls import patterns, include, url
 from django.contrib import admin
-
-# Settings
+# NSS
 import nss.settings as settings
-
+# Decorators
 # Models
-
 # Forms
-
-# Misc - Dajaxice
-
+# View functions
+# Misc
 # Python
 
 

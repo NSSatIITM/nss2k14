@@ -1,17 +1,22 @@
-#Utilities
-#Import stuff.
+# Django
 from django.template.context import Context, RequestContext
-from django.shortcuts import HttpResponseRedirect
-import nss.settings as settings
+from django.shortcuts import HttpResponseRedirect, resolve_url
 from django.core.urlresolvers import reverse,resolve
-
 from django.contrib import messages
 from django.contrib.auth import REDIRECT_FIELD_NAME
-from functools import wraps
-from django.utils.decorators import available_attrs
 from django.utils.encoding import force_str
-from django.shortcuts import resolve_url
+# Decorators
+# NSS
+import nss.settings as settings
+from misc.utils import *  #Import miscellaneous functions
+# Models
 from django.db import models
+from django.contrib.auth.models import User, Group
+# Forms
+# View functions
+# Misc
+# Python
+from functools import wraps
 try:
     from urllib.parse import urlparse
 except ImportError:     # Python 2
@@ -75,11 +80,16 @@ def valid_phone_number(num_string):
 # Setup database commands
 def setup_groups():
     GROUPS = (
-        (0, 'Professor'),
-        (1, 'Managerial'),
-        (2, 'Project Representative'),
-        (3, 'Organisation'),
-        (4, 'Helper'),
-        (5, 'Volunteer'),
+        'Incharge', # Equivalent of profs
+        'Managerial', # Managerial team members
+        'Project Representative', # PRs for eacsh project
+        'Volunteer', # Volunteers in NSS
+        'Helper', # Helpers in NSS
+        'Organisation', # Organizations like NGOs
     )
 
+    for i in GROUPS:
+        t = Group.objects.create()
+        t.name = i
+        t.save()
+        #t.permissions.add(

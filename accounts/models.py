@@ -17,13 +17,7 @@ class UserProfile(models.Model):
     feedback = models.TextField(null = True, blank = True, help_text = 'We\'d love to hear from you! Please feel free to let us know what you think.')
 
     def __unicode__(self):
-        return self.user.email
+        return self.user.username
 
-        
-    def is_request_maker(self): # Request makers at the location of the establishment by default
-        return self.establishment in [self.BLOODBANK, self.HOSPITAL]
-    def is_request_maker_with_location(self): # Request makers who make requests for people at different location
-        return self.establishment in [self.INSTITUTE, self.ORGANISATION]
-    
     class Admin:
         pass
