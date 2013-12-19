@@ -14,11 +14,37 @@ framework.
 
 """
 import os
+import sys
+import site
 
-# We defer to a DJANGO_SETTINGS_MODULE already in the environment. This breaks
-# if running multiple sites in the same mod_wsgi process. To fix this, use
-# mod_wsgi daemon mode with each site in its own daemon process, or use
-# os.environ["DJANGO_SETTINGS_MODULE"] = "nss.settings"
+# Add virtual environment to site directories:
+site.addsitedir('/var/sites/nss/git/nss2k14/venv/lib/python2.6/site-packages')
+
+path = ['/var/sites/nss/flup-1.0.2',
+	'/var/sites/nss/git/nss2k14/nss', 
+	'/var/sites/nss/git/nss2k14',
+	'/var/sites/nss/git/nss2k14/venv',
+	'/var/sites/nss/git/nss2k14/venv/bin',
+	'/var/sites/nss/git/nss2k14/venv/lib',
+	'/var/sites/nss/git/nss2k14/venv/lib/python2.6/site-packages',
+	]
+for i in path: # If path exists, remove and add on the top
+    if i not in sys.path: 
+        sys.path.insert(0, i)
+    else:
+        while i in sys.path:
+            sys.path.remove(i)
+        sys.path.insert(0, i)
+
+ROOT_PATH = os.path.abspath(os.path.join(os.path.dirname(__file__), '..'))
+VENV_FILE = os.path.abspath(os.path.join(ROOT_PATH, 'venv', 'bin', 'activate_this.py'))
+execfile(VENV_FILE, dict(__file__=VENV_FILE))
+
+# Switch to the directory of your project. (Optional)
+os.chdir("/var/sites/nss/git/nss2k14/")
+
+# Set the DJANGO_SETTINGS_MODULE environment variables
+os.environ['PYTHON_EGG_CACHE'] = "/var/sites/nss/.python-eggs"
 os.environ.setdefault("DJANGO_SETTINGS_MODULE", "nss.settings")
 
 # This application object is used by any WSGI server configured to use this

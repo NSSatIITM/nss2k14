@@ -191,20 +191,21 @@ LOGGING = {
     'version': 1,
     'disable_existing_loggers': False,
     'filters': {
-        #'require_debug_false': {
-        #    '()': 'django.utils.log.RequireDebugFalse'
-        #},
-        # Define filter for suspicious operations
-        'skip_suspicious_operations': {
-            '()': 'django.utils.log.CallbackFilter',
-            'callback': skip_suspicious_operations,
+        'require_debug_false': {
+            '()': 'django.utils.log.RequireDebugFalse'
         },
+        # Define filter for suspicious operations
+#        'skip_suspicious_operations': {
+#            '()': 'django.utils.log.CallbackFilter',
+#            'callback': skip_suspicious_operations,
+#        },
     },
     'handlers': {
         'mail_admins': {
             'level': 'ERROR',
-            #'filters': ['require_debug_false', 'skip_suspicious_operations'],
-            'filters': ['skip_suspicious_operations'],
+#            'filters': ['require_debug_false', 'skip_suspicious_operations'],
+#            'filters': ['skip_suspicious_operations'],
+ 	    'filters': ['require_debug_false'],
             'class': 'django.utils.log.AdminEmailHandler'
         },
         'console': {
