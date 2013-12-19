@@ -23,7 +23,7 @@ VENV_FILE = os.path.abspath(os.path.join(ROOT_PATH, 'venv', 'bin', 'activate_thi
 PAKG_PATH = os.path.abspath(os.path.join(ROOT_PATH, 'venv', 'lib', 'python2.6', 'site-packages'))
 
 # Add virtual environment to site directories:
-site.addsitedir()
+site.addsitedir(ROOT_PATH)
 
 # handle the path variable
 path = [
