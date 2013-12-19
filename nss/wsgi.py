@@ -17,17 +17,25 @@ import os
 import sys
 import site
 
-# Add virtual environment to site directories:
-site.addsitedir('/var/sites/nss/git/nss2k14/venv/lib/python2.6/site-packages')
+# Paths
+ROOT_PATH = os.path.abspath(os.path.join(os.path.dirname(__file__), '..'))
+VENV_FILE = os.path.abspath(os.path.join(ROOT_PATH, 'venv', 'bin', 'activate_this.py'))
+PAKG_PATH = os.path.abspath(os.path.join(ROOT_PATH, 'venv', 'lib', 'python2.6', 'site-packages'))
 
-path = ['/var/sites/nss/flup-1.0.2',
-	'/var/sites/nss/git/nss2k14/nss', 
-	'/var/sites/nss/git/nss2k14',
-	'/var/sites/nss/git/nss2k14/venv',
-	'/var/sites/nss/git/nss2k14/venv/bin',
-	'/var/sites/nss/git/nss2k14/venv/lib',
-	'/var/sites/nss/git/nss2k14/venv/lib/python2.6/site-packages',
-	]
+# Add virtual environment to site directories:
+site.addsitedir()
+
+# handle the path variable
+path = [
+#    '/var/sites/nss/flup-1.0.2',
+    ROOT_PATH,
+    os.path.abspath(os.path.join(ROOT_PATH, 'nss')),
+    os.path.abspath(os.path.join(ROOT_PATH, 'venv')),
+    os.path.abspath(os.path.join(ROOT_PATH, 'venv', 'bin')),
+    os.path.abspath(os.path.join(ROOT_PATH, 'venv', 'lib')),
+    PAKG_PATH
+    ]
+    
 for i in path: # If path exists, remove and add on the top
     if i not in sys.path: 
         sys.path.insert(0, i)
@@ -36,15 +44,14 @@ for i in path: # If path exists, remove and add on the top
             sys.path.remove(i)
         sys.path.insert(0, i)
 
-ROOT_PATH = os.path.abspath(os.path.join(os.path.dirname(__file__), '..'))
-VENV_FILE = os.path.abspath(os.path.join(ROOT_PATH, 'venv', 'bin', 'activate_this.py'))
+
 execfile(VENV_FILE, dict(__file__=VENV_FILE))
 
 # Switch to the directory of your project. (Optional)
-os.chdir("/var/sites/nss/git/nss2k14/")
+os.chdir(ROOT_PATH)
 
 # Set the DJANGO_SETTINGS_MODULE environment variables
-os.environ['PYTHON_EGG_CACHE'] = "/var/sites/nss/.python-eggs"
+#os.environ['PYTHON_EGG_CACHE'] = "/var/sites/nss/.python-eggs"
 os.environ.setdefault("DJANGO_SETTINGS_MODULE", "nss.settings")
 
 # This application object is used by any WSGI server configured to use this
