@@ -21,9 +21,9 @@ SITE_URL = 'http://localhost:8000'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql', # Add 'postgresql_psycopg2', 'mysql', 'sqlite3' or 'oracle'.
-        'NAME': 'DB_NAME',                      # Or path to database file if using sqlite3.
-        'USER': 'USERNAME',                      # Not used with sqlite3.
-        'PASSWORD': 'PASSWORD',                  # Not used with sqlite3.
+        'NAME': 'NSS_DB_NAME',                      # Or path to database file if using sqlite3.
+        'USER': 'SQL_ID',                      # Not used with sqlite3.
+        'PASSWORD': 'SQL_PWD',                  # Not used with sqlite3.
         'HOST': '',                      # Set to empty string for localhost. Not used with sqlite3.
         'PORT': '',                      # Set to empty string for default. Not used with sqlite3.
     }
@@ -31,13 +31,8 @@ DATABASES = {
 
 SEND_EMAILS = False
 
-NOTIFY_FOR_CONNECTION = (
-#        ('Bloodline Team', 'bloodlineideate@googlegroups.com'),
-#        ('Abdeali J Kothari','abdealikothari@gmail.com'),
-)
-
 #EMAIL_HOST = 'smtp.gmail.com'
-#DEFAULT_FROM_EMAIL = 'Abdeali BLL <noreply@ajkbloodlinelabs.com>'
+#DEFAULT_FROM_EMAIL = 'Abdeali NSS <noreply@ajknss.iitm.ac.in>'
 #EMAIL_HOST_USER = 'abdealikothari@gmail.com'
 #EMAIL_HOST_PASSWORD = ''
 #EMAIL_PORT = 587
