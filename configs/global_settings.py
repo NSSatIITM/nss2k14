@@ -294,3 +294,15 @@ CAPTCHA_LETTER_ROTATION = None
 MOBI_USER_AGENT_IGNORE_LIST = [] # Example : ['ipad'] will ignore ipads
 MOBI_DETECT_TABLET = False # Set to True to have another variable request.tablet 
 #MOBI_REDIRECT_URL = "http://nss.iitm.ac.in/mobile"
+
+# Admin form and bootstrapping
+ADAPTOR_INPLACEEDIT = {}
+if 'inplaceeditform_extra_fields' in INSTALLED_APPS:
+    ADAPTOR_INPLACEEDIT['tiny'] = 'inplaceeditform_extra_fields.fields.AdaptorTinyMCEField'
+    # You can add the other adaptors of inplaceeditform_extra_fields
+    # https://pypi.python.org/pypi/django-inplaceedit-extra-fields#installation
+if 'bootstrap3_datetime' in INSTALLED_APPS:
+    ADAPTOR_INPLACEEDIT['date'] = 'inplaceeditform_bootstrap.fields.AdaptorDateBootStrapField'
+    ADAPTOR_INPLACEEDIT['datetime'] = 'inplaceeditform_bootstrap.fields.AdaptorDateTimeBootStrapField'
+    ADAPTOR_INPLACEEDIT['date_bootstrap'] = 'inplaceeditform_bootstrap.fields.AdaptorDateBootStrapField'
+    ADAPTOR_INPLACEEDIT['datetime_bootstrap'] = 'inplaceeditform_bootstrap.fields.AdaptorDateTimeBootStrapField'

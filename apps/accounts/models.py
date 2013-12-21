@@ -8,16 +8,25 @@ GENDER_CHOICES = (
 )
 
 class UserProfile(models.Model):
-    user = models.ForeignKey(User, unique = True)
+    # Foreign Key for the User class
+    user            = models.ForeignKey(User, unique = True)
+
+    # Identification number
+    roll_no         = models.CharField(max_length = 10, blank = False, null = False)
     
     # Personal info
-    gender = models.CharField(max_length=1,choices=GENDER_CHOICES,default='N')
-    phone_number = models.CharField(max_length = 10, help_text='eg: 9841072571.',null = True, blank = True)
-    
-    feedback = models.TextField(null = True, blank = True, help_text = 'We\'d love to hear from you! Please feel free to let us know what you think.')
+    gender          = models.CharField(max_length=1,choices=GENDER_CHOICES,default='N')
+    phone_number    = models.CharField(max_length = 10, help_text='eg: 9841072571.',null = True, blank = True)
+    hostel          = models.CharField(max_length = 15, blank = True, null = True)
+    room_no         = models.CharField(max_length = 10, blank = True, null = True)
 
+    # Activation keys
+    activation_key  = models.CharField(max_length = 40, null = True)
+    activation_key_mobile  = models.CharField(max_length = 6, null = True)
+    
     def __unicode__(self):
         return self.user.username
 
     class Admin:
         pass
+
