@@ -66,7 +66,7 @@ TIME_FORMAT = '%H:%M'
 
 # Absolute filesystem path to the directory that will hold user-uploaded files.
 # Example: "/home/media/media.lawrence.com/media/"
-MEDIA_ROOT = os.path.abspath(os.path.join(PROJECT_PATH, '/media/'))
+MEDIA_ROOT = os.path.abspath(os.path.join(PROJECT_PATH, 'files', 'media'))
 
 # URL that handles the media served from MEDIA_ROOT. Make sure to use a
 # trailing slash.
@@ -77,7 +77,7 @@ MEDIA_URL = '/media/'
 # Don't put anything in this directory yourself; store your static files
 # in apps' "static/" subdirectories and in STATICFILES_DIRS.
 # Example: "/home/media/media.lawrence.com/static/"
-STATIC_ROOT = os.path.abspath(os.path.join(PROJECT_PATH, 'static-files/'))
+STATIC_ROOT = os.path.abspath(os.path.join(PROJECT_PATH, 'files', 'static-files'))
 
 # URL prefix for static files.
 # Example: "http://media.lawrence.com/static/"
@@ -88,7 +88,7 @@ STATICFILES_DIRS = (
     # Put strings here, like "/home/html/static" or "C:/www/django/static".
     # Always use forward slashes, even on Windows.
     # Don't forget to use absolute paths, not relative paths.
-    os.path.join(PROJECT_PATH, 'static'), # Custon static files
+    os.path.join(PROJECT_PATH, 'files', 'static'), # Custon static files
     os.path.join(PROJECT_PATH, 'misc', 'dajax', 'static', 'dajax'), # Dajax static files
 )
 
@@ -124,10 +124,10 @@ MIDDLEWARE_CLASSES = (
     #'django_user_agents.middleware.UserAgentMiddleware',
 )
 
-ROOT_URLCONF = 'nss.urls'
+ROOT_URLCONF = 'configs.urls'
 
 # Python dotted path to the WSGI application used by Django's runserver.
-WSGI_APPLICATION = 'nss.wsgi.application'
+WSGI_APPLICATION = 'configs.wsgi.application'
 
 TEMPLATE_DIRS = (
     # Put strings here, like "/home/html/django_templates" or "C:/www/django/templates".
@@ -137,7 +137,7 @@ TEMPLATE_DIRS = (
     # os.path.join(PROJECT_PATH, 'misc', 'dajaxice', 'templates'), # Dajaxice templates
 )
 
-INSTALLED_APPS = (
+DJANGO_APPS = (
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
@@ -145,33 +145,37 @@ INSTALLED_APPS = (
     'django.contrib.messages',
     'django.contrib.staticfiles',
     # Uncomment the next line to enable the admin:
+    #'bootstrap',
     'django.contrib.admin',
     # Uncomment the next line to enable admin documentation:
     'django.contrib.admindocs',
-
-    # Extra inbuilt django apps
+    # For humanized dates
     'django.contrib.humanize',
-
+)
+THIRD_PARTY_APPS = (
     # South
     'south',
     # Social auth plugin
     'social_auth',
     #TastyPie for the RESTFUL API
     'tastypie',
-    # Dajax(ice) for async requests
-    'misc.dajaxice',
-    'misc.dajax',
     # Captcha - django-simple-captcha
     'captcha',
     # Mobile checker
     'django_user_agents',
-    
-    #Our apps
-    'nss',
-    'accounts',
-    'misc',
 
 )
+
+NSS_APPS = (
+    # Dajax(ice) for async requests
+    'misc.dajaxice',
+    'misc.dajax',    
+    #Our apps
+    'libs.nss',
+    'libs.accounts',
+    'misc',
+)
+INSTALLED_APPS = DJANGO_APPS + THIRD_PARTY_APPS + NSS_APPS
 
 # A sample logging configuration. The only tangible logging
 # performed by this configuration is to send an email to
@@ -195,17 +199,15 @@ LOGGING = {
             '()': 'django.utils.log.RequireDebugFalse'
         },
         # Define filter for suspicious operations
-#        'skip_suspicious_operations': {
-#            '()': 'django.utils.log.CallbackFilter',
-#            'callback': skip_suspicious_operations,
-#        },
+        'skip_suspicious_operations': {
+            '()': 'django.utils.log.CallbackFilter',
+            'callback': skip_suspicious_operations,
+        },
     },
     'handlers': {
         'mail_admins': {
             'level': 'ERROR',
-#            'filters': ['require_debug_false', 'skip_suspicious_operations'],
-#            'filters': ['skip_suspicious_operations'],
- 	    'filters': ['require_debug_false'],
+            'filters': ['require_debug_false', 'skip_suspicious_operations'],
             'class': 'django.utils.log.AdminEmailHandler'
         },
         'console': {
@@ -233,6 +235,7 @@ LOGGING = {
     }
 }
 
+"""
 # Cache backend is optional, but recommended to speed up user agent parsing
 CACHES = {
     'default': {
@@ -240,13 +243,14 @@ CACHES = {
         'LOCATION': '127.0.0.1:11211',
     }
 }
+"""
 
 #Authentication Profile
-AUTH_PROFILE_MODULE = 'accounts.UserProfile'
+AUTH_PROFILE_MODULE = 'libs.accounts.UserProfile'
 
 # Important urls
-LOGIN_URL          = 'nss.views.home'
-LOGIN_REDIRECT_URL = 'nss.views.home'
+LOGIN_URL          = 'libs.nss.views.home'
+LOGIN_REDIRECT_URL = 'libs.nss.views.home'
 LOGIN_ERROR_URL    = '/login-error/'
 
 #Template context processors
@@ -264,10 +268,12 @@ TEMPLATE_CONTEXT_PROCESSORS = (
 
 )
 
+
+# Email settings
 EMAIL_HOST = 'localhost'
 DEFAULT_FROM_EMAIL = 'NSS IITM <noreply@nss.iitm.ac.in>'
-EMAIL_HOST_USER = 'noreply@bloodlinelabs.com'
-# EMAIL_HOST_PASSWORD = '@lYvthO1'
+EMAIL_HOST_USER = 'noreply@nss.iitm.ac.in'
+# EMAIL_HOST_PASSWORD = ''
 
 # Captcha settings - django-simple-captcha
 CAPTCHA_CHALLENGE_FUNCT = 'captcha.helpers.math_challenge'

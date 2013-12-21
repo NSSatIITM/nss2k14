@@ -2,14 +2,13 @@
 from django.conf.urls import patterns, include, url
 from django.contrib import admin
 # NSS
-import nss.settings as settings
+import configs.settings as settings
 # Decorators
 # Models
 # Forms
 # View functions
 # Misc
 # Python
-
 
 # Admin
 admin.autodiscover()
@@ -18,7 +17,7 @@ from misc.dajaxice.core import dajaxice_autodiscover, dajaxice_config
 dajaxice_autodiscover()
 
 urlpatterns = patterns('',
-    url(r'^$', 'nss.views.home', name='home'),
+    url(r'^$', 'apps.nss.views.home', name='home'),
     #url(r'^nss/', include('nss.foo.urls')),
 
     # Admin
@@ -27,10 +26,13 @@ urlpatterns = patterns('',
     
     # Captcha urls
     url(r'^captcha/', include('captcha.urls')),
+
     # Social Auth
     url(r'', include('social_auth.urls')),
+
     # Dajaxice
     url(dajaxice_config.dajaxice_url, include('misc.dajaxice.urls')), # For dajaxice to function corrently
+    
     # Media files
     url(r'^media/(?P<path>.*)$', 'django.views.static.serve', { 'document_root': settings.MEDIA_ROOT }),
 )

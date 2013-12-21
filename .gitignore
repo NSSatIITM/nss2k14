@@ -15,9 +15,9 @@
 *.html~
 
 .AppleDouble
-nss/local_settings.py
-media/*
-static-files/*
+configs/settings.py
+files/media/*
+files/static-files/*
 *.sublime-project
 *.sublime-workspace
 venv

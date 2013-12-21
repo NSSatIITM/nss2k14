@@ -29,7 +29,7 @@ site.addsitedir(ROOT_PATH)
 path = [
 #    '/var/sites/nss/flup-1.0.2',
     ROOT_PATH,
-    os.path.abspath(os.path.join(ROOT_PATH, 'nss')),
+    os.path.abspath(os.path.join(ROOT_PATH, 'configs')),
     os.path.abspath(os.path.join(ROOT_PATH, 'venv')),
     os.path.abspath(os.path.join(ROOT_PATH, 'venv', 'bin')),
     os.path.abspath(os.path.join(ROOT_PATH, 'venv', 'lib')),
@@ -52,7 +52,7 @@ os.chdir(ROOT_PATH)
 
 # Set the DJANGO_SETTINGS_MODULE environment variables
 #os.environ['PYTHON_EGG_CACHE'] = "/var/sites/nss/.python-eggs"
-os.environ.setdefault("DJANGO_SETTINGS_MODULE", "nss.settings")
+os.environ.setdefault("DJANGO_SETTINGS_MODULE", "configs.settings")
 
 # This application object is used by any WSGI server configured to use this
 # file. This includes Django's development server, if the WSGI_APPLICATION
