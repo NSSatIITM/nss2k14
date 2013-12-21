@@ -17,8 +17,8 @@ from misc.dajaxice.core import dajaxice_autodiscover, dajaxice_config
 dajaxice_autodiscover()
 
 urlpatterns = patterns('',
-    url(r'^$', 'libs.nss.views.home', name='home'),
-    #url(r'^nss/', include('libs.nss.foo.urls')),
+    url(r'^$', 'apps.nss.views.home', name='home'),
+    #url(r'^nss/', include('apps.nss.foo.urls')),
 
     # Admin
     url(r'^admin/doc/', include('django.contrib.admindocs.urls')),

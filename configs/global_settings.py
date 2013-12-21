@@ -145,7 +145,6 @@ DJANGO_APPS = (
     'django.contrib.messages',
     'django.contrib.staticfiles',
     # Uncomment the next line to enable the admin:
-    #'bootstrap',
     'django.contrib.admin',
     # Uncomment the next line to enable admin documentation:
     'django.contrib.admindocs',
@@ -163,7 +162,14 @@ THIRD_PARTY_APPS = (
     'captcha',
     # Mobile checker
     'django_user_agents',
-
+    # Bootstrap 3 django templates -- seems horrible; need to test again later
+    #'bootstrap3',
+    # Bootstrap and inplace-edit admin
+    'inplaceeditform_bootstrap',  # it is very important that this app is before that inplaceeditform and inplaceeditform_extra_fields
+    'inplaceeditform',
+    'inplaceeditform_extra_fields',  # this is optional but recommended
+    'bootstrap3_datetime', # this is optional but recommended
+    
 )
 
 NSS_APPS = (
@@ -171,11 +177,11 @@ NSS_APPS = (
     'misc.dajaxice',
     'misc.dajax',    
     #Our apps
-    'libs.nss',
-    'libs.accounts',
+    'apps.nss',
+    'apps.accounts',
     'misc',
 )
-INSTALLED_APPS = DJANGO_APPS + THIRD_PARTY_APPS + NSS_APPS
+INSTALLED_APPS = THIRD_PARTY_APPS + NSS_APPS + DJANGO_APPS
 
 # A sample logging configuration. The only tangible logging
 # performed by this configuration is to send an email to
