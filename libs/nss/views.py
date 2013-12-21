@@ -3,7 +3,7 @@ from django.shortcuts import render_to_response, redirect, HttpResponseRedirect
 from django.contrib.auth import authenticate, login
 from django.contrib import messages
 # NSS
-import nss.settings as settings
+import configs.settings as settings
 from misc.utils import *  #Import miscellaneous functions
 # Decorators
 # Models

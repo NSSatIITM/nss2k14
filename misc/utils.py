@@ -7,7 +7,7 @@ from django.contrib.auth import REDIRECT_FIELD_NAME
 from django.utils.encoding import force_str
 # Decorators
 # NSS
-import nss.settings as settings
+import configs.settings as settings
 from misc.utils import *  #Import miscellaneous functions
 # Models
 from django.db import models
