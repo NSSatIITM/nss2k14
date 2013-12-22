@@ -1,5 +1,6 @@
 {% extends 'base.html' %}
 {% load staticfiles %}
+{% load widget_tweaks %}
 
 {% block title %} Login - NSS IITM {% endblock %}
 
@@ -26,17 +27,23 @@
                 <div id="regular-signup" class="row " style='display: none;'>
                     <div class="col-md-4 col-md-offset-2">
                         <h3><center>Create a new account</center></h3>
-                        <form action="{% url 'login' %}" method="POST" role='form'>
+                        <form action="{% url 'login' %}" method="POST" role='form' class='form-horizontal'>
                             {% csrf_token %}
+                            {% with WIDGET_ERROR_CLASS='error' WIDGET_REQUIRED_CLASS='my_required' %}
                             <div class='row'>
-                                {{ signupform.first_name.errors }}
-                                {{ signupform.first_name }}
+                                <div class='col-md-6'>
+                                    <label for="first_name" class="sr-only control-label">{{signupform.first_name.label}}</label>
+                                    {% render_field signupform.first_name class+="form-control" placeholder=signupform.first_name.label %}
+                                </div>
+                                <div class='col-md-6'>
+                                    <label for="first_name" class="sr-only control-label">Last Name</label>
+                                    {{ signupform.last_name }}
+                                </div>
                             </div>
                             
                                 {{ signupform.non_field_errors }}
-                                <center><input type="submit" name="signup" class="btn btn-success pull-left" value="Join a trusted community. For life."></center>
-                            
-                            
+                                <input type="submit" name="signup" class="btn btn-success pull-left" value="Join a trusted community. For life.">
+                            {% endwith %}
                         </form>
                     </div>
                     <div class="col-md-4">

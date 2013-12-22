@@ -169,7 +169,8 @@ THIRD_PARTY_APPS = (
     'inplaceeditform',
     'inplaceeditform_extra_fields',  # this is optional but recommended
     'bootstrap3_datetime', # this is optional but recommended
-    
+    # For template form field changes in template
+    'widget_tweaks',
 )
 
 NSS_APPS = (
