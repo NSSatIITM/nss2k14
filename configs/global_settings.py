@@ -171,6 +171,8 @@ THIRD_PARTY_APPS = (
     'bootstrap3_datetime', # this is optional but recommended
     # For template form field changes in template
     'widget_tweaks',
+    # Permission handling
+    'object_permissions'
 )
 
 NSS_APPS = (

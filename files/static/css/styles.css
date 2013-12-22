@@ -83,6 +83,25 @@ body {
 .pad-top {
     padding-top : 5%;
 }
+.pad-bottom {
+    padding-bottom : 5%;
+}
+.pad-left {
+    padding-left : 5%;
+}
+.pad-right {
+    padding-right : 5%;
+}
+
+.full-width {
+    width : 100%;
+}
+
+.right-line {
+
+padding-right : 20px;
+border-right: 1px solid #ccc;
+}
 
 /* ----------------------- Navbar and base css
  * ----------------------------------------------------------------- */
