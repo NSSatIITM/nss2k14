@@ -163,7 +163,7 @@ THIRD_PARTY_APPS = (
     # Mobile checker
     'django_user_agents',
     # Bootstrap 3 django templates -- seems horrible; need to test again later
-    #'bootstrap3',
+    'bootstrap3',
     # Bootstrap and inplace-edit admin
     'inplaceeditform_bootstrap',  # it is very important that this app is before that inplaceeditform and inplaceeditform_extra_fields
     'inplaceeditform',
@@ -176,9 +176,10 @@ NSS_APPS = (
     # Dajax(ice) for async requests
     'misc.dajaxice',
     'misc.dajax',    
-    #Our apps
+    # Our apps
     'apps.nss',
     'apps.accounts',
+    'apps.events',
     'misc',
 )
 INSTALLED_APPS = THIRD_PARTY_APPS + NSS_APPS + DJANGO_APPS

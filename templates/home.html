@@ -1,5 +1,92 @@
 {% extends 'base.html' %}
+{% load staticfiles %}
+
+{% block title %} NSS IITM {% endblock %}
 
 {% block content %}
-test
+    <div id="home_carousel" class="carousel slide" data-interval='3000' data-ride='carousel'>
+        <!-- Indicators --
+        <ol class="carousel-indicators">
+            {% for carousel_img in carousel_files %}
+                <li data-target="#home_carousel" data-slide-to="{{ forloop.counter0 }}" class="{% if forloop.first %}active {% endif %}"></li>
+            {% endfor %}
+        </ol>-->
+
+        <!-- Wrapper for slides -->
+        <div class="carousel-inner">
+            {% for carousel_img in carousel_files %}
+                <div class="item {% if forloop.first %}active {% endif %}">   
+                    <div class="fill" style="background-image:url('{{ carousel_img }}');"></div>
+                    <div class="carousel-caption">
+                        <h1>NSS IITM</h1>
+                    </div>  
+                </div>
+            {% endfor %}
+        </div>
+
+        <!-- Controls -->
+        <a class="left carousel-control" href="#home_carousel" data-slide="prev">
+            <span class="icon-prev"></span>
+        </a>
+        <a class="right carousel-control" href="#home_carousel" data-slide="next">
+            <span class="icon-next"></span>
+        </a>
+    </div>
+    <div class='container'>
+        <div class='row centered'>
+            <div class="col-md-6">efj,ke</div>
+            <div class="col-md-6">efj,ke</div>
+        </div>
+    </div>
+
+{% endblock %}
+
+{% block extra_css %}
+<style type='text/css'>
+    /* Half Page Height Carousel Customization */
+    .carousel {
+        height: 50%;
+        padding : 0px 10%;
+    }
+    
+    .item,
+    .active,
+    .carousel-inner {
+        height: 100%;
+    }
+    
+    .fill {
+        width: 100%;
+        height: 100%;
+        background-position: center;
+        background-size: cover;
+    }
+    .carousel-control.left {
+        background-image: -webkit-linear-gradient(left, color-stop(rgba(255, 255, 255, 0.5) 0), color-stop(rgba(255, 255, 255, 0.0001) 100%));
+        background-image: linear-gradient(to right, rgba(255, 255, 255, 0.5) 0, rgba(255, 255, 255, 0.0001) 100%);
+        background-repeat: repeat-x;
+        filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#80000000', endColorstr='#00000000', GradientType=1);
+    }
+
+    .carousel-control.right {
+        right: 0;
+        left: auto;
+        background-image: -webkit-linear-gradient(left, color-stop(rgba(255, 255, 255, 0.0001) 0), color-stop(rgba(255, 255, 255, 0.5) 100%));
+        background-image: linear-gradient(to right, rgba(255, 255, 255, 0.0001) 0, rgba(255, 255, 255, 0.5) 100%);
+        background-repeat: repeat-x;
+        filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#00000000', endColorstr='#80000000', GradientType=1);
+    }
+
+    @media (max-width: 767px) {
+        .carousel {
+            height: 70%; /* increases the carousel height so it looks good on phones */
+        }
+    }
+</style>
+{% endblock %}
+
+
+{% block extra_js %}
+<script type='text/javascript'>
+</script>
 {% endblock %}

@@ -68,6 +68,17 @@ def make_custom_datefield(f, **kwargs):
         formfield.widget.attrs.update({'class':'datePicker'})#, 'readonly':'true'})
     return formfield
 
+def bootstrap_form(f, **kwargs):
+    """
+        This makes it easy for frms to be bootstrapped
+        Just add :
+            formfield_callback = bootstrap_form
+        inside the form
+    """
+    formfield = f.formfield(**kwargs)
+    formfield.widget.attrs.update({'class' : 'form-control'})#, 'readonly':'true'})
+    return formfield
+
 def valid_phone_number(num_string):
     """
         Takes a phone number string and checs if the thing is a valid phone number.

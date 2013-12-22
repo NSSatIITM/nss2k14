@@ -1,5 +1,7 @@
 <!DOCTYPE html>
 {% load staticfiles %}
+{% load bootstrap3 %}
+
 <html lang="en">
 <head>
     <meta name="application-name" content="NSSIITM">
@@ -11,15 +13,12 @@
     <title>{% block title %} NSS IITM {% endblock %}</title>
     
     <!-- Include stylesheets here -->
-    <link href="{% static 'css/bootstrap.min.css' %}" rel="stylesheet" media="screen">
-    <!-- <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.0-rc1/css/bootstrap.min.css"> -->
+    {% if DEBUG %} <link href="{% static 'css/bootstrap.css' %}" rel="stylesheet" media="screen"> {% else %} {% bootstrap_css %} {% endif %}
+
     <link href="{% static 'css/styles.css' %}" rel="stylesheet" media="screen">
     <link rel="icon" type="image/x-icon" href="{% static 'img/favicon.ico' %}">
+    {% block extra_css %}{% endblock %}
 
-    <!-- Fonts -->
-    <link href='http://fonts.googleapis.com/css?family=Belleza' rel='stylesheet' type='text/css'>
-    <link href='http://fonts.googleapis.com/css?family=Alegreya+Sans:400,500,700' rel='stylesheet' type='text/css'>
-    
     {% if not DEBUG %}
         <script type="text/javascript">
             (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
@@ -33,12 +32,54 @@
     {% endif %}
 </head>
 <body>
+    
     {% block navbar %}
+    <nav class="navbar navbar-fixed-top nss-nav" role="navigation">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand navbar-logo nss" href="{{ SITE_URL }}"><img src="{% static 'img/nss_logo_small.png' %}" /></a>
+                <a class="navbar-brand nss" href="{{ SITE_URL }}">NSS IITM</a>
+            </div>
+    
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse navbar-ex1-collapse">
+                <ul class="nav navbar-nav">
+                    <li {% if eventspage %}class="active"{% endif %}><a href="">Events</a></li>
+                    <li {% if projectspage %}class="active"{% endif %}><a href="">Projects</a></li>
+                    <li {% if downloadspage %}class="active"{% endif %}><a href="">Downloads</a></li>
+                    <li {% if aboutuspage %}class="active"{% endif %}><a href="{% if abo">About Us</a></li>
+                </ul>
+                <ul class="nav navbar-nav navbar-right nss">
+                    <li {% if loginpage %}class="active"{% endif %}>
+                        {% if user.is_authenticated %}
+                            <a href="{% url 'profile' %}">{{ user.get_full_name }}</a>
+                            <a href="{% url 'logout' %}">Logout</a>
+                        {% else %}
+                            <a href="{% url 'apps.accounts.views.login' %}">Login</a>
+                        {% endif %}
+                    </li>
+                </ul>
+            </div><!-- /.navbar-collapse -->
+        </div><!-- /.container -->
+    </nav>
+    {% endblock %}
 
+    {% block messages %}
+        {% bootstrap_messages %}
     {% endblock %}
 
     {% block content %}
-
     {% endblock %}
+
+    <script type="text/javascript" src="{% static 'js/jquery.js' %}"></script>
+    {% if DEBUG %} <script type="text/javascript" src="{% static 'js/bootstrap.min.js' %}"></script> {% else %} {% bootstrap_javascript %} {% endif %}
+    
+    {% block extra_js %}{% endblock %}
 </body>
 </html>

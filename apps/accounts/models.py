@@ -12,10 +12,10 @@ class UserProfile(models.Model):
     user            = models.ForeignKey(User, unique = True)
 
     # Identification number
-    roll_no         = models.CharField(max_length = 10, blank = False, null = False)
+    roll_no         = models.CharField(max_length = 10, blank = False, null = True)
     
     # Personal info
-    gender          = models.CharField(max_length=1,choices=GENDER_CHOICES,default='N')
+    gender          = models.CharField(max_length=1, choices=GENDER_CHOICES, default='N')
     phone_number    = models.CharField(max_length = 10, help_text='eg: 9841072571.',null = True, blank = True)
     hostel          = models.CharField(max_length = 15, blank = True, null = True)
     room_no         = models.CharField(max_length = 10, blank = True, null = True)

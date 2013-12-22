@@ -1,0 +1,91 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+
+{% block title %} Login - NSS IITM {% endblock %}
+
+{% block content %}
+    <div class="container">
+        <div class="row pad-top">
+            {% if not request.user.is_authenticated %}  
+                <div class="col-md-4 col-md-offset-4 centered" id='login'>
+                    <span class='text-huge'>Hello! New here?</span>
+                    <p>lorem : need a one line on what NSS does. Should be impactful.</p>
+                    <br /><br />
+                    <a class='zocial google btn-block' href="{% url 'socialauth_begin' 'google' %}{% if request.GET.next %}?next={{ request.GET.next }}{% endif %}">Sign in with Google</a>
+                    <br /><br />
+                    <a class='zocial facebook btn-block' href="{% url 'socialauth_begin' 'facebook' %}{% if request.GET.next %}?next={{ request.GET.next }}{% endif %}">Sign in with Facebook</a>
+                    <br /><br />
+                    <a class="zocial twitter btn-block" href="{% url 'socialauth_begin' 'twitter' %}{% if request.GET.next %}?next={{ request.GET.next }}{% endif %}">Sign in with Twitter</a>
+                    <br /><br />
+                    <p class="text-big">Or, <a id="regular-signup-link" href="#regular-signup">Sign in with email.</a></p>
+                </div>
+        </div>
+    </div>
+    <div class="container">
+        <div class="row">
+                <div id="regular-signup" class="row " style='display: none;'>
+                    <div class="col-md-4 col-md-offset-2">
+                        <h3><center>Create a new account</center></h3>
+                        <form action="{% url 'login' %}" method="POST" role='form'>
+                            {% csrf_token %}
+                            <div class='row'>
+                                {{ signupform.first_name.errors }}
+                                {{ signupform.first_name }}
+                            </div>
+                            
+                                {{ signupform.non_field_errors }}
+                                <center><input type="submit" name="signup" class="btn btn-success pull-left" value="Join a trusted community. For life."></center>
+                            
+                            
+                        </form>
+                    </div>
+                    <div class="col-md-4">
+                        <h3><center>Login</center></h3>
+                        <form action="{% url 'login' %}" method="POST" class='pull-right'>
+                            {% csrf_token %}
+                            <table class="table table-condensed">
+                                {% for field in loginform %}
+                                    <tr>
+                                        <td>{{ field.label_tag }}</td><td> {{ field }}</td><td>{{ field.errors }}</td>
+                                    </tr>
+                                {% endfor %}
+                                <tr>
+                                    <td colspan='2'>
+                                        <center><input class="btn btn-success" name="login" type="submit" value="Login"> <br />
+                                            <a class="btn btn-link" style='color:white' href="{% url 'django.contrib.auth.views.password_reset' %}">Forgot password</a>
+                                        </center>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td colspan='2'>
+                                        <center>
+                                            <a id='login-link' class="btn btn-link" style='color:white' href='#login'>Login with google, facebook, twitter</a>
+                                        </center>
+                                    </td>
+                                </tr>
+                            </table>
+                            <input type="hidden" name="next" value="{% if request.GET.next %}{{ request.GET.next }}{% elif request.session.email_already_exists %}{% url 'accounts.views.profile' %}{% endif %}" />
+                        </form>
+                    </div>
+                </div>
+
+            {% endif %}
+        </div>
+    </div>
+    
+{% endblock %}
+
+{% block extra_css %}
+    <link href="{% static 'css/zocial.css' %}" rel="stylesheet" media="screen"> 
+    <style type='text/css'></style>
+{% endblock %}
+
+
+{% block extra_js %}
+    <script type='text/javascript'>
+        $("#regular-signup-link").click(function(){
+            $("#regular-signup").show('slow')
+            $('html, body').animate({ scrollTop: $("#regular-signup").offset().top}, 'slow');
+        });
+    </script>
+{% endblock %}
