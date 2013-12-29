@@ -22,7 +22,13 @@ urlpatterns = patterns('',
     # NSS APPS
     url(r'^$', 'apps.nss.views.home', name='home'),
     url(r'^home/?$', 'apps.nss.views.home', name='home'),
+    url(r'^events/?$', 'apps.events.views.events', name='events'),
+    url(r'^projects/?$', 'apps.events.views.projects', name='projects'),
+    url(r'^aboutus/?$', 'apps.nss.views.aboutus', name='aboutus'),
     url(r'^login/?$', 'apps.accounts.views.login', name='login'),
+    
+    url(r'^404/?$', 'apps.nss.views.err404', name='err404'),
+    url(r'^500/?$', 'apps.nss.views.err500', name='err500'),
     
     
     
@@ -53,8 +59,8 @@ urlpatterns = patterns('',
 )
 
 # 400 & 500
-#handler404 = 'bloodline_server.views.show404'
-#handler500 = 'bloodline_server.views.show500'
+handler404 = 'apps.nss.views.err404'
+handler500 = 'apps.nss.views.err500'
 
 # This is to test out DEBUG = False in localhost
 # REMEMBER : Should be commented out on server !

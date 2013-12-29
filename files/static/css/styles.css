@@ -64,6 +64,11 @@ body {
     text-align : center;
     text-align : middle;
 }
+
+.bold {
+    font-weight : bold;
+}
+
 .text-normal {
     font-size : 1em;
 }
@@ -96,11 +101,13 @@ body {
 .full-width {
     width : 100%;
 }
+.half-width {
+    width : 50%;
+}
 
 .right-line {
-
-padding-right : 20px;
-border-right: 1px solid #ccc;
+    padding-right : 20px;
+    border-right: 1px solid #ccc;
 }
 
 /* ----------------------- Navbar and base css
@@ -233,7 +240,7 @@ footer {
   padding: 3em 0;
 }
 
-.btn-primary {
+/*.btn-primary {
   color: #ffffff;
   background-color: #b84d45;
   border-color: #a5423b;
@@ -254,7 +261,7 @@ footer {
 .open .dropdown-toggle.btn-primary {
   background-image: none;
 }
-
+*/
 @media (max-width: 991px) {
 
 .masthead {

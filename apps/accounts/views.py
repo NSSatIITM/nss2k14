@@ -21,8 +21,11 @@ def login (request):
     loginform = LoginForm()
     signupform = SignUpForm()
     
-    return render_to_response('login.html', locals(), context_instance= global_context(request))
+    return render_to_response('pages/login.html', locals(), context_instance= global_context(request))
 
 def profile(request):
-    
-    return render_to_response('profile.html', locals(), context_instance= global_context(request))
+    return render_to_response('pages/profile.html', locals(), context_instance= global_context(request))
+
+def profile(request):
+    return render_to_response('pages/profile.html', locals(), context_instance= global_context(request))
+

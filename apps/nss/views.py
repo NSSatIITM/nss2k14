@@ -19,4 +19,17 @@ def home (request, *args, **kwargs):
     homepage = True
     carousel_files = [ static(os.path.join('img', 'carousel', i)) for i in os.listdir(os.path.abspath(os.path.join(settings.STATIC_ROOT, 'img', 'carousel'))) ]
     print carousel_files
-    return render_to_response('home.html', locals(), context_instance= global_context(request))
+    return render_to_response('pages/home.html', locals(), context_instance= global_context(request))
+
+def aboutus(request):
+    aboutuspage = True
+    return render_to_response('pages/aboutus.html', locals(), context_instance= global_context(request))
+
+def err404 (request, *args, **kwargs):
+    err404page = True
+    return render_to_response('pages/404.html', locals(), context_instance= global_context(request))
+    
+def err500 (request, *args, **kwargs):
+    err500page = True
+    return render_to_response('pages/500.html', locals(), context_instance= global_context(request))
+
