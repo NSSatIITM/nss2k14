@@ -83,7 +83,7 @@
         </div>
         <div class='row pad-top form-view' style='{% if not userprofile.phone_number %}display : block;{% endif %}'>
             <div class='col-md-12'>
-                <a class="btn btn-info form-control white text-medium" href="#edit" onclick='edit_profile(500)'>E D I T</a>
+                <a class="btn btn-danger form-control white text-medium" href="#edit" onclick='edit_profile(500)'>E D I T</a>
             </div>
         </div>
     {% endwith %}
@@ -109,7 +109,7 @@
                 e.preventDefault();
             }
         } );        
-        {% if not userprofile.basic_info %}
+        {% if not userprofile.basic_info or profileform.errors %}
             window.location.hash = "edit";
             edit_profile(0);
         {% else %}

@@ -68,7 +68,7 @@ def login (request):
                         if 'next' in request.POST:
                             return HttpResponseRedirect(request.POST['next'])
                         else:
-                            return HttpResponseRedirect(reverse('home'))
+                            return HttpResponseRedirect(reverse('profile'))
                 except User.DoesNotExist:
                     messages.error(request,'<strong>Oops!</strong> You don\'t seem to be registered. Please Sign Up first!',extra_tags='alert-error')
             else:
@@ -95,8 +95,8 @@ def profile(request):
             if profileform.is_valid():
                 # If the form is valid, save the user using the inbuilt function
                 profileform.save()   
-                messages.success(request,'<strong>Hi!</strong> Your account was successfully saved !',extra_tags='alert-success')
-                return HttpResponseRedirect(reverse('home'))
+                messages.success(request,'<strong>Done!</strong> Your account information was successfully saved !',extra_tags='alert-success')
+                return HttpResponseRedirect(reverse('profile'))
             else:
                 print profileform.errors
     return render_to_response('pages/profile.html', locals(), context_instance= global_context(request))
