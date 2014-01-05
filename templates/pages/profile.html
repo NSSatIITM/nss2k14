@@ -1,39 +1,26 @@
 {% extends 'pages/base.html' %}
 {% load staticfiles %}
+{% load widget_tweaks %}
 
-{% block title %} NSS IITM {% endblock %}
+{% block title %} Profile - NSS IITM {% endblock %}
 
 {% block content %}
     <div class='container'>
         <div class='row pad-top'><div class='col-md-12 centered'><span class='text-huge'>Welcome {{ user.get_full_name }} !</span></div></div>
         <br />
-        <div class='row centered'>
-            <div class="col-md-6">
-                <span class='text-huge'>Profile</span>
-                <div class='row'>
-                    <div class='col-md-5'>Name</div> 
-                        <div class='col-md-7'>
-                            <span class='form_text'>{{ user.get_full_name }}</span>
-                            <span class='form_field'>{{ user.get_full_name }}</span>
-                            
-                            
-                        </div>
-                    <div class='col-md-5'>Roll No</div> <div class='col-md-7'>-{{ user }}</div>
-                    <div class='col-md-5'>Phone Number</div> <div class='col-md-7'>-{{ user }}</div>
-                    <div class='col-md-5'>Emails</div> <div class='col-md-7'>-{{ user }}</div>
-                    <div class='col-md-5'>Emails</div> <div class='col-md-7'>-{{ user }}</div>
-                    <div class='col-md-5'>Emails</div> <div class='col-md-7'>-{{ user }}</div>
-                </div>
+        <div class='row'>
+            <div class="col-md-4">
+                {% include 'modules/accounts/profile_form.html' %}
             </div>
-            <div class="col-md-6 left-line">
+            <div class="col-md-8 left-line">
                 <div class='row bottom-line pad-bottom'>
                     <div class='col-md-12'>
-                        <span class='text-huge'>News</span>
+                        <div class='row'><div class='col-md-12 centered'><span class='text-huge'>News</span></div></div>
                     </div>
                 </div>
                 <div class='row pad-top'>
                     <div class='col-md-12'>
-                        <span class='text-huge'>Navigation</span>
+                        <div class='row'><div class='col-md-12 centered'><span class='text-huge'>Navigation</span></div></div>
                     </div>
                 </div>
             </div>
@@ -44,45 +31,7 @@
 
 {% block extra_css %}
 <style type='text/css'>
-    /* Half Page Height Carousel Customization */
-    .carousel {
-        height: 50%;
-        padding : 0px 10%;
-    }
     
-    .item,
-    .active,
-    .carousel-inner {
-        height: 100%;
-    }
-    
-    .fill {
-        width: 100%;
-        height: 100%;
-        background-position: center;
-        background-size: cover;
-    }
-    .carousel-control.left {
-        background-image: -webkit-linear-gradient(left, color-stop(rgba(255, 255, 255, 0.5) 0), color-stop(rgba(255, 255, 255, 0.0001) 100%));
-        background-image: linear-gradient(to right, rgba(255, 255, 255, 0.5) 0, rgba(255, 255, 255, 0.0001) 100%);
-        background-repeat: repeat-x;
-        filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#80000000', endColorstr='#00000000', GradientType=1);
-    }
-
-    .carousel-control.right {
-        right: 0;
-        left: auto;
-        background-image: -webkit-linear-gradient(left, color-stop(rgba(255, 255, 255, 0.0001) 0), color-stop(rgba(255, 255, 255, 0.5) 100%));
-        background-image: linear-gradient(to right, rgba(255, 255, 255, 0.0001) 0, rgba(255, 255, 255, 0.5) 100%);
-        background-repeat: repeat-x;
-        filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#00000000', endColorstr='#80000000', GradientType=1);
-    }
-
-    @media (max-width: 767px) {
-        .carousel {
-            height: 70%; /* increases the carousel height so it looks good on phones */
-        }
-    }
 </style>
 {% endblock %}
 

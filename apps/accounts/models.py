@@ -7,6 +7,20 @@ GENDER_CHOICES = (
     ('N','Choose not to answer'),
 )
 
+HOSTEL_CHOICES = (
+    ('Alakananda', 'Alakananda'),
+    ('Godavari', 'Godavari'),
+    ('Jamuna', 'Jamuna'),
+    ('Mandakini', 'Mandakini'),
+    ('Ganga', 'Ganga'),
+    ('Tapti', 'Tapti'),
+    ('Saraswathi', 'Saraswathi'),
+    ('Narmadha', 'Narmadha'),
+    ('Mahanadi', 'Mahanadi'),
+    ('Brahmaputra', 'Brahmaputra'),
+    ('Sharavati', 'Sharavati'),
+)
+
 class UserProfile(models.Model):
     # Foreign Key for the User class
     user            = models.ForeignKey(User, unique = True)
@@ -15,9 +29,9 @@ class UserProfile(models.Model):
     roll_no         = models.CharField(max_length = 10, blank = False, null = True)
     
     # Personal info
-    gender          = models.CharField(max_length=1, choices=GENDER_CHOICES, default='N')
     phone_number    = models.CharField(max_length = 10, help_text='eg: 9841072571.',null = True, blank = True)
-    hostel          = models.CharField(max_length = 15, blank = True, null = True)
+    gender          = models.CharField(max_length=1, choices=GENDER_CHOICES, default='N')
+    hostel          = models.CharField(max_length = 15, choices=HOSTEL_CHOICES, blank = True, null = True)
     room_no         = models.CharField(max_length = 10, blank = True, null = True)
 
     # Extra emails the person may want to attach to the account
@@ -38,6 +52,21 @@ class UserProfile(models.Model):
         return True
         [i.strip() for i in self.additional_emails.split(";")]
         
+    def basic_info(self):
+        """
+            Basic required fields are : Hostel, Room, Phone number, roll number
+        """
+        unknown_data = []
+        if self.hostel != None and self.hostel != "":
+            unknown_data.append("Hostel Name")
+        if self.room_no != None and self.room_no != "":
+            unknown_data.append("Room Number")
+        if self.phone_number != None and self.phone_number != "":
+            unknown_data.append("Phone Number")
+        if self.roll_no != None and self.roll_no != "":
+            unknown_data.append("Roll Number")
+        return unknown_data
+                
     class Admin:
         pass
 

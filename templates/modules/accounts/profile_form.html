@@ -1,0 +1,125 @@
+{% load staticfiles %}
+{% load widget_tweaks %}
+
+<div class='row'><div class='col-md-12 centered'><span class='text-huge'>Profile</span></div></div>
+<form action="{% url 'profile' %}" method="POST" class='form-horizontal'>
+    {% csrf_token %}
+    {% with WIDGET_ERROR_CLASS='error' %}
+        <div class='row'>
+            <div class='col-md-4'> Name : </div>
+            <div class='col-md-8 form-view' style='{% if not user.get_full_name %}display : none;{% endif %}'>
+                {{ user.first_name }} {{ user.last_name }}
+            </div>
+            <div class='col-md-8 form-edit' style='{% if not user.get_full_name %}display : block;{% endif %}'>
+                <div class='col-md-6'>
+                    <label for="first_name" class="sr-only control-label">{{profileform.first_name.label}}</label>
+                    {% render_field profileform.first_name class+="form-control" placeholder=profileform.first_name.label %}
+                </div>
+                <div class='col-md-6'>
+                    <label for="last_name" class="sr-only control-label">{{profileform.last_name.label}}</label>
+                    {% render_field profileform.last_name class+="form-control" placeholder=profileform.last_name.label %}
+                </div>
+            </div>
+        </div>
+        <div class='row'>
+            <div class='col-md-4'> Roll No : </div>
+            <div class='col-md-8 form-view' style='{% if not userprofile.roll_no %}display : none;{% endif %}'>
+                {{ userprofile.roll_no }}
+            </div>
+            <div class='col-md-8 form-edit' style='{% if not userprofile.roll_no %}display : block;{% endif %}'>
+                <div class='col-md-12'>
+                    <label for="roll_no" class="sr-only control-label">{{profileform.roll_no.label}}</label>
+                    {% render_field profileform.roll_no class+="form-control" placeholder=profileform.roll_no.label %}
+                </div>
+            </div>
+        </div>
+        <div class='row'>
+            <div class='col-md-4'> Mobile : </div>
+            <div class='col-md-8 form-view' style='{% if not userprofile.phone_number %}display : none;{% endif %}'>
+                {{ userprofile.phone_number }}
+            </div>
+            <div class='col-md-8 form-edit' style='{% if not userprofile.phone_number %}display : block;{% endif %}'>
+                <div class='col-md-12'>
+                    <label for="phone_number" class="sr-only control-label">{{profileform.phone_number.label}}</label>
+                    {% render_field profileform.phone_number class+="form-control" placeholder=profileform.phone_number.label %}
+                </div>
+            </div>
+        </div>
+        <div class='row'>
+            <div class='col-md-4'> Address : </div>
+            <div class='col-md-8 form-view' style='{% if not userprofile.room_no or not userprofile.hostel %}display : none;{% endif %}'>
+                #{{ userprofile.room_no }}, {{ userprofile.hostel }} Hostel
+            </div>
+            <div class='col-md-8 form-edit' style='{% if not userprofile.room_no or not userprofile.hostel %}display : block;{% endif %}'>
+                <div class='col-md-5'>
+                    <label for="room_no" class="sr-only control-label">{{profileform.room_no.label}}</label>
+                    {% render_field profileform.room_no class+="form-control" placeholder=profileform.room_no.label %}
+                </div>
+                <div class='col-md-7'>
+                    <label for="hostel" class="sr-only control-label">{{profileform.hostel.label}}</label>
+                    {% render_field profileform.hostel class+="form-control" placeholder=profileform.hostel.label %}
+                </div>
+            </div>
+        </div>
+        <div class='row'>
+            <div class='col-md-4'> Gender : </div>
+            <div class='col-md-8 form-view' style='{% if not userprofile.phone_number %}display : none;{% endif %}'>
+                {{ userprofile.gender }}
+            </div>
+            <div class='col-md-8 form-edit' style='{% if not userprofile.phone_number %}display : block;{% endif %}'>
+                <div class='col-md-12'>
+                    <label for="gender" class="sr-only control-label">{{profileform.gender.label}}</label>
+                    {% render_field profileform.gender class+="form-control" placeholder=profileform.gender.label %}
+                </div>
+            </div>
+        </div>
+        <div class='row pad-top form-edit' style='{% if not userprofile.phone_number %}display : block;{% endif %}'>
+            <div class='col-md-6'>
+                <input type="submit" name="profile" class="btn btn-success form-control " value="    Submit    ">
+            </div>
+            <div class='col-md-6'>
+                <a class="btn btn-link form-control white text-medium" href="#view" onclick='view_profile(500)'>Cancel</a>
+            </div>
+        </div>
+        <div class='row pad-top form-view' style='{% if not userprofile.phone_number %}display : block;{% endif %}'>
+            <div class='col-md-12'>
+                <a class="btn btn-info form-control white text-medium" href="#edit" onclick='edit_profile(500)'>E D I T</a>
+            </div>
+        </div>
+    {% endwith %}
+</form>
+
+
+<script>
+    function edit_profile(t) {
+        $(".form-view").hide(t);
+        setTimeout( function() {$(".form-edit").show(t)}, t);
+    }
+    function view_profile(t) {
+        $(".form-edit").hide(t);
+        setTimeout( function() {$(".form-view").show(t)}, t);
+    }
+    window.onload = function () {
+        $(window).bind( 'hashchange',  function(e) {
+            if ( window.location.hash == "edit" ) {
+                edit_profile();
+                e.preventDefault();
+            } else if ( window.location.hash == "view" ) {
+                view_profile();
+                e.preventDefault();
+            }
+        } );        
+        {% if not userprofile.basic_info %}
+            window.location.hash = "edit";
+            edit_profile(0);
+        {% else %}
+            window.location.hash = "view";
+            view_profile(0);
+        {% endif %}
+    
+    }
+</script>
+
+<style>
+</style>
+

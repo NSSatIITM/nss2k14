@@ -64,11 +64,21 @@ body {
     text-align : center;
     text-align : middle;
 }
+.centerme {
+    text-align : center;
+    text-align : middle;
+    margin : auto;
+}
 
 .bold {
     font-weight : bold;
 }
-
+.black {
+    color : black;
+}
+.white {
+    color : white;
+}
 .text-normal {
     font-size : 1em;
 }
@@ -115,6 +125,16 @@ body {
 }
 .bottom-line {
     border-bottom: 1px solid #ccc;
+}
+.top-line {
+    border-top: 1px solid #ccc;
+}
+
+.hide {
+    display : none;
+}
+.show {
+    display : block;
 }
 
 /* ----------------------- Navbar and base css
@@ -247,28 +267,35 @@ footer {
   padding: 3em 0;
 }
 
-/*.btn-primary {
-  color: #ffffff;
-  background-color: #b84d45;
-  border-color: #a5423b;
+.form-edit {
+    display : none;
+    height : 36px;
+}
+.form-view {
+    height : 36px;
 }
 
-.btn-primary:hover,
-.btn-primary:focus,
-.btn-primary:active,
-.btn-primary.active,
-.open .dropdown-toggle.btn-primary {
-  color: #ffffff;
-  background-color: #a5423b;
-  border-color: #a5423b;
+a.white {
+    color : white;
+}
+a.white:hover {
+    color : #999999;
+    text-decoration : none; 
 }
 
-.btn-primary:active,
-.btn-primary.active,
-.open .dropdown-toggle.btn-primary {
-  background-image: none;
+.error.form-control {
+  border-color: #a94442;
+  -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+  box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
 }
-*/
+.error.form-control:focus {
+  border-color: #843534;
+  -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 6px #ce8483;
+  box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 6px #ce8483;
+  
+}
+
+
 @media (max-width: 991px) {
 
 .masthead {

@@ -74,6 +74,7 @@
 {% endblock %}
 
 {% block extra_css %}
+{{ block.super }}
 <style type='text/css'>
     .collapse.width {
         position: relative;
@@ -92,6 +93,7 @@
 
 
 {% block extra_js %}
+{{ block.super }}
 <script type='text/javascript'>
 </script>
 {% endblock %}

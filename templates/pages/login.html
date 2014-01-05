@@ -21,13 +21,11 @@
     <div class="container pad-bottom">
         <div class="row">
                 <div id="regular-signup" class="row pad-top" style='display: block;'>
-                    <div class="col-md-4 col-md-offset-1">
-                    {% include 'modules/accounts/sociallogin_form.html' %}
-                        
-                    </div>
-                    <div class="col-md-4 col-md-offset-2">
-                    {% include 'modules/accounts/login_form.html' %}
-                        
+                    <!--<div class="col-md-4 col-md-offset-1">
+                        { include 'modules/accounts/sociallogin_form.html' %}
+                    </div>-->
+                    <div class="col-md-4 col-md-offset-4">
+                        {% include 'modules/accounts/login_form.html' %}
                     </div>
                 </div>
 
@@ -38,12 +36,14 @@
 {% endblock %}
 
 {% block extra_css %}
+{{ block.super }}
     <link href="{% static 'css/zocial.css' %}" rel="stylesheet" media="screen"> 
     <style type='text/css'></style>
 {% endblock %}
 
 
 {% block extra_js %}
+{{ block.super }}
     <script type='text/javascript'>
         $("#regular-signup-link").click(function(){
             $("#regular-signup").show('slow')

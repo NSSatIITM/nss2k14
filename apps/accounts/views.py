@@ -11,10 +11,11 @@ from social_auth.decorators import dsa_view, disconnect_view
 from django.contrib.auth.decorators import login_required
 # Models
 from django.contrib.auth.models import User
+from apps.accounts.models import UserProfile
 # Forms
-from apps.accounts.forms import LoginForm, SignUpForm
+from apps.accounts.forms import LoginForm, SignUpForm, ProfileForm
 # View functions
-from social_auth.views import auth, complete as social_auth_complete
+from social_auth.views import auth as social_auth_auth, complete as social_auth_complete
 # Misc
 from django.templatetags.static import static
 from social_auth.utils import setting, backend_setting, clean_partial_pipeline
@@ -58,7 +59,8 @@ def login (request):
             loginform = LoginForm(postdata)
             if loginform.is_valid():
                 try:
-                    user = User.objects.get(email=loginform.cleaned_data.get('email'))
+                    user = User.objects.get(username=loginform.cleaned_data.get('username'))
+                    print user
                     user = auth.authenticate(username=user.username, password=loginform.cleaned_data.get('password'))
                     
                     if user is not None and user.is_active:
@@ -75,9 +77,33 @@ def login (request):
     return render_to_response('pages/login.html', locals(), context_instance= global_context(request))
 
 def profile(request):
+    profilepage = True
+    
+    # Create the basic forms which will be rendered in get requests
+    user = request.user
+    try:
+        userprofile = UserProfile.objects.get(user = user)
+        #profileform = ProfileForm(instance=userprofile, instance_user=user)
+    except:
+        userprofile = UserProfile(user = user)
+    profileform = ProfileForm(instance=userprofile)
+    
+    if request.method == 'POST':
+        postdata = request.POST.copy()
+        if 'profile' in postdata: # SIGNUP FORM
+            profileform = ProfileForm(postdata, instance=userprofile)
+            if profileform.is_valid():
+                # If the form is valid, save the user using the inbuilt function
+                profileform.save()   
+                messages.success(request,'<strong>Hi!</strong> Your account was successfully saved !',extra_tags='alert-success')
+                return HttpResponseRedirect(reverse('home'))
+            else:
+                print profileform.errors
     return render_to_response('pages/profile.html', locals(), context_instance= global_context(request))
     
-# SOCIAL AUTH RELATED VIEWS
+# ---------------------------------------------------------------------
+# >>>>>>>>>>>>>>>>>>>>>>>>>>>>>               SOCIAL AUTH RELATED VIEWS
+# ---------------------------------------------------------------------
 def socialauth_connected(request, *args, **kwargs):
     messages.success(request,'<strong>Who\'s awesome?</strong> YOU\'re awesome! Successfully connected!',extra_tags='alert-success')
     return HttpResponseRedirect(reverse('accounts.views.profile'))
