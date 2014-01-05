@@ -29,7 +29,15 @@ class UserProfile(models.Model):
     
     def __unicode__(self):
         return self.user.username
-
+    
+    def get_alt_emails(self):
+        return [i.strip() for i in self.additional_emails.split(";")]
+    def add_alt_email(self, email_addr):
+        # Do email check and add it
+        self.additional_emails += ";" + email_addr
+        return True
+        [i.strip() for i in self.additional_emails.split(";")]
+        
     class Admin:
         pass
 

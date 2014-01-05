@@ -7,13 +7,18 @@ from django.db import IntegrityError
 import configs.settings as settings
 from misc.utils import *  #Import miscellaneous functions
 # Decorators
+from social_auth.decorators import dsa_view, disconnect_view
+from django.contrib.auth.decorators import login_required
 # Models
 from django.contrib.auth.models import User
 # Forms
 from apps.accounts.forms import LoginForm, SignUpForm
 # View functions
+from social_auth.views import auth, complete as social_auth_complete
 # Misc
 from django.templatetags.static import static
+from social_auth.utils import setting, backend_setting, clean_partial_pipeline
+from social_auth.exceptions import AuthCanceled, AuthFailed, AuthException, NotAllowedToDisconnect
 # Python
 import os
 
@@ -71,3 +76,47 @@ def login (request):
 
 def profile(request):
     return render_to_response('pages/profile.html', locals(), context_instance= global_context(request))
+    
+# SOCIAL AUTH RELATED VIEWS
+def socialauth_connected(request, *args, **kwargs):
+    messages.success(request,'<strong>Who\'s awesome?</strong> YOU\'re awesome! Successfully connected!',extra_tags='alert-success')
+    return HttpResponseRedirect(reverse('accounts.views.profile'))
+
+def socialauth_disconnected(request, *args, **kwargs):
+    messages.error(request,'<strong>OW, Snap!</strong> Why did you do that? If you\'re worried that we will post without your consent, we assure you that we will <strong>never</strong> do that. Please consider connecting again.',extra_tags='alert-error')
+    return HttpResponseRedirect(reverse('accounts.views.profile'))
+
+def socialauth_error(request, *args, **kwargs):    
+    messages.error(request,'<strong>OW!</strong> There was some problem with your login. Please try again after sometime !',extra_tags='alert-error')
+    return HttpResponseRedirect(reverse('apps.accounts.views.home'))
+
+def socialauth_complete(request, backend, *args, **kwargs):
+    try:
+        return social_auth_complete(request, backend, *args, **kwargs)
+    except AuthException as e:
+        msg = u'<strong>OW, Snap!</strong> There seems to have been some problem while processing your request. Please try again later'
+        messages.error(request, msg, extra_tags='alert-error')
+        return HttpResponseRedirect(reverse('bloodline_server.views.home') + "#login")
+    except AuthCanceled as e:
+        msg = u'<strong>OW, Snap!</strong> Why did you do that? If you\'re worried that we will post without your consent, we assure you that we will <strong>never</strong> do that. Please consider signing up.'
+        messages.error(request, msg, extra_tags='alert-error')
+        return HttpResponseRedirect(reverse('bloodline_server.views.home') + "#login")
+
+@login_required
+@dsa_view()
+@disconnect_view
+def socialauth_disconnect(request, backend, association_id=None):
+    """Disconnects given backend from current logged in user."""
+
+    try:
+        backend.disconnect(request.user, association_id)
+    except NotAllowedToDisconnect:
+        messages.error(request,'<strong>OW!</strong> This is the only way you can login ! <br />We cannot disconnect this as you won\'t be able to access NSS Website without it.',extra_tags='alert-error')
+        return HttpResponseRedirect(reverse('accounts.views.profile'))
+        
+    DEFAULT_REDIRECT = setting('SOCIAL_AUTH_LOGIN_REDIRECT_URL', setting('LOGIN_REDIRECT_URL'))
+    
+    url = request.REQUEST.get(REDIRECT_FIELD_NAME, '') or \
+          backend_setting(backend, 'SOCIAL_AUTH_DISCONNECT_REDIRECT_URL') or \
+          DEFAULT_REDIRECT
+    return HttpResponseRedirect(url)

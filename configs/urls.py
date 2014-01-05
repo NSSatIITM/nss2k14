@@ -34,7 +34,12 @@ urlpatterns = patterns('',
     
     
     # ------------------------------------------------------------------
-    # DJANGO APPS - OVERRIDDEN
+    # DJANGO APPS - FOR EXTERNAL APPS
+    # NSS + socialauth
+    url(r'^login-error/?$', 'apps.accounts.views.socialauth_error'),
+    url(r'^socialauth_disconnect/(?P<backend>[^/]+)/(?P<association_id>[^/]+)/$', 'apps.accounts.views.socialauth_disconnect', name='socialauth_disconnect'),
+    url(r'^socialauth_complete/(?P<backend>[^/]+)/$', 'apps.accounts.views.socialauth_complete', name='socialauth_complete'),
+    
     
 
     # ------------------------------------------------------------------
