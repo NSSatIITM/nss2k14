@@ -1,6 +1,6 @@
 # Django
 from django.shortcuts import render_to_response, redirect, HttpResponseRedirect
-from django.contrib.auth import authenticate, login
+from django.contrib import auth
 from django.contrib import messages
 from django.db import IntegrityError
 # NSS
@@ -54,12 +54,14 @@ def login (request):
             if loginform.is_valid():
                 try:
                     user = User.objects.get(email=loginform.cleaned_data.get('email'))
-                    user = authenticate(username=user.username, password=loginform.cleaned_data.get('password'))
+                    user = auth.authenticate(username=user.username, password=loginform.cleaned_data.get('password'))
                     
                     if user is not None and user.is_active:
-                        login(request, user) # Successful login
+                        auth.login(request, user) # Successful login
                         if 'next' in request.POST:
                             return HttpResponseRedirect(request.POST['next'])
+                        else:
+                            return HttpResponseRedirect(reverse('home'))
                 except User.DoesNotExist:
                     messages.error(request,'<strong>Oops!</strong> You don\'t seem to be registered. Please Sign Up first!',extra_tags='alert-error')
             else:

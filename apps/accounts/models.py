@@ -21,7 +21,7 @@ class UserProfile(models.Model):
     room_no         = models.CharField(max_length = 10, blank = True, null = True)
 
     # Extra emails the person may want to attach to the account
-    additional_emails = models.CharField(max_length = 500, blank = True, null = True)
+    additional_emails = models.CharField(max_length = 500, blank = True, null = True) # Separated by semicolons
     
     # Activation keys
     activation_key  = models.CharField(max_length = 40, null = True)
