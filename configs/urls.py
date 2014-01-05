@@ -22,6 +22,7 @@ urlpatterns = patterns('',
     # NSS APPS
     url(r'^$', 'apps.nss.views.home', name='home'),
     url(r'^home/?$', 'apps.nss.views.home', name='home'),
+    url(r'^profile/?$', 'apps.accounts.views.profile', name='profile'),
     url(r'^events/?$', 'apps.events.views.events', name='events'),
     url(r'^projects/?$', 'apps.events.views.projects', name='projects'),
     url(r'^aboutus/?$', 'apps.nss.views.aboutus', name='aboutus'),
@@ -31,6 +32,9 @@ urlpatterns = patterns('',
     url(r'^500/?$', 'apps.nss.views.err500', name='err500'),
     
     
+    
+    # ------------------------------------------------------------------
+    # DJANGO APPS - OVERRIDDEN
     
 
     # ------------------------------------------------------------------

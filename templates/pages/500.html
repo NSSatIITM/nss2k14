@@ -1,8 +1,7 @@
 {% extends 'pages/base.html' %}
 {% load staticfiles %}
-{% load widget_tweaks %}
 
-{% block title %} Login - NSS IITM {% endblock %}
+{% block title %} 500 - NSS IITM {% endblock %}
 
 {% block content %}
     <div class="container">
@@ -19,10 +18,10 @@
                 <span class='text-big'>Here are some links that may help you continue !</span>
                 <br /><br />
                 <div class='btn-group-lg'>
-                    <a href='' class='btn btn-primary'>Home</a>
-                    <a href='' class='btn btn-success'>Events</a>
-                    <a href='' class='btn btn-warning'>Projects</a>
-                    <a href='' class='btn btn-danger'>About Us</a>
+                    <a href='{% url "home" %}' class='btn btn-primary'>Home</a>
+                    <a href='{% url "events" %}' class='btn btn-success'>Events</a>
+                    <a href='{% url "projects" %}' class='btn btn-warning'>Projects</a>
+                    <a href='{% url "aboutus" %}' class='btn btn-danger'>About Us</a>
                 </div>
                 <br /><br /><br />
                 {% if not user.is_authenticated %}

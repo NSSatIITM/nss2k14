@@ -1,0 +1,40 @@
+{% load staticfiles %}
+{% load widget_tweaks %}
+
+<div class='row'><div class='col-md-12 centered'><span class='text-huge'>Create a new account</span></div></div>
+<br />
+<form action="{% url 'login' %}" method="POST" role='form' class='form-horizontal'>
+    {% csrf_token %}
+    {% with WIDGET_ERROR_CLASS='error' %}
+        <div class='row'>
+            <div class='col-md-6'>
+                <label for="first_name" class="sr-only control-label">{{signupform.first_name.label}}</label>
+                {% render_field signupform.first_name class+="form-control" placeholder=signupform.first_name.label %}
+            </div>
+            <div class='col-md-6'>
+                <label for="last_name" class="sr-only control-label">{{signupform.last_name.label}}</label>
+                {% render_field signupform.last_name class+="form-control" placeholder=signupform.last_name.label %}
+            </div>
+        </div>
+        <br />
+        <div class='row'>
+            <div class='col-md-12'>
+                <label for="email" class="sr-only control-label">{{signupform.email.label}}</label>
+                {% render_field signupform.email class+="form-control" placeholder=signupform.email.label %}
+            </div>
+        </div>
+        <br />
+        <div class='row'>
+            <div class='col-md-12'>
+                <label for="password" class="sr-only control-label">{{signupform.password.label}}</label>
+                {% render_field signupform.password class+="form-control" placeholder=signupform.password.label %}
+            </div>
+        </div>
+        <br />
+        <div class='row'>
+            <div class='col-md-12'>
+                <input type="submit" name="signup" class="btn btn-success form-control" value="Join NSS">
+            </div>
+        </div>
+    {% endwith %}
+</form>

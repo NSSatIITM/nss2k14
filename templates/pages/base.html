@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 {% load staticfiles %}
-{% load bootstrap3 %}
 
 <html lang="en">
 <head>
@@ -13,7 +12,8 @@
     <title>{% block title %} NSS IITM {% endblock %}</title>
     
     <!-- Include stylesheets here -->
-    {% if DEBUG %} <link href="{% static 'css/bootstrap.css' %}" rel="stylesheet" media="screen"> {% else %} {% bootstrap_css %} {% endif %}
+    {% if DEBUG %} <link href="{% static 'css/bootstrap.css' %}" rel="stylesheet" media="screen"> 
+    {% else %} <link href="//netdna.bootstrapcdn.com/bootstrap/3.0.3/css/bootstrap.min.css" rel="stylesheet"> {% endif %}
 
     <link href="{% static 'css/styles.css' %}" rel="stylesheet" media="screen">
     <link rel="icon" type="image/x-icon" href="{% static 'img/favicon.ico' %}">
@@ -55,29 +55,46 @@
                     <li {% if aboutuspage %}class="active"{% endif %}><a href="{% url 'aboutus' %}">About Us</a></li>
                 </ul>
                 <ul class="nav navbar-nav navbar-right nss">
-                    <li {% if loginpage %}class="active"{% endif %}>
-                        {% if user.is_authenticated %}
+                    {% if user.is_authenticated %}
+                        <li {% if profilepage %}class="active"{% endif %}>
                             <a href="{% url 'profile' %}">{{ user.get_full_name }}</a>
+                        </li>
+                        <li {% if logoutpage %}class="active"{% endif %}>
                             <a href="{% url 'logout' %}">Logout</a>
-                        {% else %}
+                        </li>
+                    {% else %}
+                        <li {% if loginpage %}class="active"{% endif %}>
                             <a href="{% url 'apps.accounts.views.login' %}">Login</a>
-                        {% endif %}
-                    </li>
+                        </li>
+                    {% endif %}
+                    
                 </ul>
             </div><!-- /.navbar-collapse -->
         </div><!-- /.container -->
     </nav>
     {% endblock %}
-
+    
     {% block messages %}
-        {% bootstrap_messages %}
+        <div class='container'>
+            {% for message in messages %}
+                <div class="row">
+                    <div class="col-md-8 col-md-offset-2">
+                        <div class="alert {{ message.tags }} alert-dismissable center">
+                            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                            {{ message|safe }}
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
     {% endblock %}
-
+    
     {% block content %}
     {% endblock %}
-
+    
     <script type="text/javascript" src="{% static 'js/jquery.js' %}"></script>
-    {% if DEBUG %} <script type="text/javascript" src="{% static 'js/bootstrap.min.js' %}"></script> {% else %} {% bootstrap_javascript %} {% endif %}
+    {% if DEBUG %} <script type="text/javascript" src="{% static 'js/bootstrap.min.js' %}"></script> 
+    {% else %} <script src="//netdna.bootstrapcdn.com/bootstrap/3.0.3/js/bootstrap.min.js"></script> {% endif %}
     
     {% block extra_js %}{% endblock %}
 </body>

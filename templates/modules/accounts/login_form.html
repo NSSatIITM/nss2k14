@@ -1,0 +1,39 @@
+{% load staticfiles %}
+{% load widget_tweaks %}
+
+<div class='row'><div class='col-md-12 centered'><span class='text-huge'>Login</span></div></div>
+<br />
+<form action="{% url 'login' %}" method="POST" class='form-horizontal'>
+    {% csrf_token %}
+    {% with WIDGET_ERROR_CLASS='error' %}
+        <div class='row'>
+            <div class='col-md-12'>
+                <label for="email" class="sr-only control-label">{{signupform.email.label}}</label>
+                {% render_field loginform.email class+="form-control" placeholder=loginform.email.label %}
+            </div>
+        </div>
+        <br />
+        <div class='row'>
+            <div class='col-md-12'>
+                <label for="password" class="sr-only control-label">{{signupform.password.label}}</label>
+                {% render_field loginform.password class+="form-control" placeholder=loginform.password.label %}
+            </div>
+        </div>
+        <br />
+        <div class='row'>
+            <div class='col-md-6'>
+                <input type="submit" name="login" class="btn btn-success form-control " value="    Login    ">
+            </div>
+            <div class='col-md-6'>
+                <a class="btn btn-link form-control" style='color:white' href="{% url 'django.contrib.auth.views.password_reset' %}">Forgot password ?</a>
+            </div>
+        </div>
+        <!--<br />
+        <div class='row'>
+            <div class='col-md-12 centered'>
+                <a id='login-link' class="btn btn-link text-medium" style='color:white' href='#login'>Login with google, facebook, twitter</a>
+            </div>
+        </div>-->
+    {% endwith %}
+    <input type="hidden" name="next" value="{% if request.GET.next %}{{ request.GET.next }}{% endif %}" />
+</form>

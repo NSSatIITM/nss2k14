@@ -20,6 +20,9 @@ class UserProfile(models.Model):
     hostel          = models.CharField(max_length = 15, blank = True, null = True)
     room_no         = models.CharField(max_length = 10, blank = True, null = True)
 
+    # Extra emails the person may want to attach to the account
+    additional_emails = models.CharField(max_length = 500, blank = True, null = True)
+    
     # Activation keys
     activation_key  = models.CharField(max_length = 40, null = True)
     activation_key_mobile  = models.CharField(max_length = 6, null = True)

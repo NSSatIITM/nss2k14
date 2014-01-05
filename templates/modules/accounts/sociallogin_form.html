@@ -1,0 +1,12 @@
+{% load staticfiles %}
+{% load widget_tweaks %}
+
+<div class='row'><div class='col-md-12 centered'><span class='text-huge'>One Click Login</span></div></div>
+<br />
+<a class='zocial google btn-block' href="{% url 'socialauth_begin' 'google' %}{% if request.GET.next %}?next={{ request.GET.next }}{% endif %}">Sign in with Google</a>
+<br /><br />
+<a class='zocial facebook btn-block' href="{% url 'socialauth_begin' 'facebook' %}{% if request.GET.next %}?next={{ request.GET.next }}{% endif %}">Sign in with Facebook</a>
+<br /><br />
+<a class="zocial twitter btn-block" href="{% url 'socialauth_begin' 'twitter' %}{% if request.GET.next %}?next={{ request.GET.next }}{% endif %}">Sign in with Twitter</a>
+<!--<br /><br />
+<p class="text-big">Or, <a id="regular-signup-link" href="#regular-signup">Sign in with email.</a></p>-->

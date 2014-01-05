@@ -15,96 +15,19 @@
                     </span>
                     <p>lorem : need a one line on what NSS does. Should be impactful.</p>
                     <br /><br />
-                    <a class='zocial google btn-block' href="{% url 'socialauth_begin' 'google' %}{% if request.GET.next %}?next={{ request.GET.next }}{% endif %}">Sign in with Google</a>
-                    <br /><br />
-                    <a class='zocial facebook btn-block' href="{% url 'socialauth_begin' 'facebook' %}{% if request.GET.next %}?next={{ request.GET.next }}{% endif %}">Sign in with Facebook</a>
-                    <br /><br />
-                    <a class="zocial twitter btn-block" href="{% url 'socialauth_begin' 'twitter' %}{% if request.GET.next %}?next={{ request.GET.next }}{% endif %}">Sign in with Twitter</a>
-                    <br /><br />
-                    <p class="text-big">Or, <a id="regular-signup-link" href="#regular-signup">Sign in with email.</a></p>
                 </div>
         </div>
     </div>
     <div class="container pad-bottom">
         <div class="row">
-                <div id="regular-signup" class="row pad-top" style='display: none;'>
+                <div id="regular-signup" class="row pad-top" style='display: block;'>
                     <div class="col-md-4 col-md-offset-1">
-                        <div class='row'><div class='col-md-12 centered'><span class='text-huge'>Create a new account</span></div></div>
-                        <br />
-                        <form action="{% url 'login' %}" method="POST" role='form' class='form-horizontal'>
-                            {% csrf_token %}
-                            {% with WIDGET_ERROR_CLASS='error' %}
-                                <div class='row'>
-                                    <div class='col-md-6'>
-                                        <label for="first_name" class="sr-only control-label">{{signupform.first_name.label}}</label>
-                                        {% render_field signupform.first_name class+="form-control" placeholder=signupform.first_name.label %}
-                                    </div>
-                                    <div class='col-md-6'>
-                                        <label for="last_name" class="sr-only control-label">{{signupform.last_name.label}}</label>
-                                        {% render_field signupform.last_name class+="form-control" placeholder=signupform.last_name.label %}
-                                    </div>
-                                </div>
-                                <br />
-                                <div class='row'>
-                                    <div class='col-md-12'>
-                                        <label for="email" class="sr-only control-label">{{signupform.email.label}}</label>
-                                        {% render_field signupform.last_name class+="form-control" placeholder=signupform.emai.label %}
-                                    </div>
-                                </div>
-                                <br />
-                                <div class='row'>
-                                    <div class='col-md-12'>
-                                        <label for="password" class="sr-only control-label">{{signupform.password.label}}</label>
-                                        {% render_field signupform.password class+="form-control" placeholder=signupform.password.label %}
-                                    </div>
-                                </div>
-                                <br />
-                                <div class='row'>
-                                    <div class='col-md-12'>
-                                        <input type="submit" name="signup" class="btn btn-success form-control" value="Join NSS">
-                                    </div>
-                                </div>
-                            {% endwith %}
-                        </form>
+                    {% include 'modules/accounts/sociallogin_form.html' %}
+                        
                     </div>
                     <div class="col-md-4 col-md-offset-2">
-                        <div class='row'><div class='col-md-12 centered'><span class='text-huge'>Login</span></div></div>
-                        <br />
-                        <form action="{% url 'login' %}" method="POST" class='form-horizontal'>
-                            {% csrf_token %}
-                            {% with WIDGET_ERROR_CLASS='error' %}
-                                <div class='row'>
-                                    <div class='col-md-12'>
-                                        <label for="email" class="sr-only control-label">{{signupform.email.label}}</label>
-                                        {% render_field signupform.last_name class+="form-control" placeholder=signupform.email.label %}
-                                    </div>
-                                </div>
-                                <br />
-                                <div class='row'>
-                                    <div class='col-md-12'>
-                                        <label for="password" class="sr-only control-label">{{signupform.password.label}}</label>
-                                        {% render_field signupform.password class+="form-control" placeholder=signupform.password.label %}
-                                    </div>
-                                </div>
-                                <br />
-                                <div class='row'>
-                                    <div class='col-md-6'>
-                                        <input type="submit" name="signup" class="btn btn-success form-control " value="    Login    ">
-                                    </div>
-                                    <div class='col-md-6'>
-                                        <a class="btn btn-link form-control" style='color:white' href="{% url 'django.contrib.auth.views.password_reset' %}">Forgot password ?</a>
-                                    </div>
-                                </div>
-                                <br />
-                                <div class='row'>
-                                    <div class='col-md-12 centered'>
-                                        <a id='login-link' class="btn btn-link text-medium" style='color:white' href='#login'>Login with google, facebook, twitter</a>
-                                    </div>
-                                </div>
-                                
-                            {% endwith %}
-                            <input type="hidden" name="next" value="{% if request.GET.next %}{{ request.GET.next }}{% endif %}" />
-                        </form>
+                    {% include 'modules/accounts/login_form.html' %}
+                        
                     </div>
                 </div>
 

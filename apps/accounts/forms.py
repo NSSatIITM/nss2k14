@@ -21,22 +21,24 @@ import os
 class SignUpForm(forms.Form):
     """To grab the user's email (and a signing-up password?)"""
     first_name = forms.CharField(max_length='40', widget=forms.TextInput(attrs={'required':'true'}))
-    last_name = forms.CharField(max_length='40',widget=forms.TextInput(attrs={'required':'true'}))
+    last_name = forms.CharField(max_length='40', widget=forms.TextInput(attrs={'required':'true'}))
     email = forms.EmailField(help_text = 'email@example.com', widget=forms.TextInput(attrs={'required':'true','type':'email'}))
     password = forms.CharField(max_length=30, widget=forms.PasswordInput(attrs={'required':'true'}))
-    captcha = CaptchaField()
+    #captcha = CaptchaField()
     
     def __init__(self, *args, **kwargs):
         super(SignUpForm, self).__init__(*args, **kwargs)
     
-#    def save(self, *args, **kwargs):
-        #"""
-            #Creates a user and makes it inactive
-        #"""
-        #user = User.objects.create_user(signupform.cleaned_data.get('email'), signupform.cleaned_data.get('email'), signupform.cleaned_data.get('password'))
-        #user.first_name = signupform.cleaned_data.get('first_name')
-        #user.last_name = signupform.cleaned_data.get('last_name')
-        #user.save()
+    def save(self, *args, **kwargs):
+        """
+            Creates a User object and makes it inactive
+            The user profile will have to be created later on
+        """
+        user = User.objects.create_user(self.cleaned_data.get('email'), self.cleaned_data.get('email'), self.cleaned_data.get('password'))
+        user.first_name = self.cleaned_data.get('first_name')
+        user.last_name = self.cleaned_data.get('last_name')
+        user.is_active = False
+        user.save()
     
 class LoginForm(forms.Form):
     email = forms.EmailField(required=True, widget=forms.TextInput(attrs={'required':'true','type':'email'}))

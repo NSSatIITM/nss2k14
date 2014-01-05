@@ -172,7 +172,7 @@ THIRD_PARTY_APPS = (
     # For template form field changes in template
     'widget_tweaks',
     # Permission handling
-    'object_permissions'
+    'guardian'
 )
 
 NSS_APPS = (
@@ -278,6 +278,12 @@ TEMPLATE_CONTEXT_PROCESSORS = (
 
 )
 
+# Guardian settings - permissions
+AUTHENTICATION_BACKENDS = (
+    'django.contrib.auth.backends.ModelBackend', # default
+    'guardian.backends.ObjectPermissionBackend',
+)
+ANONYMOUS_USER_ID = -1
 
 # Email settings
 EMAIL_HOST = 'localhost'
