@@ -19,14 +19,13 @@ def setup_groups():
     GROUPS = (
         'Incharge',     # Equivalent of profs
         'Managerial',   # Managerial team members
-        'Project Representative', # PRs for eacsh project
+        'Project Representative', # PRs for each project
         'Volunteer',    # Volunteers in NSS
         'Helper',       # Helpers in NSS
         'Organisation', # Organizations like NGOs
     )
 
     for i in GROUPS:
-        t = Group.objects.create()
-        t.name = i
+        t = Group.objects.create(name = i)
         t.save()
         #t.permissions.add(

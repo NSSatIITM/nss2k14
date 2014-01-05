@@ -2,9 +2,9 @@ from django.db import models
 from django.contrib.auth.models import User, Group
 
 GENDER_CHOICES = (
-    ('M','Male'),
-    ('F','Female'),
-    ('N','Choose not to answer'),
+    ('M', 'Male'),
+    ('F', 'Female'),
+    ('N', 'Choose not to answer'),
 )
 
 HOSTEL_CHOICES = (
@@ -29,13 +29,14 @@ class UserProfile(models.Model):
     roll_no         = models.CharField(max_length = 10, blank = False, null = True)
     
     # Personal info
-    phone_number    = models.CharField(max_length = 10, help_text='eg: 9841072571.',null = True, blank = True)
-    gender          = models.CharField(max_length=1, choices=GENDER_CHOICES, default='N')
+    phone_number    = models.CharField(max_length = 10, null = True, blank = True)
+    gender          = models.CharField(max_length = 1, choices=GENDER_CHOICES, default='N')
     hostel          = models.CharField(max_length = 15, choices=HOSTEL_CHOICES, blank = True, null = True)
     room_no         = models.CharField(max_length = 10, blank = True, null = True)
-
-    # Extra emails the person may want to attach to the account
     additional_emails = models.CharField(max_length = 500, blank = True, null = True) # Separated by semicolons
+    
+    # Extra info 
+    # usertype      = models.CharField(max_length = 20, blank = True, null = True) # To tell something extra about the user
     
     # Activation keys
     activation_key  = models.CharField(max_length = 40, null = True)

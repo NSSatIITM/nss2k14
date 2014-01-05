@@ -11,7 +11,8 @@ class Event(models.Model):
     
     # Specific data
     credits         = models.ManyToManyField(User, through = 'Credit', blank = True, null = True)
-    members         = models.ManyToManyField(User, related_name='members',  blank = True, null = True)
+    members         = models.ManyToManyField(User, related_name='members', blank = True, null = True)
+    reps            = models.ManyToManyField(User, related_name='reps', blank = True, null = True)
     
     def __unicode__(self):
         return self.name

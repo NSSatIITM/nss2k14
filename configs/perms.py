@@ -46,3 +46,11 @@ NSS_GROUPS = {
                     '',
                 ],
 }
+
+
+ # List of permissions :
+ #      edit event
+ #      view event
+ #      delete event
+ #      give credit for event
+ #      
