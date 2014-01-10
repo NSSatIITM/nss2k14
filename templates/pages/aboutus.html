@@ -1,7 +1,11 @@
 {% extends 'pages/base.html' %}
 {% load staticfiles %}
 
-{% block title %} NSS IITM {% endblock %}
+{% comment %}
+    Need to add emails for contacts !
+{% endcomment %}
+
+{% block title %} AboutUs | NSS IITM {% endblock %}
 
 {% block content %}
     <div class='container pad-top'>
@@ -24,49 +28,83 @@
     </div>
     <div class='container pad-top'>
         <div class='row centered'>
-            <div class="panel-group" id="accordion">
-                <div class="panel panel-default">
-                    <div class="panel-heading">
-                        <h4 class="panel-title">
-                            <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne">
-                                Collapsible Group Item #3
-                            </a>
-                        </h4>
-                    </div>
-                    <div id="collapseOne" class="panel-collapse collapse width in">
-                        <div class="panel-body">
-                            Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
+            <div class="col-md-12">
+                <ul id="contactus-grid" class="contactus-grid">
+                    <li>
+                        <a href="http://cargocollective.com/jaimemartinez/">
+                            <img src="{% static 'img/contact/1.jpg' %}" alt="img01"/>
+                        </a>
+                        <div class="contactus-expander" style="display : none;">
+                            <div class="contactus-expander-inner">
+                                <span class="contactus-close"></span>
+                                <div class="contactus-fullimg">
+                                    <img src="{% static 'img/contact/1.jpg' %}" style="display: inline;" />
+                                </div>
+                                <div class="contactus-details">
+                                    <h3 class="centered text-huge">Chief Co-ordinator</h3>
+                                    <div class="row pad-top contactus-info">
+                                        <div class="col-xs-6">Prof. John Bosco Lourdusamy</div>     
+                                        <div class="col-xs-6">+91 9444008762</div>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
-                    </div>
-                </div>
-                <div class="panel panel-default">
-                    <div class="panel-heading">
-                        <h4 class="panel-title">
-                            <a data-toggle="collapse" data-parent="#accordion" href="#collapseTh">
-                                Collapsible Group Item #3
-                            </a>
-                        </h4>
-                    </div>
-                    <div id="collapseTh" class="panel-collapse collapse width">
-                        <div class="panel-body">
-                            Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
+                    </li>
+                    <li>
+                        <a href="http://cargocollective.com/jaimemartinez/">
+                            <img src="{% static 'img/contact/2.jpg' %}" alt="img02"/>
+                        </a>
+                        <div class="contactus-expander" style="display : none;">
+                            <div class="contactus-expander-inner">
+                                <span class="contactus-close"></span>
+                                <div class="contactus-fullimg">
+                                    <img src="{% static 'img/contact/2.jpg' %}" style="display: inline;" />
+                                </div>
+                                <div class="contactus-details">
+                                    <h3 class="centered text-huge">Managerial Team</h3>
+                                    
+                                    <div class="row contactus-info">
+                                        <div class="col-xs-4">Project Administration</div> 
+                                        <div class="col-xs-4">Rohit Y</div>
+                                        <div class="col-xs-4">+91 9884247470</div>
+                                    </div>
+                                    <div class="row contactus-info">
+                                        <div class="col-xs-4">Event Management</div>       
+                                        <div class="col-xs-4">Niranjan C S</div>  
+                                        <div class="col-xs-4">+91 9092772563</div>
+                                    </div>
+                                    <div class="row contactus-info">
+                                        <div class="col-xs-4">Design &amp; Publicity</div> 
+                                        <div class="col-xs-4">Shashanka Rao</div> 
+                                        <div class="col-xs-4">+91 9498098063</div>
+                                    </div>
+                                    <div class="row contactus-info">
+                                        <div class="col-xs-4">Webops &amp; MobOps</div>    
+                                        <div class="col-xs-4">Abdeali JK</div>    
+                                        <div class="col-xs-4">+91 9003097073</div>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
-                    </div>
-                </div>
-                <div class="panel panel-default">
-                    <div class="panel-heading">
-                        <h4 class="panel-title">
-                            <a data-toggle="collapse" data-parent="#accordion" href="#collapseThree">
-                                Collapsible Group Item #3
-                            </a>
-                        </h4>
-                    </div>
-                    <div id="collapseThree" class="panel-collapse collapse width">
-                        <div class="panel-body">
-                            Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
+                    </li>
+                    <li>
+                        <a href="http://cargocollective.com/jaimemartinez/">
+                            <img src="{% static 'img/contact/3.jpg' %}" alt="img03"/>
+                        </a>
+                        <div class="contactus-expander" style="display : none;">
+                            <div class="contactus-expander-inner">
+                                <span class="contactus-close"></span>
+                                <div class="contactus-fullimg">
+                                    <img src="{% static 'img/contact/3.jpg' %}" style="display: inline;" />
+                                </div>
+                                <div class="contactus-details">
+                                    <h3 class="centered text-huge">Project Representatives</h3>
+                                    
+                                </div>
+                            </div>
                         </div>
-                    </div>
-                </div>
+                    </li>
+                </ul>
             </div>
         </div>
     </div>
@@ -75,25 +113,19 @@
 
 {% block extra_css %}
 {{ block.super }}
+<link href="{% static 'css/thumbnails.css' %}" rel="stylesheet" media="screen">
 <style type='text/css'>
-    .collapse.width {
-        position: relative;
-        width: 0;
-        overflow: hidden;
-        -webkit-transition: width 0.35s ease;
-        -moz-transition: width 0.35s ease;
-        -o-transition: width 0.35s ease;
-        transition: width 0.35s ease;
-    }
-    .collapse.width.in {
-        width : auto;
-    }
 </style>
 {% endblock %}
 
 
 {% block extra_js %}
 {{ block.super }}
+<script type="text/javascript" src="{% static 'js/thumbnails.js' %}"></script>
 <script type='text/javascript'>
+    
+    $(function() {
+        Grid.init();
+    });
 </script>
 {% endblock %}

@@ -4,6 +4,7 @@ from django.contrib.auth.models import User, Group
 class Event(models.Model):
     # Basic info
     name            = models.CharField(max_length = 30, blank = False, null = False)
+    years           = models.CharField(max_length = 7, blank = False, null = False)
     category        = models.CharField(max_length = 30, blank = True, null = True)
     
     # Data
@@ -13,6 +14,10 @@ class Event(models.Model):
     credits         = models.ManyToManyField(User, through = 'Credit', blank = True, null = True)
     members         = models.ManyToManyField(User, related_name='members', blank = True, null = True)
     reps            = models.ManyToManyField(User, related_name='reps', blank = True, null = True)
+    
+    # Dates
+    time_created    = models.DateTimeField(auto_now_add=True)
+    
     
     def __unicode__(self):
         return self.name
@@ -36,7 +41,7 @@ class Event(models.Model):
 class Credit(models.Model):
     # people involved in the credit allotment
     awarded_to      = models.ForeignKey(User, related_name='awarded_to')
-    awarded_by_id   = models.IntegerField(default = 0)
+    awarded_by_id   = models.IntegerField(default = 0) # Cant make a foreign key as only 1 user foreign key is allowed ...
     
     # Project or Event involved in the credit
     event           = models.ForeignKey(Event)

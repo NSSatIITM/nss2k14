@@ -92,7 +92,8 @@
     {% block content %}
     {% endblock %}
     
-    <script type="text/javascript" src="{% static 'js/jquery.js' %}"></script>
+    {% if DEBUG %} <script type="text/javascript" src="{% static 'js/jquery.min.js' %}"></script> 
+    {% else %} <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script> {% endif %}
     {% if DEBUG %} <script type="text/javascript" src="{% static 'js/bootstrap.min.js' %}"></script> 
     {% else %} <script src="//netdna.bootstrapcdn.com/bootstrap/3.0.3/js/bootstrap.min.js"></script> {% endif %}
     

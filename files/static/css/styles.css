@@ -41,6 +41,30 @@
   font-weight: 400;
   src: local('Voces'), local('Voces-Regular'), url(../fonts/voces-regular.woff) format('woff');
 }
+/* ----------------------- Misc
+ * ----------------------------------------------------------------- */
+
+::selection  {
+    background-color:  #F44343;
+    color:  #FFF;
+    text-shadow:  none;
+}
+::-webkit-scrollbar {
+    width:  13px;
+    height:  13px;
+}
+::-webkit-scrollbar-track {
+    background:  #eee;
+    border:  thin solid lightgray;
+    box-shadow:  0px 0px 3px rgba(0,  0,  0,  0.5) inset;
+}
+::-webkit-scrollbar-thumb {
+    background:  #555;
+    border:  thin solid gray;
+    box-shadow:  0px 0px 3px rgba(0,  0,  0,  0.9) outset;
+}
+
+
 /* ----------------------- Generic classes
  * ----------------------------------------------------------------- */
 html {
@@ -63,11 +87,6 @@ body {
 .centered {
     text-align : center;
     text-align : middle;
-}
-.centerme {
-    text-align : center;
-    text-align : middle;
-    margin : auto;
 }
 
 .bold {
@@ -282,6 +301,40 @@ a.white:hover {
     color : #999999;
     text-decoration : none; 
 }
+
+.loading-dots {
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background: #ddd;
+    box-shadow: 0 0 1px #ccc, 15px 30px 1px #ccc, -15px 30px 1px #ccc;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    margin: -25px 0 0 -25px;
+    -webkit-animation: loader 0.5s infinite ease-in-out both;
+    -moz-animation: loader 0.5s infinite ease-in-out both;
+    animation: loader 0.5s infinite ease-in-out both;
+}
+
+@-webkit-keyframes loader {
+    0% { background: #ddd; }
+    33% { background: #ccc; box-shadow: 0 0 1px #ccc, 15px 30px 1px #ccc, -15px 30px 1px #ddd; }
+    66% { background: #ccc; box-shadow: 0 0 1px #ccc, 15px 30px 1px #ddd, -15px 30px 1px #ccc; }
+}
+
+@-moz-keyframes loader {
+    0% { background: #ddd; }
+    33% { background: #ccc; box-shadow: 0 0 1px #ccc, 15px 30px 1px #ccc, -15px 30px 1px #ddd; }
+    66% { background: #ccc; box-shadow: 0 0 1px #ccc, 15px 30px 1px #ddd, -15px 30px 1px #ccc; }
+}
+
+@keyframes loader {
+    0% { background: #ddd; }
+    33% { background: #ccc; box-shadow: 0 0 1px #ccc, 15px 30px 1px #ccc, -15px 30px 1px #ddd; }
+    66% { background: #ccc; box-shadow: 0 0 1px #ccc, 15px 30px 1px #ddd, -15px 30px 1px #ccc; }
+}
+
 
 .error.form-control {
   border-color: #a94442;

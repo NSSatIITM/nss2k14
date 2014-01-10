@@ -1,41 +1,89 @@
 {% extends 'pages/base.html' %}
 {% load staticfiles %}
 
-{% block title %} NSS IITM {% endblock %}
+{% block title %} Events | NSS IITM {% endblock %}
 
 {% block content %}
-    <div id="home_carousel" class="carousel slide" data-interval='3000' data-ride='carousel'>
-        <!-- Indicators --
-        <ol class="carousel-indicators">
-            {% for carousel_img in carousel_files %}
-                <li data-target="#home_carousel" data-slide-to="{{ forloop.counter0 }}" class="{% if forloop.first %}active {% endif %}"></li>
-            {% endfor %}
-        </ol>-->
-
-        <!-- Wrapper for slides -->
-        <div class="carousel-inner">
-            {% for carousel_img in carousel_files %}
-                <div class="item {% if forloop.first %}active {% endif %}">   
-                    <div class="fill" style="background-image:url('{{ carousel_img }}');"></div>
-                    <div class="carousel-caption">
-                        <h1>NSS IITM</h1>
-                    </div>  
-                </div>
-            {% endfor %}
-        </div>
-
-        <!-- Controls -->
-        <a class="left carousel-control" href="#home_carousel" data-slide="prev">
-            <span class="icon-prev"></span>
-        </a>
-        <a class="right carousel-control" href="#home_carousel" data-slide="next">
-            <span class="icon-next"></span>
-        </a>
-    </div>
-    <div class='container'>
+    <div class='container pad-top'>
         <div class='row centered'>
-            <div class="col-md-6">efj,ke</div>
-            <div class="col-md-6">efj,ke</div>
+            <div class="col-md-6">
+                <span class='text-huge'>Who we are ?</span><br />
+                The <span class='nss'>NSS of IIT Madras</span> has consciously undergone a series of structural and ideological changes in order to foster creativity and innovation in all its activities. Standing by our motto <span class='bold'>Salvation through Education</span>, we actively promote Projects that are related to the theme of education, though we will support any project related to helping others.
+                <br /><br />
+                By working out projects from Braille magazines to technology interventions, from teaching children in urban slums to educational video content, <span class='nss'>NSS (IITM)</span> seeks to challenge the mediocre thinking, and reach out into the darkness, to pull a hand into the light.
+            </div>
+            <div class="col-md-6">
+                <span class='text-huge'>Our History</span><br />
+                The <span class='nss'>National Service Scheme of IIT Madras</span> was initiated over four decades ago with a vision, a sincere vision to cause benefit to the society, creating in due course a country with equality in thought and opportunity.
+                <br /><br />
+                We at <span class='nss'>NSS</span> function with a mission to mobilise our nation’s youth into a sect of progressive citizens and imbibe in them an inclination towards social service. As we battle corruption, greed, hunger, poverty, and illiteracy, we hope that one day our country will once again be restored the title of the Golden Bird. To this brilliant future, we commit.
+                <br /><br />
+                <span class='bold'>India is Calling. Do you hear it?</span>
+            </div>
+        </div>
+    </div>
+    <div class='container pad-top'>
+        <div class='row centered'>
+            <div class="col-md-12">
+                <div>
+                    <div class="z-slider-wrapper z-shadows" style="display: block; width: 1138px;">
+                        <article id="demo-accordion-01" class="z-demo-accordion transition z-accordion horizontal red z-grouped z-bordered z-shadows" data-role="z-accordion" data-options="{
+                            &quot;active&quot; : false,
+                            &quot;responsive&quot; : true,
+                            &quot;orientation&quot; : &quot;horizontal&quot;,  
+                            &quot;theme&quot; : &quot;red&quot;, 
+                            &quot;shadows&quot; : true,
+                            &quot;bordered&quot; : true, 
+                            &quot;slider&quot; : true, 
+                            &quot;rounded&quot; : false, 
+                            &quot;width&quot; : 1600, 
+                            &quot;height&quot; : 420, 
+                            &quot;dotNav&quot; : false, 
+                            &quot;containerHeight&quot; : 320, 
+                            &quot;headerSize&quot; : 68, 
+                            &quot;animation&quot; : { 
+                                &quot;duration&quot; : 500, 
+                                &quot;easing&quot; : &quot;easeInOutQuart&quot;
+                            }, 
+                            &quot;showIcons&quot; : true,
+                            &quot;headerFontSize &quot; : 1.6, 
+                            &quot;autoplay&quot; : { 
+                                &quot;interval&quot; : 3000 
+                            } 
+                        }" role="tablist" style="width: 1138px; height : 298px;">
+                            <section class="z-section" aria-hidden="true" aria-expanded="false" aria-selected="false">
+                                <h3 class="z-link" role="tab" tabindex="-1">
+                                    <span class="z-title">Ocean Sunset</span>
+                                    <span class="z-arrow"></span>
+                                </h3>
+                                <div class="z-content" role="tabpanel" aria-hidden="true" aria-expanded="false"><div class="z-auto-g">
+                                    abcd
+                                </div></div>
+                            </section>
+                            
+                            <section class="z-section" aria-hidden="true" aria-expanded="false" aria-selected="false">
+                                <h3 class="z-link" role="tab" tabindex="-1">
+                                    <span class="z-title">View from a Cave</span>
+                                    <span class="z-arrow"></span>
+                                </h3>
+                                <div class="z-content" role="tabpanel" aria-hidden="true" aria-expanded="false"><div class="z-auto-g">
+                                    qwwert
+                                </div></div>
+                            </section>
+                            
+                            <section class="z-section" aria-hidden="true" aria-expanded="false" aria-selected="false">
+                                <h3 class="z-link" role="tab" tabindex="-1">
+                                    <span class="z-title">Beach House</span>
+                                    <span class="z-arrow"></span>
+                                </h3>
+                                <div class="z-content" role="tabpanel" aria-hidden="true" aria-expanded="false"><div class="z-auto-g">
+                                    zxccvb
+                                </div></div>
+                            </section>
+                        </article>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 
@@ -43,52 +91,29 @@
 
 {% block extra_css %}
 {{ block.super }}
+<link href="{% static 'css/zozo.css' %}" rel="stylesheet" media="screen">
 <style type='text/css'>
-    /* Half Page Height Carousel Customization */
-    .carousel {
-        height: 50%;
-        padding : 0px 10%;
-    }
-    
-    .item,
-    .active,
-    .carousel-inner {
-        height: 100%;
-    }
-    
-    .fill {
-        width: 100%;
-        height: 100%;
-        background-position: center;
-        background-size: cover;
-    }
-    .carousel-control.left {
-        background-image: -webkit-linear-gradient(left, color-stop(rgba(255, 255, 255, 0.5) 0), color-stop(rgba(255, 255, 255, 0.0001) 100%));
-        background-image: linear-gradient(to right, rgba(255, 255, 255, 0.5) 0, rgba(255, 255, 255, 0.0001) 100%);
-        background-repeat: repeat-x;
-        filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#80000000', endColorstr='#00000000', GradientType=1);
-    }
-
-    .carousel-control.right {
-        right: 0;
-        left: auto;
-        background-image: -webkit-linear-gradient(left, color-stop(rgba(255, 255, 255, 0.0001) 0), color-stop(rgba(255, 255, 255, 0.5) 100%));
-        background-image: linear-gradient(to right, rgba(255, 255, 255, 0.0001) 0, rgba(255, 255, 255, 0.5) 100%);
-        background-repeat: repeat-x;
-        filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#00000000', endColorstr='#80000000', GradientType=1);
-    }
-
-    @media (max-width: 767px) {
-        .carousel {
-            height: 70%; /* increases the carousel height so it looks good on phones */
-        }
-    }
 </style>
 {% endblock %}
 
 
 {% block extra_js %}
 {{ block.super }}
+<script type="text/javascript" src="{% static 'js/zozo.js' %}"></script>
+<script type="text/javascript" src="{% static 'js/modernizr-zozo.min.js' %}"></script>
 <script type='text/javascript'>
+    var demo_accordion = {
+        rounded: false,
+        active: false,
+        shadows: true,
+        headerSize: 36,
+        sectionSpacing: 8,
+        theme: "silver",
+        orientation: "vertical",
+        responsiveDelay: 0,
+        animation: {
+            duration: 400
+        }
+    };
 </script>
 {% endblock %}
