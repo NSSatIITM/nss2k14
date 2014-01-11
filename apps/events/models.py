@@ -4,7 +4,7 @@ from django.contrib.auth.models import User, Group
 class Event(models.Model):
     # Basic info
     name            = models.CharField(max_length = 30, blank = False, null = False)
-    years           = models.CharField(max_length = 7, blank = False, null = False)
+    years           = models.CharField(max_length = 7, blank = True, null = True)
     category        = models.CharField(max_length = 30, blank = True, null = True)
     
     # Data
@@ -16,7 +16,7 @@ class Event(models.Model):
     reps            = models.ManyToManyField(User, related_name='reps', blank = True, null = True)
     
     # Dates
-    time_created    = models.DateTimeField(auto_now_add=True)
+    time_created    = models.DateTimeField(auto_now_add=True, null = True)
     
     
     def __unicode__(self):
@@ -52,7 +52,7 @@ class Credit(models.Model):
     
     # Time created
     date            = models.DateField(null = True, help_text = 'The date when the credit was alloted')
-    time_created    = models.DateTimeField(auto_now_add=True)
+    time_created    = models.DateTimeField(auto_now_add=True, null = True)
     
     def __unicode__(self):
         return unicode(self.awarded_to) + ': ' + unicode(self.number_of_credits)

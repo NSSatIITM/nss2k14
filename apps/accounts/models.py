@@ -21,6 +21,11 @@ HOSTEL_CHOICES = (
     ('Sharavati', 'Sharavati'),
 )
 
+USERTYPE_CHOICES = (
+    (0, 'User'),
+    (1, 'Manager'),
+)
+
 class UserProfile(models.Model):
     # Foreign Key for the User class
     user            = models.ForeignKey(User, unique = True)
@@ -36,7 +41,7 @@ class UserProfile(models.Model):
     additional_emails = models.CharField(max_length = 500, blank = True, null = True) # Separated by semicolons
     
     # Extra info 
-    # usertype      = models.CharField(max_length = 20, blank = True, null = True) # To tell something extra about the user
+    usertype      = models.IntegerField(max_length = 20, blank = True, null = False, choices = USERTYPE_CHOICES, default = 0) # To tell something extra about the user
     
     # Activation keys
     activation_key  = models.CharField(max_length = 40, null = True)
