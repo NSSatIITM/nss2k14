@@ -4,7 +4,8 @@ from django.contrib.auth.models import User, Group
 class Event(models.Model):
     # Basic info
     name            = models.CharField(max_length = 30, blank = False, null = False)
-    years           = models.CharField(max_length = 7, blank = True, null = True)
+    #years           = models.CharField(max_length = 7, blank = True, null = True) # This is for projects
+    date            = models.DateTimeField(null = True)
     category        = models.CharField(max_length = 30, blank = True, null = True)
     
     # Data
@@ -18,10 +19,13 @@ class Event(models.Model):
     # Dates
     time_created    = models.DateTimeField(auto_now_add=True, null = True)
     
-    
+    # -------- Methods to handle basic data of the class
     def __unicode__(self):
         return self.name
     
+    # -------- Methods to handle fields in the model
+    
+    # -------- Method to handle ManyToMany fields of the model
     def give_credits(self, **kwargs):
         cred = Credit(event = self,  **kwargs)
         cred.save()
