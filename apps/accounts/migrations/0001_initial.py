@@ -12,9 +12,15 @@ class Migration(SchemaMigration):
         db.create_table(u'accounts_userprofile', (
             (u'id', self.gf('django.db.models.fields.AutoField')(primary_key=True)),
             ('user', self.gf('django.db.models.fields.related.ForeignKey')(to=orm['auth.User'], unique=True)),
-            ('gender', self.gf('django.db.models.fields.CharField')(default='N', max_length=1)),
+            ('roll_no', self.gf('django.db.models.fields.CharField')(max_length=10, null=True)),
             ('phone_number', self.gf('django.db.models.fields.CharField')(max_length=10, null=True, blank=True)),
-            ('feedback', self.gf('django.db.models.fields.TextField')(null=True, blank=True)),
+            ('gender', self.gf('django.db.models.fields.CharField')(default='N', max_length=1)),
+            ('hostel', self.gf('django.db.models.fields.CharField')(max_length=15, null=True, blank=True)),
+            ('room_no', self.gf('django.db.models.fields.CharField')(max_length=10, null=True, blank=True)),
+            ('additional_emails', self.gf('django.db.models.fields.CharField')(max_length=500, null=True, blank=True)),
+            ('usertype', self.gf('django.db.models.fields.IntegerField')(default=0, max_length=20, blank=True)),
+            ('activation_key', self.gf('django.db.models.fields.CharField')(max_length=40, null=True)),
+            ('activation_key_mobile', self.gf('django.db.models.fields.CharField')(max_length=6, null=True)),
         ))
         db.send_create_signal(u'accounts', ['UserProfile'])
 
@@ -27,11 +33,17 @@ class Migration(SchemaMigration):
     models = {
         u'accounts.userprofile': {
             'Meta': {'object_name': 'UserProfile'},
-            'feedback': ('django.db.models.fields.TextField', [], {'null': 'True', 'blank': 'True'}),
+            'activation_key': ('django.db.models.fields.CharField', [], {'max_length': '40', 'null': 'True'}),
+            'activation_key_mobile': ('django.db.models.fields.CharField', [], {'max_length': '6', 'null': 'True'}),
+            'additional_emails': ('django.db.models.fields.CharField', [], {'max_length': '500', 'null': 'True', 'blank': 'True'}),
             'gender': ('django.db.models.fields.CharField', [], {'default': "'N'", 'max_length': '1'}),
+            'hostel': ('django.db.models.fields.CharField', [], {'max_length': '15', 'null': 'True', 'blank': 'True'}),
             u'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
             'phone_number': ('django.db.models.fields.CharField', [], {'max_length': '10', 'null': 'True', 'blank': 'True'}),
-            'user': ('django.db.models.fields.related.ForeignKey', [], {'to': u"orm['auth.User']", 'unique': 'True'})
+            'roll_no': ('django.db.models.fields.CharField', [], {'max_length': '10', 'null': 'True'}),
+            'room_no': ('django.db.models.fields.CharField', [], {'max_length': '10', 'null': 'True', 'blank': 'True'}),
+            'user': ('django.db.models.fields.related.ForeignKey', [], {'to': u"orm['auth.User']", 'unique': 'True'}),
+            'usertype': ('django.db.models.fields.IntegerField', [], {'default': '0', 'max_length': '20', 'blank': 'True'})
         },
         u'auth.group': {
             'Meta': {'object_name': 'Group'},

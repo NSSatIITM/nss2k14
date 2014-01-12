@@ -114,17 +114,20 @@ body {
     font-size : 2em;
 }
 
+.pad {
+    padding : 2.5%;
+}
 .pad-top {
-    padding-top : 5%;
+    padding-top : 2.5%;
 }
 .pad-bottom {
-    padding-bottom : 5%;
+    padding-bottom : 2.5%;
 }
 .pad-left {
-    padding-left : 5%;
+    padding-left : 2.5%;
 }
 .pad-right {
-    padding-right : 5%;
+    padding-right : 2.5%;
 }
 
 .full-width {
@@ -160,7 +163,7 @@ body {
  * ----------------------------------------------------------------- */
  
 .nss-nav {
-    opacity : 0.9;
+    opacity : 1;
     background-color: #b84d45;
     border-color: #a5423b;
     box-shadow: 0 1px 0 rgba(255,255,255,.1);

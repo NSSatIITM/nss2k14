@@ -17,6 +17,11 @@ import os
 
 def events (request):
     eventspage = True
+     
+    # Get all event details
+    event_category = 'Event'
+    eventdet_list = EventDetails.objects.filter(category = event_category)
+    
     return render_to_response('pages/events.html', locals(), context_instance= global_context(request))
 
 def projects(request):

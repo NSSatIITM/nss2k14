@@ -14,7 +14,6 @@ from apps.accounts.models import UserProfile
 # View functions
 # Misc
 from django.templatetags.static import static
-from captcha.fields import CaptchaField
 # Python
 import os
 
@@ -25,7 +24,6 @@ class SignUpForm(forms.Form):
     last_name = forms.CharField(max_length='40', widget=forms.TextInput(attrs={'required':'true'}))
     email = forms.EmailField(help_text = 'email@example.com', widget=forms.TextInput(attrs={'required':'true','type':'email'}))
     password = forms.CharField(max_length=30, widget=forms.PasswordInput(attrs={'required':'true'}))
-    #captcha = CaptchaField()
     
     def __init__(self, *args, **kwargs):
         super(SignUpForm, self).__init__(*args, **kwargs)

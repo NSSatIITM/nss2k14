@@ -36,10 +36,6 @@ urlpatterns = patterns('',
     # ------------------------------------------------------------------
     # DJANGO APPS - FOR EXTERNAL APPS
     # NSS + socialauth
-    url(r'^login-error/?$', 'apps.accounts.views.socialauth_error'),
-    url(r'^socialauth_disconnect/(?P<backend>[^/]+)/(?P<association_id>[^/]+)/$', 'apps.accounts.views.socialauth_disconnect', name='socialauth_disconnect'),
-    url(r'^socialauth_complete/(?P<backend>[^/]+)/$', 'apps.accounts.views.socialauth_complete', name='socialauth_complete'),
-    
     
 
     # ------------------------------------------------------------------
@@ -58,10 +54,6 @@ urlpatterns = patterns('',
     
     # ------------------------------------------------------------------
     # THIRD PARTY APPS
-    # Captcha urls
-    url(r'^captcha/', include('captcha.urls')),
-    # Social Auth
-    url(r'', include('social_auth.urls')),
     # Dajaxice
     url(dajaxice_config.dajaxice_url, include('misc.dajaxice.urls')), # For dajaxice to function corrently
     

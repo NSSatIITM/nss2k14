@@ -20,7 +20,7 @@
             <div class="col-md-12">
                 <div>
                     <div class="z-slider-wrapper z-shadows" style="display: block; width: 1138px;">
-                        <article id="demo-accordion-01" class="z-demo-accordion transition z-accordion horizontal red z-grouped z-bordered z-shadows" data-role="z-accordion" data-options="{
+                        <article id="" class="transition z-accordion" data-role="z-accordion" data-options="{
                             &quot;active&quot; : false,
                             &quot;responsive&quot; : true,
                             &quot;orientation&quot; : &quot;horizontal&quot;,  
@@ -41,38 +41,26 @@
                             &quot;showIcons&quot; : true,
                             &quot;headerFontSize &quot; : 1.6, 
                             &quot;autoplay&quot; : { 
-                                &quot;interval&quot; : 3000 
+                                &quot;interval&quot; : 1000000 
                             } 
                         }" role="tablist" style="width: 1138px; height : 298px;">
-                            <section class="z-section" aria-hidden="true" aria-expanded="false" aria-selected="false">
-                                <h3 class="z-link" role="tab" tabindex="-1">
-                                    <span class="z-title">Ocean Sunset</span>
-                                    <span class="z-arrow"></span>
-                                </h3>
-                                <div class="z-content" role="tabpanel" aria-hidden="true" aria-expanded="false"><div class="z-auto-g">
-                                    abcd
-                                </div></div>
-                            </section>
-                            
-                            <section class="z-section" aria-hidden="true" aria-expanded="false" aria-selected="false">
-                                <h3 class="z-link" role="tab" tabindex="-1">
-                                    <span class="z-title">View from a Cave</span>
-                                    <span class="z-arrow"></span>
-                                </h3>
-                                <div class="z-content" role="tabpanel" aria-hidden="true" aria-expanded="false"><div class="z-auto-g">
-                                    qwwert
-                                </div></div>
-                            </section>
-                            
-                            <section class="z-section" aria-hidden="true" aria-expanded="false" aria-selected="false">
-                                <h3 class="z-link" role="tab" tabindex="-1">
-                                    <span class="z-title">Beach House</span>
-                                    <span class="z-arrow"></span>
-                                </h3>
-                                <div class="z-content" role="tabpanel" aria-hidden="true" aria-expanded="false"><div class="z-auto-g">
-                                    zxccvb
-                                </div></div>
-                            </section>
+                            {% for evdet in eventdet_list %}
+                                <section class="z-section" aria-hidden="true" aria-expanded="false" aria-selected="false">
+                                    <h3 class="z-link" role="tab" tabindex="-1">
+                                        <span class="z-title">{{ evdet.name }}</span>
+                                        <span class="z-arrow"></span>
+                                    </h3>
+                                    <div class="z-content" role="tabpanel" aria-hidden="true" aria-expanded="false">
+                                        <div class="z-auto-g">
+                                            {{ evdet.description }}
+                                            <br />
+                                            <br />
+                                            <a href='#' class='pull-right'>Get more details ...</a>
+                                        
+                                        </div>
+                                    </div>
+                                </section>
+                            {% endfor %}
                         </article>
                     </div>
                 </div>
@@ -95,18 +83,5 @@
 <script type="text/javascript" src="{% static 'js/zozo.js' %}"></script>
 <script type="text/javascript" src="{% static 'js/modernizr-zozo.min.js' %}"></script>
 <script type='text/javascript'>
-    var demo_accordion = {
-        rounded: false,
-        active: false,
-        shadows: true,
-        headerSize: 36,
-        sectionSpacing: 8,
-        theme: "silver",
-        orientation: "vertical",
-        responsiveDelay: 0,
-        animation: {
-            duration: 400
-        }
-    };
 </script>
 {% endblock %}

@@ -154,25 +154,13 @@ DJANGO_APPS = (
 THIRD_PARTY_APPS = (
     # South
     'south',
-    # Social auth plugin
-    'social_auth',
+    'south_admin',
     #TastyPie for the RESTFUL API
-    'tastypie',
-    # Captcha - django-simple-captcha
-    'captcha',
+    # 'tastypie',
     # Mobile checker
-    'django_user_agents',
-    # Bootstrap 3 django templates -- seems horrible; need to test again later
-    'bootstrap3',
-    # Bootstrap and inplace-edit admin
-    'inplaceeditform_bootstrap',  # it is very important that this app is before that inplaceeditform and inplaceeditform_extra_fields
-    'inplaceeditform',
-    'inplaceeditform_extra_fields',  # this is optional but recommended
-    'bootstrap3_datetime', # this is optional but recommended
+    # 'django_user_agents',
     # For template form field changes in template
     'widget_tweaks',
-    # Permission handling
-    'guardian'
 )
 
 NSS_APPS = (
@@ -281,7 +269,6 @@ TEMPLATE_CONTEXT_PROCESSORS = (
 # Guardian settings - permissions
 AUTHENTICATION_BACKENDS = (
     'django.contrib.auth.backends.ModelBackend', # default
-    'guardian.backends.ObjectPermissionBackend',
 )
 ANONYMOUS_USER_ID = -1
 

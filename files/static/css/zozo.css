@@ -6,7 +6,6 @@ z-accordion.vertical.z-content-nav > section > h3 {
     font-family:  "Helvetica Neue", Helvetica, Arial, sans-serif;
     font-size:  14px;
 }
-
 .z-slider-wrapper, 
 .z-accordion, 
 .z-accordion > section, 
@@ -182,7 +181,7 @@ z-accordion.vertical.z-content-nav > section > h3 {
     white-space:  nowrap;
     -webkit-transition:  all 0.25s ease-out;
 }
- .z-accordion.horizontal > section > h3 .z-arrow  {
+.z-accordion.horizontal > section > h3 .z-arrow  {
     position:  absolute;
     left:  14px;
     left: 6%;
@@ -234,20 +233,20 @@ z-accordion.vertical.z-content-nav > section > h3 {
     left:  48px;
     right:  0;
 }
- .z-accordion.horizontal > section > .z-content > div {
-    padding:  10px 10px 10px 20px;
+.z-accordion.horizontal > section > .z-content > div {
+    padding:  10px 10px 10px 10px;
 }
- .z-accordion.horizontal > section.z-active > .z-content  {
+.z-accordion.horizontal > section.z-active > .z-content  {
     margin:  0px;
     height:  100%;
 }
- .z-accordion.horizontal > section.z-active.z-last > .z-content  {
+.z-accordion.horizontal > section.z-active.z-last > .z-content  {
     height:  96%;
     margin:  6px 0 0 0;
     height: 100%;
     margin: 0;
 }
- .z-accordion.transition.horizontal > section  {
+.z-accordion.transition.horizontal > section  {
 }
 .z-accordion.z-scrollable > section.z-active .z-content::-webkit-scrollbar  {
     width:  9px;
@@ -326,33 +325,6 @@ z-accordion.vertical.z-content-nav > section > h3 {
 }
  .z-accordion.horizontal.z-bordered > section.z-active.z-last > h3 > .z-title  {
     border-bottom-width:  1px;
-}
-.z-accordion.red.z-bordered, .z-accordion.red.z-bordered > section > h3, .z-accordion.red.z-bordered > section > h3 > .z-title, .z-accordion.red.z-bordered > section > .z-content  {
-    border-color:  #C72C2C;
-}
-.z-accordion.red > section > h3  {
-    color:  white;
-    text-shadow:  0px -1px 0px rgba(0,  0,  0,  0.3);
-}
-.z-accordion.red > section > h3, .z-accordion.red > section > h3 > .z-title2  {
-    background-color:  #E44848;
-    box-shadow:  5px 10px 100px rgba(100,  100,  100,  0.15) inset;
-}
-.z-accordion.red > section > h3 > .z-arrow  {
-    color:  #aa2a52;
-}
-.z-accordion.red.z-scrollable > section.z-active .z-content::-webkit-scrollbar-thumb  {
-    background:  rgba(228,  35,  35,  0.35);
-    border-color:  rgba(228,  35,  35,  0.15);
-    box-shadow:  1px 1px 5px rgba(228,  35,  35,  0.05) inset;
-}
-.z-accordion.red.z-scrollable > section.z-active .z-content::-webkit-scrollbar-track  {
-    background:  rgba(228,  35,  35,  0.15);
-    border-color: rgba(228,  35,  35,  0.15);
-    box-shadow:  0 0 3px rgba(228,  35,  35,  0.15) inset;
-}
-.z-accordion.red > section > h3 > .z-arrow {
-    background-position:  0 -62px;
 }
 .z-accordion.vertical > section > h3 > .z-title2 {
     background-color:  none !important;
@@ -565,10 +537,6 @@ z-accordion.vertical.z-content-nav > section > h3 {
  .z-slider-wrapper .z-accordion > section.z-active > .z-content > .z-auto-g > img  {
     visibility:  visible;
 }
- .z-slider-wrapper .z-accordion.horizontal > section > .z-content > div  {
-    padding:  0 0 0 12px;
-     padding: 0;
-}
  .z-slider-wrapper .z-accordion.horizontal > section > .z-content,  .z-slider-wrapper .z-accordion.horizontal > section.z-active > .z-content,  .z-slider-wrapper .z-accordion.horizontal > section.z-active.z-last > .z-content  {
     height:  100%;
      margin:  0;
@@ -615,4 +583,163 @@ z-accordion.vertical.z-content-nav > section > h3 {
     -moz-border-radius:  5px;
     -webkit-border-radius:  5px;
     border-radius:  5px;
+}
+
+.z-accordion a, 
+.z-accordion a:active { 
+    color : #F44343;
+    text-decoration : none;
+    -webkit-transition:  all 0.1s ease-in-out;
+            transition:  all 0.1s ease-in-out;
+         -o-transition:  all 0.1s ease-in-out;
+       -moz-transition:  all 0.1s ease-in-out;
+}
+.z-accordion a:hover { 
+    color : #000000;
+    text-decoration : none;
+}
+/* ------------------------------------------------------
+ *                       RED
+ -------------------------------------------------------- */
+.z-accordion.red.z-bordered, .z-accordion.red.z-bordered > section > h3, .z-accordion.red.z-bordered > section > h3 > .z-title, .z-accordion.red.z-bordered > section > .z-content  {
+    border-color:  #C72C2C;
+}
+.z-accordion.red > section > h3  {
+    color:  white;
+    text-shadow:  0px -1px 0px rgba(0,  0,  0,  0.3);
+}
+.z-accordion.red > section > h3:hover  {
+    color : #F4C8C8;
+}
+.z-accordion.red > section > h3, .z-accordion.red > section > h3 > .z-title2  {
+    background-color:  #E44848;
+    box-shadow:  5px 10px 100px rgba(100,  100,  100,  0.15) inset;
+}
+.z-accordion.red > section > h3:hover, 
+.z-accordion.red > section > h3 > .z-title2:hover  {
+    background-color:  #D43838;
+    box-shadow:  5px 10px 100px rgba(100,  100,  100,  0.15) inset;
+}
+.z-accordion.red > section > h3 > .z-arrow  {
+    color:  #aa2a52;
+}
+.z-accordion.red.z-scrollable > section.z-active .z-content::-webkit-scrollbar-thumb  {
+    background:  rgba(228,  35,  35,  0.35);
+    border-color:  rgba(228,  35,  35,  0.15);
+    box-shadow:  1px 1px 5px rgba(228,  35,  35,  0.05) inset;
+}
+.z-accordion.red.z-scrollable > section.z-active .z-content::-webkit-scrollbar-track  {
+    background:  rgba(228,  35,  35,  0.15);
+    border-color: rgba(228,  35,  35,  0.15);
+    box-shadow:  0 0 3px rgba(228,  35,  35,  0.15) inset;
+}
+.z-accordion.red > section > h3 > .z-arrow {
+    background-position:  0 -62px;
+}
+ 
+/* ------------------------------------------------------
+ *                       DEEPBLUE 
+ -------------------------------------------------------- */
+.z-accordion.deepblue.z-bordered, .z-accordion.deepblue.z-bordered > section > h3, .z-accordion.deepblue.z-bordered > section > h3 > .z-title, .z-accordion.deepblue.z-bordered > section > .z-content  {
+    border-color:  #003E7C;
+}
+.z-accordion.deepblue.vertical > section > h3, 
+.z-accordion.deepblue.horizontal > section > h3 > .z-title  {
+    color:  white;
+     text-shadow:  0 -1px 0 rgba(0,  0,  0,  .5);
+     background-color:  #6891E7;
+     background-image:  -moz-linear-gradient(top, #096BD2 0, #0053A6 100%);
+     background-image:  -ms-linear-gradient(top, #096BD2 0, #0053A6 100%);
+     background-image:  -o-linear-gradient(top, #096BD2 0, #0053A6 100%);
+     background-image:  -webkit-gradient(linear, left top, left bottom, color-stop(0, #096BD2), color-stop(100%, #0053A6));
+     background-image:  -webkit-linear-gradient(top, #096BD2 0, #0053A6 100%);
+     background-image:  linear-gradient(to bottom, #096BD2 0, #0053A6 100%);
+}
+.z-accordion.deepblue.horizontal > section > h3 > .z-title  {
+    background-image:  -moz-linear-gradient(left, #096BD2 0, #0053A6 100%);
+}
+.z-accordion.deepblue > section > h3:hover, 
+.z-accordion.deepblue > section > h3 > .z-title2:hover  {
+     background-color:  #5881D7;
+     background-image:  -moz-linear-gradient(top, #095BC2 0, #004396 100%);
+     background-image:  -ms-linear-gradient(top, #095BC2 0, #004396 100%);
+     background-image:  -o-linear-gradient(top, #095BC2 0, #004396 100%);
+     background-image:  -webkit-gradient(linear, left top, left bottom, color-stop(0, #095BC2), color-stop(100%, #004396));
+     background-image:  -webkit-linear-gradient(top, #095BC2 0, #004396 100%);
+     background-image:  linear-gradient(to bottom, #095BC2 0, #004396 100%);
+}
+.z-accordion.deepblue > section > h3 > .z-arrow  {
+    color:  #002D59;
+     text-shadow:  0 -1px 0 rgba(0,  0,  0,  .5);
+}
+.ie7 .z-accordion.deepblue.horizontal > section > h3 .z-arrow, .ie8 .z-accordion.deepblue.horizontal > section > h3 .z-arrow, .ie7 .z-accordion.deepblue.horizontal > section > h3 > .z-title, .ie8 .z-accordion.deepblue.horizontal > section > h3 > .z-title {
+    filter: none;
+    background-color:  #3569d7;
+}
+.ie7 .z-accordion.deepblue.vertical > section > h3, .ie8 .z-accordion.deepblue.vertical > section > h3  {
+    filter:  progid:DXImageTransform.Microsoft.gradient(GradientType=0, startColorstr='#096BD2',  endColorstr='#0053A6');
+}
+.z-accordion.deepblue.z-scrollable > section.z-active .z-content::-webkit-scrollbar-thumb  {
+    background:  rgba(0,  62,  124,  0.75);
+     border-color:  rgba(0,  62,  124,  0.25);
+     box-shadow:  1px 1px 5px rgba(0,  62,  124,  0.25) inset;
+}
+.z-accordion.deepblue.z-scrollable > section.z-active .z-content::-webkit-scrollbar-track  {
+    background:  rgba(0,  62,  124,  0.05);
+     border-color: rgba(0,  62,  124,  0.06);
+     box-shadow:  0 0 3px rgba(0,  62,  124,  0.05) inset;
+}
+.z-accordion.deepblue > section > h3 > .z-arrow {
+    background-position:  0 -62px;
+}
+.z-accordion.deepblue .z-sub-nav li a {
+    background:  #207BDB;
+}
+.z-accordion.deepblue .z-sub-nav li a:hover {
+    background:  #2E87E4;
+}
+.z-tabs.deepblue > ul,  .z-tabs.deepblue > ul > li > a,  .z-tabs.deepblue > .z-container {
+    border-color:  #1E69DE;
+    border-style:  solid;
+}
+.z-tabs.deepblue > ul > li > a {
+    background:  #479fed;
+     background:  -moz-linear-gradient(top,  #479fed 0%,  #54a3ee 50%,  #3690f0 51%,  #1e69de 100%);
+     background:  -webkit-gradient(linear,  left top,  left bottom,  color-stop(0%, #479fed),  color-stop(50%, #54a3ee),  color-stop(51%, #3690f0),  color-stop(100%, #1e69de));
+     background:  -webkit-linear-gradient(top,  #479fed 0%, #54a3ee 50%, #3690f0 51%, #1e69de 100%);
+     background:  -o-linear-gradient(top,  #479fed 0%, #54a3ee 50%, #3690f0 51%, #1e69de 100%);
+     background:  -ms-linear-gradient(top,  #479fed 0%, #54a3ee 50%, #3690f0 51%, #1e69de 100%);
+     background:  linear-gradient(to bottom,  #479fed 0%, #54a3ee 50%, #3690f0 51%, #1e69de 100%);
+     filter:  progid:DXImageTransform.Microsoft.gradient( startColorstr='#479fed',  endColorstr='#1e69de', GradientType=0 );
+}
+ .z-tabs.deepblue > ul > li > a  {
+    color:  white;
+    text-shadow:  1px 1px 1px rgba(0,  0,  0,  .5);
+}
+.z-tabs.deepblue > ul > li.z-active > a  {
+    text-shadow:  0 1px 1px white;
+    color:  Black;
+}
+.z-tabs.deepblue > ul > li > a:hover  {
+    background:  #238dea;
+     background:  -moz-linear-gradient(top,  #238dea 0%,  #54a3ee 50%,  #3690f0 51%,  #065cdd 100%);
+     background:  -webkit-gradient(linear,  left top,  left bottom,  color-stop(0%, #238dea),  color-stop(50%, #54a3ee),  color-stop(51%, #3690f0),  color-stop(100%, #065cdd));
+     background:  -webkit-linear-gradient(top,  #238dea 0%, #54a3ee 50%, #3690f0 51%, #065cdd 100%);
+     background:  -o-linear-gradient(top,  #238dea 0%, #54a3ee 50%, #3690f0 51%, #065cdd 100%);
+     background:  -ms-linear-gradient(top,  #238dea 0%, #54a3ee 50%, #3690f0 51%, #065cdd 100%);
+     background:  linear-gradient(to bottom,  #238dea 0%, #54a3ee 50%, #3690f0 51%, #065cdd 100%);
+     filter:  progid:DXImageTransform.Microsoft.gradient( startColorstr='#238dea',  endColorstr='#065cdd', GradientType=0 );
+}
+ .z-tabs.deepblue > ul > li.z-active > a {
+    background:  #fff;
+     color:  #000F4D;
+     text-shadow:  0 1px rgba(78,  78,  78,  0.1);
+     filter:  none;
+}
+ .z-tabs.underlined.deepblue > ul.z-tabs-nav > li.z-active > a, .z-tabs.underlined.deepblue > ul.z-tabs-nav > li:hover {
+    border-color: #1E69DE;
+}
+
+.z-tabs.underlined.mobile.m-deepblue > ul.z-tabs-desktop > li.z-active > a, .z-tabs.underlined.mobile.hover.m-deepblue > ul.z-tabs-desktop > li:hover > a {
+    color:  #1E69DE;
 }

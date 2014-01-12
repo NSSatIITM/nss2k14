@@ -1,15 +1,30 @@
 from django.db import models
 from django.contrib.auth.models import User, Group
 
+EVENT_CATEGORY_CHOICES = (
+    ('Project', 'Project'),
+    ('Event', 'Event')
+)
+
+class EventDetails(models.Model):
+    # Info
+    name            = models.CharField(max_length = 30, blank = False, null = False, unique = True)
+    description     = models.TextField(blank = True, null = True)
+    category        = models.CharField(max_length = 30, blank = True, null = True, choices = EVENT_CATEGORY_CHOICES)
+    is_visible      = models.BooleanField(default = False)
+    
+    # Dates
+    time_created    = models.DateTimeField(auto_now_add=True, null = True)
+
+    # -------- Methods to handle basic data of the class
+    def __unicode__(self):
+        return self.name
+    
 class Event(models.Model):
     # Basic info
-    name            = models.CharField(max_length = 30, blank = False, null = False)
-    #years           = models.CharField(max_length = 7, blank = True, null = True) # This is for projects
-    date            = models.DateTimeField(null = True)
-    category        = models.CharField(max_length = 30, blank = True, null = True)
-    
-    # Data
-    description     = models.TextField(blank = True, null = True)
+    details         = models.ForeignKey(EventDetails)
+    start_date      = models.DateTimeField(null = True)
+    end_date        = models.DateTimeField(null = True)
     
     # Specific data
     credits         = models.ManyToManyField(User, through = 'Credit', blank = True, null = True)
@@ -21,7 +36,7 @@ class Event(models.Model):
     
     # -------- Methods to handle basic data of the class
     def __unicode__(self):
-        return self.name
+        return self.details.name + "::" + str(self.start_date) + "-" + str(self.end_data)
     
     # -------- Methods to handle fields in the model
     
