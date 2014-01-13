@@ -8,32 +8,51 @@ EVENT_CATEGORY_CHOICES = (
 
 class EventDetails(models.Model):
     # Info
-    name            = models.CharField(max_length = 30, blank = False, null = False, unique = True)
+
+    name            = models.CharField(max_length = 50, blank = False, null = False, unique = True)
     description     = models.TextField(blank = True, null = True)
-    category        = models.CharField(max_length = 30, blank = True, null = True, choices = EVENT_CATEGORY_CHOICES)
+    category        = models.CharField(max_length = 20, blank = True, null = True, choices = EVENT_CATEGORY_CHOICES)
     is_visible      = models.BooleanField(default = False)
-    
-    # m2m for event
-    
+    reps            = models.ManyToManyField(User, related_name='reps', blank = True, null = True)
+	#TODO: add reps view!!
+	#TODO: get vol list    
     # Dates
     time_created    = models.DateTimeField(auto_now_add=True, null = True)
 
     # -------- Methods to handle basic data of the class
     def __unicode__(self):
         return self.name
-    
+    def get_events(self):
+		try:
+			elist = Event.objects.filter(details = self)			
+			if elist.count() > 0:
+				return list(elist)
+		except:
+			pass
+		return None
+	def get_reps(self):
+		try:
+			replist =  list(self.reps.all())
+			if replist:
+				return replist
+		except:
+			pass
+		return None	
+
 class Event(models.Model):
     # Basic info
-    #details         = models.ForeignKey(EventDetails) # one-to-many
+    details       = models.ForeignKey(EventDetails) # one-to-many
+    #TODO: start and end date as default August 1 and May 31st of this year for all events...This will be used to check for year
     start_date      = models.DateTimeField(null = True)
     end_date        = models.DateTimeField(null = True)
-    
+    #TODO: if project-> no google calendar..
     # Specific data
     credits         = models.ManyToManyField(User, through = 'Credit', blank = True, null = True)
     members         = models.ManyToManyField(User, related_name='members', blank = True, null = True)
-    reps            = models.ManyToManyField(User, related_name='reps', blank = True, null = True)
-    
-    # Dates
+    # TODO:For event, list will be uploaded..(text comma separated etc..)..many ppl upload-> append to members
+    # Finally, give credits-> create credit objects..
+	# @Ali:reps not needed for every event..
+    # Date
     time_created    = models.DateTimeField(auto_now_add=True, null = True)
     
     # -------- Methods to handle basic data of the class
@@ -44,8 +63,8 @@ class Event(models.Model):
     
     # -------- Method to handle ManyToMany fields of the model
     def give_credits(self, **kwargs):
-        cred = Credit(event = self,  **kwargs)
-        cred.save()
+        cred = Credit(event = self,  **kwargs)#TODO:use get_or_create??(avoid duplicates)
+        cred.save()#TODO: prevent giving option for PR to add credits with arbitrary dates..
     
     def remove_credits(self, member):
         cred = Credit.objects.get(project=self, member=member)
@@ -58,11 +77,14 @@ class Event(models.Model):
         for id in member_ids:
             members = members | User.objects.get(id=id)
         return members
-
+	def is_project(self):
+		return self.details.category == 'Project'
+	
+	
 class Credit(models.Model):
     # people involved in the credit allotment
     awarded_to      = models.ForeignKey(User, related_name='awarded_to')
-    awarded_by_id   = models.IntegerField(default = 0) # Cant make a foreign key as only 1 user foreign key is allowed ...
+    awarded_by_id   = models.IntegerField(default = -1) # Cant make a foreign key as only 1 user foreign key is allowed ...
     
     # Project or Event involved in the credit
     event           = models.ForeignKey(Event)
@@ -80,6 +102,5 @@ class Credit(models.Model):
     
     def awarded_by(self):
         return User.objects.get(id=self.awarded_by_id)
-
 
 
