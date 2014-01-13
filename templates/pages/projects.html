@@ -1,17 +1,17 @@
 {% extends 'pages/base.html' %}
 {% load staticfiles %}
 
-{% block title %} Events | NSS IITM {% endblock %}
+{% block title %} Projects | NSS IITM {% endblock %}
 
 {% block content %}
     <div class='container pad-top'>
         <div class='row centered'>
             <div class="col-md-3 text-huge">
                 <a class="navbar-logo nss pad-right" href="{{ SITE_URL }}"><img src="{% static 'img/nss_logo_medium.png' %}" /></a>
-                Events
+                Projects
             </div>
             <div class="col-xl-9">
-                <p>Sticking to the NSS motto of "Not me, but you", our events for the year would serve the larger goal of reaching out to the society and motivating the volunteers towards such endeavors. NSS Events will empower a volunteer with better skills for life, be it leadership or time management; enlighten with ideas for a lifetime; enrich as a person and expand possibilities and choices and finally rekindle the fire within.</p>
+                <p>Each initiative of NSS is pursued as a project. These projects run seamlessly throughout it's entire duration and can be taken up by anyone. No previous experience with NSS is required to be part of a project, and anyone can propose new projects. The quality standards of each project is maintained by Project Representatives and the Managerial Team Advisory Committee</p>
             </div>
         </div>
     </div>
@@ -20,7 +20,7 @@
             <div class="col-md-12">
                 <div>
                     <div class="z-slider-wrapper z-shadows" style="display: block; width: 1138px;">
-                        <article id="demo-accordion-01" class="z-demo-accordion transition z-accordion horizontal red z-grouped z-bordered z-shadows" data-role="z-accordion" data-options="{
+                        <article id="" class="transition z-accordion" data-role="z-accordion" data-options="{
                             &quot;active&quot; : false,
                             &quot;responsive&quot; : true,
                             &quot;orientation&quot; : &quot;horizontal&quot;,  
@@ -35,7 +35,8 @@
                             &quot;containerHeight&quot; : 320, 
                             &quot;headerSize&quot; : 68, 
                             &quot;animation&quot; : { 
-                                &quot;duration&quot; : 500
+                                &quot;duration&quot; : 500, 
+                                &quot;easing&quot; : &quot;easeInOutQuart&quot;
                             }, 
                             &quot;showIcons&quot; : true,
                             &quot;headerFontSize &quot; : 1.6, 
@@ -43,15 +44,15 @@
                                 &quot;interval&quot; : 1000000 
                             } 
                         }" role="tablist" style="width: 1138px; height : 298px;">
-                            {% for evdet in eventdet_list %}
+                            {% for projdet in projectdet_list %}
                                 <section class="z-section" aria-hidden="true" aria-expanded="false" aria-selected="false">
                                     <h3 class="z-link" role="tab" tabindex="-1">
-                                        <span class="z-title">{{ evdet.name }}</span>
+                                        <span class="z-title">{{ projdet.name }}</span>
                                         <span class="z-arrow"></span>
                                     </h3>
                                     <div class="z-content" role="tabpanel" aria-hidden="true" aria-expanded="false">
                                         <div class="z-auto-g">
-                                            {{ evdet.description }}
+                                            {{ projdet.description }}
                                             <br />
                                             <br />
                                             <a href='#' class='pull-right'>Get more details ...</a>
@@ -71,7 +72,7 @@
 
 {% block extra_css %}
 {{ block.super }}
-<link href="{% static 'css/z-accordion.css' %}" rel="stylesheet" media="screen">
+<link href="{% static 'css/zozo.css' %}" rel="stylesheet" media="screen">
 <style type='text/css'>
 </style>
 {% endblock %}
@@ -79,7 +80,7 @@
 
 {% block extra_js %}
 {{ block.super }}
-<script type="text/javascript" src="{% static 'js/z-accordion.js' %}"></script>
+<script type="text/javascript" src="{% static 'js/zozo.js' %}"></script>
 <script type="text/javascript" src="{% static 'js/modernizr-zozo.min.js' %}"></script>
 <script type='text/javascript'>
 </script>

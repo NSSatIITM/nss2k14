@@ -13,6 +13,8 @@ class EventDetails(models.Model):
     category        = models.CharField(max_length = 30, blank = True, null = True, choices = EVENT_CATEGORY_CHOICES)
     is_visible      = models.BooleanField(default = False)
     
+    # m2m for event
+    
     # Dates
     time_created    = models.DateTimeField(auto_now_add=True, null = True)
 
@@ -22,7 +24,7 @@ class EventDetails(models.Model):
     
 class Event(models.Model):
     # Basic info
-    details         = models.ForeignKey(EventDetails)
+    #details         = models.ForeignKey(EventDetails) # one-to-many
     start_date      = models.DateTimeField(null = True)
     end_date        = models.DateTimeField(null = True)
     
