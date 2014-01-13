@@ -16,54 +16,48 @@
         </div>
     </div>
     <div class='container pad-top'>
-        <div class='row centered'>
+        <div class="row">
             <div class="col-md-12">
-                <div>
-                    <div class="z-slider-wrapper z-shadows" style="display: block; width: 1138px;">
-                        <article id="" class="transition z-accordion" data-role="z-accordion" data-options="{
-                            &quot;active&quot; : false,
-                            &quot;responsive&quot; : true,
-                            &quot;orientation&quot; : &quot;horizontal&quot;,  
-                            &quot;theme&quot; : &quot;red&quot;, 
-                            &quot;shadows&quot; : true,
-                            &quot;bordered&quot; : true, 
-                            &quot;slider&quot; : true, 
-                            &quot;rounded&quot; : false, 
-                            &quot;width&quot; : 1600, 
-                            &quot;height&quot; : 420, 
-                            &quot;dotNav&quot; : false, 
-                            &quot;containerHeight&quot; : 320, 
-                            &quot;headerSize&quot; : 68, 
-                            &quot;animation&quot; : { 
-                                &quot;duration&quot; : 500, 
-                                &quot;easing&quot; : &quot;easeInOutQuart&quot;
-                            }, 
-                            &quot;showIcons&quot; : true,
-                            &quot;headerFontSize &quot; : 1.6, 
-                            &quot;autoplay&quot; : { 
-                                &quot;interval&quot; : 1000000 
-                            } 
-                        }" role="tablist" style="width: 1138px; height : 298px;">
-                            {% for projdet in projectdet_list %}
-                                <section class="z-section" aria-hidden="true" aria-expanded="false" aria-selected="false">
-                                    <h3 class="z-link" role="tab" tabindex="-1">
-                                        <span class="z-title">{{ projdet.name }}</span>
-                                        <span class="z-arrow"></span>
-                                    </h3>
-                                    <div class="z-content" role="tabpanel" aria-hidden="true" aria-expanded="false">
-                                        <div class="z-auto-g">
-                                            {{ projdet.description }}
-                                            <br />
-                                            <br />
-                                            <a href='#' class='pull-right'>Get more details ...</a>
-                                        
-                                        </div>
-                                    </div>
-                                </section>
-                            {% endfor %}
-                        </article>
-                    </div>
-                </div>
+                <div style="" id="demo-tabs-vertical" class="" data-role="z-tab" data-options="{
+                    &quot;orientation&quot; : &quot;vertical&quot;, 
+                    &quot;style&quot; : &quot;contained&quot;, 
+                    &quot;theme&quot; : &quot;red&quot;,
+                    &quot;defaultTab&quot; : &quot;tab1&quot;, 
+                    &quot;shadows&quot; : true, 
+                    &quot;rounded&quot; : false, 
+                    &quot;size&quot; : &quot;medium&quot;, 
+                    &quot;animation&quot; : {
+                        &quot;effects&quot; : &quot;slideV&quot;, 
+                        &quot;duration&quot; : 350, 
+                        &quot;type&quot; : &quot;css&quot;, 
+                        &quot;easing&quot; : &quot;easeOutQuint&quot;
+                    }, 
+                    &quot;position&quot; : &quot;top-compact&quot;
+                }">
+                    <ul class="z-tabs-nav z-tabs-mobile" style="display: none;">
+                        <li><a class="z-link" style="text-align: left;">
+                            <span class="z-title"><i class="icon-desktop">&nbsp;</i>Responsive Tabs</span><span class="z-arrow"></span>
+                        </a></li>
+                    </ul>
+                    <i class="z-dropdown-arrow"></i>
+                    <ul class="z-tabs-nav z-tabs-desktop">
+                        {% for projdet in projectdet_list %}
+                            <li class="z-tab z-last" data-link="tab6">
+                                <a class="z-link"><i class="icon-resize-full baseline">&nbsp;</i>{{ projdet.name }}</a>
+                            </li>
+                        {% endfor %}
+                    </ul>
+                    
+                    
+                <div class="z-container" style="height: 269px; min-height: 269px;">
+                    {% for projdet in projectdet_list %}
+                        <div class="imgtest z-content z-active" style="position: relative; display: block;"><div class="z-content-inner">
+                            <img alt="mobile phone" src="#" style="min-width: 100%; height: auto;" class="hidden">
+
+                            <h4>{{ projdet.name }}</h4>
+                            {{ projdet.description }}
+                        </div></div>
+                    {% endfor %}
             </div>
         </div>
     </div>
@@ -72,7 +66,7 @@
 
 {% block extra_css %}
 {{ block.super }}
-<link href="{% static 'css/zozo.css' %}" rel="stylesheet" media="screen">
+<link href="{% static 'css/z-tabs.css' %}" rel="stylesheet" media="screen">
 <style type='text/css'>
 </style>
 {% endblock %}
@@ -80,7 +74,7 @@
 
 {% block extra_js %}
 {{ block.super }}
-<script type="text/javascript" src="{% static 'js/zozo.js' %}"></script>
+<script type="text/javascript" src="{% static 'js/z-tabs.js' %}"></script>
 <script type="text/javascript" src="{% static 'js/modernizr-zozo.min.js' %}"></script>
 <script type='text/javascript'>
 </script>
