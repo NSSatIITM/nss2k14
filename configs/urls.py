@@ -65,7 +65,7 @@ handler500 = 'apps.nss.views.err500'
 
 # This is to test out DEBUG = False in localhost
 # REMEMBER : Should be commented out on server !
-if ( settings.SITE_URL.find("localhost") != -1 or settings.SITE_URL.find("127.0.") != -1 ) and not settings.DEBUG:
+if settings.DEBUG or ( ( settings.SITE_URL.find("localhost") != -1 or settings.SITE_URL.find("127.0.") != -1 ) and not settings.DEBUG ):
     urlpatterns += patterns('',
         url(r'^static/(?P<path>.*)$', 'django.views.static.serve', {'document_root': settings.STATIC_ROOT}),
     )
