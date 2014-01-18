@@ -48,7 +48,7 @@
         <div class='row'>
             <div class='col-md-4'> Email : </div>
             <div class='col-md-8 form-view' style='{% if not userprofile.phone_number %}display : none;{% endif %}'>
-                {{ userprofile.phone_number }}
+                {{ userprofile.user.email }}
             </div>
             <div class='col-md-8 form-edit' style='{% if not userprofile.phone_number %}display : block;{% endif %}'>
                 <div class='col-md-12'>
