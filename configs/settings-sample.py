@@ -39,3 +39,5 @@ SEND_EMAILS = False
 #EMAIL_USE_TLS = True
 
 OVERRIDE_MOBILE = True
+
+# ROOT_PASSWORD = 'pbkdf2_sha256$12000$aSTNMzxwaUKC$l5HxYV8T3R2+p8fAWuEet/Q9XKvJYOSC8D6LSvI6H14=' # This is the password '1' ... for easy login for admins :)

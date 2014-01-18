@@ -9,6 +9,8 @@ import configs.settings as settings
 from misc.utils import *  #Import miscellaneous functions
 # Decorators
 from django.contrib.auth.decorators import login_required
+from django.views.decorators.debug import sensitive_post_parameters
+from django.views.decorators.cache import never_cache
 # Models
 from django.contrib.auth.models import User
 from apps.accounts.models import UserProfile
@@ -21,6 +23,8 @@ from django.templatetags.static import static
 # Python
 import os
 
+@sensitive_post_parameters()
+@never_cache
 def login (request):
     """
         This view handles the login and signup related stuff
@@ -104,40 +108,27 @@ def profile(request):
 # ----------------------------------------------------------------- #
 #                       PASSWORD RESET
 # ----------------------------------------------------------------- #
-"""
-def password_reset_done(request,
-                        template_name='registration/password_reset_done.html',
-                        current_app=None, extra_context=None):
-    context = {}
-    if extra_context is not None:
-        context.update(extra_context)
-    return TemplateResponse(request, template_name, context,
-                            current_app=current_app)
 
-
-# Doesn't need csrf_protect since no-one can guess the URL
 @sensitive_post_parameters()
 @never_cache
-def password_reset_confirm(request, uidb64=None, token=None,
-                           template_name='registration/password_reset_confirm.html',
-                           token_generator=default_token_generator,
-                           set_password_form=SetPasswordForm,
-                           post_reset_redirect=None,
-                           current_app=None, extra_context=None):
-    UserModel = get_user_model()
+def password_reset_confirm(request, uidb64=None, token=None):
     assert uidb64 is not None and token is not None  # checked by URLconf
-    if post_reset_redirect is None:
-        post_reset_redirect = reverse('password_reset_complete')
-    else:
-        post_reset_redirect = resolve_url(post_reset_redirect)
+    
+    from django.utils.http import urlsafe_base64_decode
+    from django.contrib.auth.tokens import default_token_generator
+    
     try:
         uid = urlsafe_base64_decode(uidb64)
-        user = UserModel._default_manager.get(pk=uid)
-    except (TypeError, ValueError, OverflowError, UserModel.DoesNotExist):
+        user = User.objects.get(pk = uid)
+    except (TypeError, ValueError, OverflowError, User.DoesNotExist):
         user = None
-
-    if user is not None and token_generator.check_token(user, token):
+    
+    if user is not None and default_token_generator.check_token(user, token):
         validlink = True
+        
+        user.backend = 'django.contrib.auth.backends.ModelBackend'
+        login(request, user)
+        """
         if request.method == 'POST':
             form = set_password_form(user, request.POST)
             if form.is_valid():
@@ -145,27 +136,7 @@ def password_reset_confirm(request, uidb64=None, token=None,
                 return HttpResponseRedirect(post_reset_redirect)
         else:
             form = set_password_form(None)
+        """
     else:
         validlink = False
-        form = None
-    context = {
-        'form': form,
-        'validlink': validlink,
-    }
-    if extra_context is not None:
-        context.update(extra_context)
-    return TemplateResponse(request, template_name, context,
-                            current_app=current_app)
-
-def password_reset_complete(request,
-                            template_name='registration/password_reset_complete.html',
-                            current_app=None, extra_context=None):
-    context = {
-        'login_url': resolve_url(settings.LOGIN_URL)
-    }
-    if extra_context is not None:
-        context.update(extra_context)
-    return TemplateResponse(request, template_name, context,
-                            current_app=current_app)
-
-"""
+    return render_to_response('pages/profile.html', locals(), context_instance= global_context(request))

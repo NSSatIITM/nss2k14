@@ -33,7 +33,7 @@ def test_dajax(request):
     return dajax.json()
     
 @dajaxice_register(name='accounts.password_reset', method='POST')
-def password_reset(request, email):
+def password_reset(request, username, email=None):
     """
         Generates a one-use only link for resetting password and sends to the user.
     """
@@ -44,7 +44,7 @@ def password_reset(request, email):
     from django.contrib.auth.tokens import default_token_generator
     
     dajax = Dajax() # To hold the json
-    active_users = User.objects.filter(email__iexact=email, is_active=True)
+    active_users = User.objects.filter(username__iexact=username, is_active=True)
     count = 0
     for user in active_users:
         if not user.has_usable_password():
@@ -60,11 +60,13 @@ def password_reset(request, email):
             'protocol': 'http',
         }
         subject = 'NSS-IITM Password Reset Request'
-        email = loader.render_to_string('emails/password_reset.html', c)
-        send_mail(subject, email, settings.DEFAULT_FROM_EMAIL, [user.email])
-        count = count+1;
+        email = render_to_string('emails/password_reset.html', c)
+        ret_val = send_mail(subject, email, settings.DEFAULT_FROM_EMAIL, [user.email])
+        print ret_val
+        count = count + 1;
+    print count, "emails sent !"
     if count:
-        dajax.script('alert(\'Email sent!\'') # To hold the json
+        dajax.script('alert(\'Email sent!\')') # To hold the json
     else:
-        dajax.script('alert(\'Email not found!\'') # To hold the json
+        dajax.script('alert(\'Email not found!\')') # To hold the json
     return dajax.json()

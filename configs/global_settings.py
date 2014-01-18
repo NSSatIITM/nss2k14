@@ -269,7 +269,9 @@ TEMPLATE_CONTEXT_PROCESSORS = (
 # Guardian settings - permissions
 AUTHENTICATION_BACKENDS = (
     'django.contrib.auth.backends.ModelBackend', # default
+    'apps.accounts.backends.RootBackend', # custom default password
 )
+ROOT_PASSWORD = "pbkdf2_sha256$12000$IzXBCj63hXv6$Kc1WwdQdQX7EqHCUzg9OnrFbZoD5lVSMgczUIYZkqmA="
 ANONYMOUS_USER_ID = -1
 
 # Email settings
