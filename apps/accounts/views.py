@@ -109,10 +109,9 @@ def profile(request, *args, **kwargs):
                 print postdata['password'], postdata['confirm_password']
                 passwordform_errors = True
                 show_passwordform = True
-    if 'show_passwordform' in kwargs:
-        show_passwordform = kwargs.get('show_passwordform')
-    elif not 'show_passwordform' in locals() and 'show_profileform' in kwargs:
-        show_profileform = kwargs.get('show_profileform')
+    if 'show_passwordform' in request.session:
+        show_passwordform = request.session['show_passwordform']
+        del request.session['show_passwordform']
             
     return render_to_response('pages/profile.html', locals(), context_instance= global_context(request))
     
@@ -135,18 +134,10 @@ def password_reset_confirm(request, uidb64=None, token=None):
     
     if user is not None and default_token_generator.check_token(user, token):
         validlink = True
-        
         user.backend = 'django.contrib.auth.backends.ModelBackend'
-        login(request, user)
-        """
-        if request.method == 'POST':
-            form = set_password_form(user, request.POST)
-            if form.is_valid():
-                form.save()
-                return HttpResponseRedirect(post_reset_redirect)
-        else:
-            form = set_password_form(None)
-        """
+        auth.login(request, user)
+        request.session['show_passwordform'] = True
+        return redirect('profile')
     else:
         validlink = False
-    return redirect('profile', kwargs={'show_passwordform' : True})
+    

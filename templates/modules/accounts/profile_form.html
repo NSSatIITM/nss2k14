@@ -110,6 +110,7 @@
 </form>
 
 <form action='{% url "profile" %}' method='POST' class='form-horizontal' id='password_form' {% if show_passwordform %} style='display:none;' {% endif %}>
+    <div class='row'><div class='col-md-12 centered'><span class='text-big'>Reset your password</span></div></div>
     {% csrf_token %}
     <div class='row pad-top form-edit'>
         <div class='col-md-5'> Password : </div>

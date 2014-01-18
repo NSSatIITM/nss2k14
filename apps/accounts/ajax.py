@@ -50,11 +50,9 @@ def password_reset(request, username=None, email=None):
         for user in active_users:
             if not user.has_usable_password():
                 continue
-            current_site = get_current_site(request)
             c = {
                 'email': user.email,
-                'domain': current_site.domain,
-                'site_name': current_site.name,
+                'site_url': settings.SITE_URL,
                 'uid': urlsafe_base64_encode(force_bytes(user.pk)),
                 'user': user,
                 'token': default_token_generator.make_token(user),
