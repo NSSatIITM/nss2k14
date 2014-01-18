@@ -29,11 +29,11 @@ def test_dajax(request):
     """
     dajax = Dajax() # To hold the json
     dajax.script('alert(\'hello\');');
-    dajax.script( '$("#row_messages").html($("#row_messages").html() + \'<div class="span8 offset2"><div class="alert ' + 'alert-success' + ' center"><button type="button" class="close" data-dismiss="alert"><i class="icon-close">&times;</i></button>' + 'This is a test script! No need to listen to me.' + ' </div></div><div class="offset2"></div>\')' )
+    dajax.script( '$("#container_messages").append(\'<div class="span8 offset2"><div class="alert ' + 'alert-success' + ' center"><button type="button" class="close" data-dismiss="alert"><i class="icon-close">&times;</i></button>' + 'This is a test script! No need to listen to me.' + ' </div></div><div class="offset2"></div>\')' )
     return dajax.json()
     
 @dajaxice_register(name='accounts.password_reset', method='POST')
-def password_reset(request, username, email=None):
+def password_reset(request, username=None, email=None):
     """
         Generates a one-use only link for resetting password and sends to the user.
     """
@@ -44,29 +44,32 @@ def password_reset(request, username, email=None):
     from django.contrib.auth.tokens import default_token_generator
     
     dajax = Dajax() # To hold the json
-    active_users = User.objects.filter(username__iexact=username, is_active=True)
-    count = 0
-    for user in active_users:
-        if not user.has_usable_password():
-            continue
-        current_site = get_current_site(request)
-        c = {
-            'email': user.email,
-            'domain': current_site.domain,
-            'site_name': current_site.name,
-            'uid': urlsafe_base64_encode(force_bytes(user.pk)),
-            'user': user,
-            'token': default_token_generator.make_token(user),
-            'protocol': 'http',
-        }
-        subject = 'NSS-IITM Password Reset Request'
-        email = render_to_string('emails/password_reset.html', c)
-        ret_val = send_mail(subject, email, settings.DEFAULT_FROM_EMAIL, [user.email])
-        print ret_val
-        count = count + 1;
-    print count, "emails sent !"
-    if count:
-        dajax.script('alert(\'Email sent!\')') # To hold the json
+    if username:
+        active_users = User.objects.filter(username__iexact=username, is_active=True)
+        count = 0
+        for user in active_users:
+            if not user.has_usable_password():
+                continue
+            current_site = get_current_site(request)
+            c = {
+                'email': user.email,
+                'domain': current_site.domain,
+                'site_name': current_site.name,
+                'uid': urlsafe_base64_encode(force_bytes(user.pk)),
+                'user': user,
+                'token': default_token_generator.make_token(user),
+                'protocol': 'http',
+            }
+            subject = 'NSS-IITM Password Reset Request'
+            email = render_to_string('emails/password_reset.html', c)
+            ret_val = send_mail(subject, email, settings.DEFAULT_FROM_EMAIL, [user.email])
+            print ret_val
+            count = count + 1;
+        print count, "emails sent !"
+        if count:
+            dajax.script('alert(\'Username sent!\')') # To hold the json
+        else:
+            dajax.script('alert(\'Username not found!\')') # To hold the json
     else:
-        dajax.script('alert(\'Email not found!\')') # To hold the json
+        dajax.script('alert(\'Please enter a username !\')')
     return dajax.json()

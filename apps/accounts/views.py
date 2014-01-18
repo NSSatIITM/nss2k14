@@ -76,7 +76,7 @@ def login (request):
     return render_to_response('pages/login.html', locals(), context_instance= global_context(request))
 
 @login_required
-def profile(request):
+def profile(request, *args, **kwargs):
     profilepage = True
     
     # Create the basic forms which will be rendered in get requests
@@ -90,25 +90,35 @@ def profile(request):
     
     if request.method == 'POST':
         postdata = request.POST.copy()
-        if 'profile' in postdata: # SIGNUP FORM
+        if 'profileform' in postdata: # SIGNUP FORM
             profileform = ProfileForm(postdata, instance=userprofile)
-            print "got a post req"
             if profileform.is_valid():
                 # If the form is valid, save the user using the inbuilt function
-                print "form valid"
-                profileform.save()   
-                print "form saved"
+                profileform.save()
                 messages.success(request,'<strong>Done!</strong> Your account information was successfully saved !',extra_tags='alert-success')
                 return HttpResponseRedirect(reverse('profile'))
             else:   
                 print "form errors"
                 print profileform.errors
+        if 'passwordform' in postdata: # SIGNUP FORM
+            if postdata['password'] == postdata['confirm_password']:
+                user.set_password(postdata['password'])
+                user.save()
+                print postdata['password']
+            else:
+                print postdata['password'], postdata['confirm_password']
+                passwordform_errors = True
+                show_passwordform = True
+    if 'show_passwordform' in kwargs:
+        show_passwordform = kwargs.get('show_passwordform')
+    elif not 'show_passwordform' in locals() and 'show_profileform' in kwargs:
+        show_profileform = kwargs.get('show_profileform')
+            
     return render_to_response('pages/profile.html', locals(), context_instance= global_context(request))
     
 # ----------------------------------------------------------------- #
 #                       PASSWORD RESET
 # ----------------------------------------------------------------- #
-
 @sensitive_post_parameters()
 @never_cache
 def password_reset_confirm(request, uidb64=None, token=None):
@@ -139,4 +149,4 @@ def password_reset_confirm(request, uidb64=None, token=None):
         """
     else:
         validlink = False
-    return render_to_response('pages/profile.html', locals(), context_instance= global_context(request))
+    return redirect('profile', kwargs={'show_passwordform' : True})

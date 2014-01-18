@@ -2,7 +2,7 @@
 {% load widget_tweaks %}
 
 <div class='row'><div class='col-md-12 centered'><span class='text-huge'>Profile</span></div></div>
-<form action='{% url "profile" %}' method='POST' class='form-horizontal'>
+<form action='{% url "profile" %}' method='POST' class='form-horizontal' id='profile_form'>
     {% csrf_token %}
     {% with WIDGET_ERROR_CLASS='error' %}
         <div class='row'>
@@ -87,10 +87,15 @@
         </div>
         <div class='row pad-top form-edit' style='{% if not userprofile.phone_number %}display : block;{% endif %}'>
             <div class='col-md-6'>
-                <input type='submit' name='profile' class='btn btn-success form-control ' value='    Submit    '>
+                <input type='submit' name='profileform' class='btn btn-success form-control ' value='    Submit    '>
             </div>
             <div class='col-md-6'>
-                <a class='btn btn-link form-control white text-medium' href='#view' onclick='view_profile(500)'>Cancel</a>
+                <a class='btn btn-link form-control text-medium' href='#view' onclick='view_profile(500)'>Cancel</a>
+            </div>
+        </div>
+        <div class='row pad-top form-edit' style='{% if not userprofile.phone_number %}display : block;{% endif %}'>
+            <div class='col-md-12'>
+                <a class='btn btn-link form-control text-medium' href='#password' onclick='view_passwordform(500)'>Change password</a>
             </div>
         </div>
         <div class='row pad-top form-view' style='{% if not userprofile.phone_number %}display : block;{% endif %}'>
@@ -104,15 +109,60 @@
     {% endwith %}
 </form>
 
+<form action='{% url "profile" %}' method='POST' class='form-horizontal' id='password_form' {% if show_passwordform %} style='display:none;' {% endif %}>
+    {% csrf_token %}
+    <div class='row pad-top form-edit'>
+        <div class='col-md-5'> Password : </div>
+        <div class='col-md-7'>
+            <div class='col-md-12'>
+                <label for='password' class='sr-only control-label'>Password</label>
+                <input class="form-control {% if show_passwordform %} error {% endif %}" id="id_password" name="password" placeholder="Password" required="true" type="password">
+            </div>
+        </div>
+    </div>
+    <div class='row'>
+        <div class='col-md-5'> Confirm Password : </div>
+        <div class='col-md-7'>
+            <div class='col-md-12'>
+                <label for='confirm_password' class='sr-only control-label'>Confirm Password</label>
+                <input class="form-control {% if show_passwordform %} error {% endif %}" id="id_confirm_password" name="confirm_password" placeholder="Confirm Password" required="true" type="password">
+            </div>
+        </div>
+    </div>
+    <div class='row pad-top form-edit'>
+        <div class='col-md-6'>
+            <input type='submit' name='passwordform' class='btn btn-success form-control ' value='    Change Password    '>
+        </div>
+        <div class='col-md-6'>
+            <a class='btn btn-link form-control text-medium' href='#view' onclick='view_profile(500)'>Cancel</a>
+        </div>
+    </div>
+</form>
+
+
+
 
 <script>
     function edit_profile(t) {
         $('.form-view').hide(t);
-        setTimeout( function() {$('.form-edit').show(t)}, t);
+        $('#password_form').hide(t);
+        setTimeout( function() {
+            $('#profile_form').show(t);
+            $('.form-edit').show(t)
+        }, t);
     }
     function view_profile(t) {
         $('.form-edit').hide(t);
-        setTimeout( function() {$('.form-view').show(t)}, t);
+        $('#password_form').hide(t);
+        setTimeout( function() {
+            $('#profile_form').show(t);
+            $('.form-view').show(t)
+        }, t);
+    }
+    function view_passwordform(t) {
+        $('#profile_form').hide(t);
+        $('.form-edit').show(t);
+        setTimeout( function() {$('#password_form').show(t)}, t);
     }
     window.onload = function () {
         $(window).bind( 'hashchange',  function(e) {
@@ -122,11 +172,17 @@
             } else if ( window.location.hash == 'view' ) {
                 view_profile();
                 e.preventDefault();
+            } else if ( window.location.hash == 'password' ) {
+                view_passwordform();
+                e.preventDefault();
             }
-        } );        
-        {% if not userprofile.basic_info or profileform.errors %}
+        } );
+        {% if not userprofile.basic_info or profileform.errors or show_profileform %}
             window.location.hash = 'edit';
             edit_profile(0);
+        {% elif passwordform_errors or show_passwordform %}
+            window.location.hash = 'password';
+            view_passwordform(0);
         {% else %}
             window.location.hash = 'view';
             view_profile(0);
