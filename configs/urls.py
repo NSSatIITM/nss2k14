@@ -3,6 +3,7 @@ from django.conf.urls import patterns, include, url
 from django.contrib import admin
 # NSS
 import configs.settings as settings
+from misc.utils import *  #Import miscellaneous functions
 # Decorators
 # Models
 # Forms
@@ -45,6 +46,13 @@ urlpatterns = patterns('',
     url(r'^admin/doc/', include('django.contrib.admindocs.urls')),
     url(r'^admin/', include(admin.site.urls)),
     # Auth
+    (r'^auth/password_reset/$', 'django.contrib.auth.views.password_reset', {'post_reset_redirect' : '/accounts/password_reset_done/'}),
+    (r'^auth/password_reset_done/$', 'django.contrib.auth.views.password_reset_done'),
+    (r'^auth/password_reset_confirm/(?P<uidb36>[0-9A-Za-z]+)-(?P<token>.+)/$', 'django.contrib.auth.views.password_reset_confirm', {'post_reset_redirect' : '/accounts/password_reset_done/'}),
+    (r'^auth/password_reset_done/$', 'django.contrib.auth.views.password_reset_complete'),
+    
+    
+    
     url(r'^logout/?$', 'django.contrib.auth.views.logout', {'next_page':'/'}, name='logout'),
     url(r'^passwd_reset/?$','django.contrib.auth.views.password_reset',{'template_name':'password/reset.html'}),
     url(r'^passwd_reset/reset/done/?$','django.contrib.auth.views.password_reset_done',{'template_name':'password/reset_done.html'}),

@@ -52,7 +52,7 @@ class Event(models.Model):
     is_visible      = models.BooleanField(default = False)
     
     # m2m for event
-    instances       = models.ManyToManyField(EventInstance, related_name = 'event', blank = True, null = True)
+    instances       = models.ManyToManyField(EventInstance, related_name = 'event_set', blank = True, null = True)
     
     # Dates
     time_created    = models.DateTimeField(auto_now_add=True, null = True)
