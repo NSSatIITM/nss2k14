@@ -15,7 +15,7 @@ from django.db import models
 from django.contrib.auth.models import User, Group
 from apps.accounts.models import UserProfile
 from apps.accounts.models import USERTYPE_CHOICES, HOSTEL_CHOICES, GENDER_CHOICES
-from apps.events.models import EventDetails, Event, Credit
+from apps.events.models import EventInstance, Event, Credit
 from apps.events.models import EVENT_CATEGORY_CHOICES
 # Forms
 # View functions
@@ -72,7 +72,7 @@ def valid_phone_number(num_string):
 
 # ------------------ DB POPULATIONS
 #----------------------------------------------------------------------
-def populate_test_data(MAX_USERS = 20, MAX_EVENT_DETAILS = 10, MAX_EVENTS = 4):
+def populate_test_data(MAX_USERS = 20, MAX_EVENTS = 10, MAX_EVENT_INSTANCES = 4):
     """
         Populates the Database with some temporary test data
         ONLY meant for testing out !
@@ -88,9 +88,12 @@ def populate_test_data(MAX_USERS = 20, MAX_EVENT_DETAILS = 10, MAX_EVENTS = 4):
         # Create user
         if User.objects.filter(username = roll_no).count() == 0:
             user = User.objects.create_user(roll_no, roll_no_email, roll_no) # id, email, passwd
+            
         else:
             user = User.objects.get(username = roll_no) # id, email, passwd
             print " > User " + roll_no + " already existing, using the one which is existing"
+        user.first_name = str(i).zfill(2)
+        user.last_name = str(i).zfill(2)
         user.save()
         
         if UserProfile.objects.filter(user = user).count() == 0:
@@ -110,36 +113,41 @@ def populate_test_data(MAX_USERS = 20, MAX_EVENT_DETAILS = 10, MAX_EVENTS = 4):
     print "Users done -----------------------------------------------"
         
     # EVENT DETAILS 
-    for i in xrange(MAX_EVENT_DETAILS):
-        eventdet_category_no = int( 1.0 * i / MAX_EVENT_DETAILS * len(EVENT_CATEGORY_CHOICES) )
-        eventdet_category = EVENT_CATEGORY_CHOICES[int( 1.0 * i / MAX_EVENT_DETAILS * len(EVENT_CATEGORY_CHOICES) )][0]
+    for i in xrange(MAX_EVENTS):
+        event_category_no = int( 1.0 * i / MAX_EVENTS * len(EVENT_CATEGORY_CHOICES) )
+        event_category = EVENT_CATEGORY_CHOICES[int( 1.0 * i / MAX_EVENTS * len(EVENT_CATEGORY_CHOICES) )][0]
         
-        eventdet_no = i % int( 1.0 * MAX_EVENT_DETAILS / len(EVENT_CATEGORY_CHOICES) )
-        eventdet_name = eventdet_category + "_" + str(eventdet_no).zfill(2)
-        eventdet_desc = ( eventdet_category + " _ " + str(eventdet_no).zfill(2) + " . " ) * 50
+        event_no = i % int( 1.0 * MAX_EVENTS / len(EVENT_CATEGORY_CHOICES) )
+        event_name = event_category + "_" + str(event_no).zfill(2)
+        event_desc = ( event_category + " _ " + str(event_no).zfill(2) + " . " ) * 50
         
-        if EventDetails.objects.filter(name = eventdet_name).count() == 0:
-            eventdet = EventDetails.objects.create()
+        if Event.objects.filter(name = event_name).count() == 0:
+            event = Event.objects.create()
         else:
-            eventdet = EventDetails.objects.get(name = eventdet_name)
-            print eventdet_category + " " + eventdet_name + " already existing, using the one which is existing"
+            event = Event.objects.get(name = event_name)
+            print event_category + " " + event_name + " already existing, using the one which is existing"
         
-        eventdet.name = eventdet_name
-        eventdet.category = eventdet_category
-        eventdet.description = eventdet_desc
-        eventdet.is_visible = True
-        eventdet.save()
-        print "Event " + eventdet_name + " created"
+        event.name = event_name
+        event.category = event_category
+        event.description = event_desc
+        event.is_visible = True
+        event.save()
+        print "Event " + event_name + " created"
     
         # EVENTS 
-        for i in xrange(MAX_EVENTS):
-            event_name = "event_" + eventdet.name + "_" + str(i).zfill(2)
+        for i in xrange(MAX_EVENT_INSTANCES):
+            event_name = "event_" + event.name + "_" + str(i).zfill(2)
             
-            event = Event.objects.create(details= eventdet)
+            event_inst = EventInstance.objects.create()
             
-            event.start_date = datetime.datetime.utcnow().replace(tzinfo = utc)
-            event.end_date = datetime.datetime.utcnow().replace(tzinfo = utc)
+            event_inst.start_date = datetime.datetime.utcnow().replace(tzinfo = utc)
+            event_inst.end_date = datetime.datetime.utcnow().replace(tzinfo = utc)
+            event_inst.is_visible = False
+            event_inst.save()
+            
+            event.instances.add(event_inst)
             event.save()
+            
             print "Event of " + event_name + " created"
     print "Event + Details done -----------------------------------------------"
     

@@ -25,6 +25,7 @@ urlpatterns = patterns('',
     url(r'^profile/?$', 'apps.accounts.views.profile', name='profile'),
     url(r'^events/?$', 'apps.events.views.events', name='events'),
     url(r'^projects/?$', 'apps.events.views.projects', name='projects'),
+    url(r'^winterns/?$', 'apps.events.views.winterns', name='winterns'),
     url(r'^aboutus/?$', 'apps.nss.views.aboutus', name='aboutus'),
     url(r'^login/?$', 'apps.accounts.views.login', name='login'),
     

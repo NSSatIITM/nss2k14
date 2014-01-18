@@ -96,5 +96,14 @@ class ProfileForm(forms.ModelForm):
         self.fields['last_name'].initial = self.instance.user.last_name
         self.fields['email'].initial = self.instance.user.email
     
-    #def save(self, *args, **kwargs):
+    def save(self, commit=True, *args, **kwargs):
+        inst = super(ProfileForm, self).save(commit=False, *args, **kwargs)
+        data = self.cleaned_data
+        print data
+        inst.user.first_name = data['first_name']
+        inst.user.last_name = data['last_name']
+        inst.user.email = data['email']
+        
+        if commit:
+            inst.save()
         

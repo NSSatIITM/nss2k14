@@ -1,17 +1,17 @@
 {% extends 'pages/base.html' %}
 {% load staticfiles %}
 
-{% block title %} Projects | NSS IITM {% endblock %}
+{% block title %} Winterns | NSS IITM {% endblock %}
 
 {% block content %}
     <div class='container pad-top'>
         <div class='row centered'>
             <div class="col-md-3 text-huge">
                 <a class="navbar-logo nss pad-right" href="{{ SITE_URL }}"><img src="{% static 'img/nss_logo_medium.png' %}" /></a>
-                Projects
+                Winterns
             </div>
             <div class="col-xl-9">
-                <p>Each initiative of NSS is pursued as a project. These projects run seamlessly throughout it's entire duration and can be taken up by anyone. No previous experience with NSS is required to be part of a project, and anyone can propose new projects. The quality standards of each project is maintained by Project Representatives and the Managerial Team Advisory Committee</p>
+                <p>Every wintern, NSS representatives spend a few days to help various pre-existing organizations in their initiatives to serve the society.</p>
             </div>
         </div>
     </div>
@@ -41,21 +41,21 @@
                     </ul>
                     <i class="z-dropdown-arrow"></i>
                     <ul class="z-tabs-nav z-tabs-desktop">
-                        {% for proj in project_list %}
+                        {% for wint in wintern_list %}
                             <li class="z-tab z-last" data-link="tab6">
-                                <a class="z-link"><i class="icon-resize-full baseline">&nbsp;</i>{{ proj.name }}</a>
+                                <a class="z-link"><i class="icon-resize-full baseline">&nbsp;</i>{{ wint.name }}</a>
                             </li>
                         {% endfor %}
                     </ul>
                     
                     
                 <div class="z-container" style="height: 269px; min-height: 269px;">
-                    {% for proj in project_list %}
+                    {% for wint in wintern_list %}
                         <div class="imgtest z-content z-active" style="position: relative; display: block;"><div class="z-content-inner">
                             <img alt="mobile phone" src="#" style="min-width: 100%; height: auto;" class="hidden">
 
-                            <h4>{{ proj.name }}</h4>
-                            {{ proj.description }}
+                            <h4>{{ wint.name }}</h4>
+                            {{ wint.description }}
                         </div></div>
                     {% endfor %}
             </div>
@@ -75,7 +75,6 @@
 {% block extra_js %}
 {{ block.super }}
 <script type="text/javascript" src="{% static 'js/z-tabs.js' %}"></script>
-<script type="text/javascript" src="{% static 'js/modernizr-zozo.min.js' %}"></script>
 <script type='text/javascript'>
 </script>
 {% endblock %}

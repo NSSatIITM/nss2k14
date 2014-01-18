@@ -22,10 +22,7 @@ import os
 def login (request):
     """
         This view handles the login and signup related stuff
-        Registration : 
-            Anybody can create an account. The account will have to be validated by a managerial team member
-        Login :
-            Normal login
+        
     """ 
     loginpage = True
     
@@ -88,12 +85,16 @@ def profile(request):
         postdata = request.POST.copy()
         if 'profile' in postdata: # SIGNUP FORM
             profileform = ProfileForm(postdata, instance=userprofile)
+            print "got a post req"
             if profileform.is_valid():
                 # If the form is valid, save the user using the inbuilt function
+                print "form valid"
                 profileform.save()   
+                print "form saved"
                 messages.success(request,'<strong>Done!</strong> Your account information was successfully saved !',extra_tags='alert-success')
                 return HttpResponseRedirect(reverse('profile'))
-            else:
+            else:   
+                print "form errors"
                 print profileform.errors
     return render_to_response('pages/profile.html', locals(), context_instance= global_context(request))
     

@@ -244,11 +244,11 @@ CACHES = {
 """
 
 #Authentication Profile
-AUTH_PROFILE_MODULE = 'libs.accounts.UserProfile'
+AUTH_PROFILE_MODULE = 'apps.accounts.UserProfile'
 
 # Important urls
-LOGIN_URL          = 'libs.nss.views.home'
-LOGIN_REDIRECT_URL = 'libs.nss.views.home'
+LOGIN_URL          = 'apps.nss.views.home'
+LOGIN_REDIRECT_URL = 'apps.nss.views.home'
 LOGIN_ERROR_URL    = '/login-error/'
 
 #Template context processors

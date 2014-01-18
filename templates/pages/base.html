@@ -50,9 +50,11 @@
             <!-- Collect the nav links, forms, and other content for toggling -->
             <div class="collapse navbar-collapse navbar-ex1-collapse">
                 <ul class="nav navbar-nav">
-                    <li {% if eventspage %}class="active"{% endif %}><a href="{% url 'events' %}">Events</a></li>
+                    <li {% if eventspage %}  class="active"{% endif %}><a href="{% url 'events' %}">Events</a></li>
                     <li {% if projectspage %}class="active"{% endif %}><a href="{% url 'projects' %}">Projects</a></li>
-                    <li {% if aboutuspage %}class="active"{% endif %}><a href="{% url 'aboutus' %}">About Us</a></li>
+                    <li {% if winternpage %} class="active"{% endif %}><a href="{% url 'winterns' %}">Winterns</a></li>
+                    <li {% if aboutuspage %} class="active"{% endif %}><a href="{% url 'aboutus' %}">About Us</a></li>
+                    
                 </ul>
                 <ul class="nav navbar-nav navbar-right nss">
                     {% if user.is_authenticated %}

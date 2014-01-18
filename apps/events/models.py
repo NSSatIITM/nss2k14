@@ -3,35 +3,20 @@ from django.contrib.auth.models import User, Group
 
 EVENT_CATEGORY_CHOICES = (
     ('Project', 'Project'),
-    ('Event', 'Event')
+    ('Event',   'Event'),
+    ('Wintern', 'Wintern')
 )
 
-class EventDetails(models.Model):
-    # Info
-    name            = models.CharField(max_length = 30, blank = False, null = False, unique = True)
-    description     = models.TextField(blank = True, null = True)
-    category        = models.CharField(max_length = 30, blank = True, null = True, choices = EVENT_CATEGORY_CHOICES)
-    is_visible      = models.BooleanField(default = False)
-    
-    # m2m for event
-    
-    # Dates
-    time_created    = models.DateTimeField(auto_now_add=True, null = True)
-
-    # -------- Methods to handle basic data of the class
-    def __unicode__(self):
-        return self.name
-    
-class Event(models.Model):
+class EventInstance(models.Model):
     # Basic info
-    #details         = models.ForeignKey(EventDetails) # one-to-many
     start_date      = models.DateTimeField(null = True)
     end_date        = models.DateTimeField(null = True)
+    is_visible      = models.BooleanField(default = False)
     
     # Specific data
-    credits         = models.ManyToManyField(User, through = 'Credit', blank = True, null = True)
-    members         = models.ManyToManyField(User, related_name='members', blank = True, null = True)
-    reps            = models.ManyToManyField(User, related_name='reps', blank = True, null = True)
+    credits         = models.ManyToManyField(User, related_name='credit_set', through = 'Credit', blank = True, null = True)
+    members         = models.ManyToManyField(User, related_name='eventmember_set', blank = True, null = True)
+    reps            = models.ManyToManyField(User, related_name='eventrep_set', blank = True, null = True)
     
     # Dates
     time_created    = models.DateTimeField(auto_now_add=True, null = True)
@@ -59,13 +44,30 @@ class Event(models.Model):
             members = members | User.objects.get(id=id)
         return members
 
+class Event(models.Model):
+    # Info
+    name            = models.CharField(max_length = 30, blank = False, null = False, unique = True)
+    description     = models.TextField(blank = True, null = True)
+    category        = models.CharField(max_length = 30, blank = True, null = True, choices = EVENT_CATEGORY_CHOICES)
+    is_visible      = models.BooleanField(default = False)
+    
+    # m2m for event
+    instances       = models.ManyToManyField(EventInstance, related_name = 'event', blank = True, null = True)
+    
+    # Dates
+    time_created    = models.DateTimeField(auto_now_add=True, null = True)
+
+    # -------- Methods to handle basic data of the class
+    def __unicode__(self):
+        return self.name
+    
 class Credit(models.Model):
     # people involved in the credit allotment
     awarded_to      = models.ForeignKey(User, related_name='awarded_to')
     awarded_by_id   = models.IntegerField(default = 0) # Cant make a foreign key as only 1 user foreign key is allowed ...
     
     # Project or Event involved in the credit
-    event           = models.ForeignKey(Event)
+    event           = models.ForeignKey(EventInstance)
     
     # Reasons and other data
     reason          = models.TextField(blank = False, null = True, help_text = 'A short explanation of what work has been done to receive credits')

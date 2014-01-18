@@ -43,15 +43,15 @@
                                 &quot;interval&quot; : 1000000 
                             } 
                         }" role="tablist" style="width: 1138px; height : 298px;">
-                            {% for evdet in eventdet_list %}
+                            {% for ev in event_list %}
                                 <section class="z-section" aria-hidden="true" aria-expanded="false" aria-selected="false">
                                     <h3 class="z-link" role="tab" tabindex="-1">
-                                        <span class="z-title">{{ evdet.name }}</span>
+                                        <span class="z-title">{{ ev.name }}</span>
                                         <span class="z-arrow"></span>
                                     </h3>
                                     <div class="z-content" role="tabpanel" aria-hidden="true" aria-expanded="false">
                                         <div class="z-auto-g">
-                                            {{ evdet.description }}
+                                            {{ ev.description }}
                                             <br />
                                             <br />
                                             <a href='#' class='pull-right'>Get more details ...</a>
