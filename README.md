@@ -34,4 +34,3 @@ Setup :
     On server, the settings file resides at configs/settings.py This is done to avoid confusion and the wsgi file automatically searched for the venv folder. It will cause errors if no such virtualenv exists !
 
 
-

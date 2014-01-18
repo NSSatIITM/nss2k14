@@ -23,14 +23,14 @@ class EventInstance(models.Model):
     
     # -------- Methods to handle basic data of the class
     def __unicode__(self):
-        return self.details.name + "::" + str(self.start_date) + "-" + str(self.end_data)
+        return self.name + "::" + str(self.start_date) + "-" + str(self.end_data)
     
     # -------- Methods to handle fields in the model
     
     # -------- Method to handle ManyToMany fields of the model
     def give_credits(self, **kwargs):
-        cred = Credit(event = self,  **kwargs)
-        cred.save()
+        cred = Credit(event = self,  **kwargs)#TODO:use get_or_create??(avoid duplicates)
+        cred.save()#TODO: prevent giving option for PR to add credits with arbitrary dates..
     
     def remove_credits(self, member):
         cred = Credit.objects.get(project=self, member=member)
@@ -46,7 +46,7 @@ class EventInstance(models.Model):
 
 class Event(models.Model):
     # Info
-    name            = models.CharField(max_length = 30, blank = False, null = False, unique = True)
+    name            = models.CharField(max_length = 50, blank = False, null = False, unique = True)
     description     = models.TextField(blank = True, null = True)
     category        = models.CharField(max_length = 30, blank = True, null = True, choices = EVENT_CATEGORY_CHOICES)
     is_visible      = models.BooleanField(default = False)
@@ -64,7 +64,7 @@ class Event(models.Model):
 class Credit(models.Model):
     # people involved in the credit allotment
     awarded_to      = models.ForeignKey(User, related_name='awarded_to')
-    awarded_by_id   = models.IntegerField(default = 0) # Cant make a foreign key as only 1 user foreign key is allowed ...
+    awarded_by_id   = models.IntegerField(default = -1) # Cant make a foreign key as only 1 user foreign key is allowed ...
     
     # Project or Event involved in the credit
     event           = models.ForeignKey(EventInstance)
@@ -82,6 +82,5 @@ class Credit(models.Model):
     
     def awarded_by(self):
         return User.objects.get(id=self.awarded_by_id)
-
 
 
