@@ -55,6 +55,16 @@ urlpatterns = patterns('',
     url(r'^passwd_reset/reset/done/?$','django.contrib.auth.views.password_reset_done',{'template_name':'password/reset_done.html'}),
     url(r'^passwd_reset/reset/(?P<uidb36>[0-9A-Za-z]+)-(?P<token>.+)/?$','django.contrib.auth.views.password_reset_confirm',{'template_name':'password/reset_new_password.html'}),
     url(r'^passwd_reset/reset/complete/?$','django.contrib.auth.views.password_reset_complete',{'template_name':'password/reset_complete.html'}),
+    
+    # Events urls
+    
+    #url(r'),
+    #url(r'^projects/(?P<event_id>\d+)/$', 'apps.events.views.display_events', name = 'event_details'),
+    #url(r'^projects/instances/(?P<instance_id>\d+)/$', 'apps.events.views.display_instance', name = 'instance_details'),
+    
+    url(r'^events/(?P<event_id>\d+)/$', 'apps.events.views.display_events', name = 'event_details'),
+    url(r'^events/instances/(?P<instance_id>\d+)/$', 'apps.events.views.display_instance', name = 'instance_details'),
+    
     # Media files
     url(r'^media/(?P<path>.*)$', 'django.views.static.serve', { 'document_root': settings.MEDIA_ROOT }),
     

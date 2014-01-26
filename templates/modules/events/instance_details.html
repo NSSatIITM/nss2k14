@@ -18,37 +18,7 @@
             <h3> Name </h3>
             <p> {{ event }} </p>
         </div>
-        {% if instances %}
-        	<div id = "intances">
-        		<h3> Instances </h3>
-        		{% for instance in instances %}
-        			<li><a href="{{instane.get_absolute_url}}" class='pull-left'>{{ instance }}</a></li>
-        		{% endfor %}
-        	</div>
-        {% endif %}
-        {% if event.goals.all %}
-            <div id="goals">
-                <h3> Goals </h3>
-                <ul>
-                    {% for goal in event.goals.all %}
-                        <li> {{ goal }} </li>
-                    {% endfor %}
-                </ul>
-            </div>
-        {% endif %}
-        {% if event.motivation %}
-            <div id="motivation">
-                <h3> Motivation </h3>
-                <p> {{ event.motivation }} </p>
-            </div>
-        {% endif %}
-        {% if event.description %}
-            <div id="description">
-                <h3> Description </h3>
-                <p> {% autoescape off %} {{ event.description }} {% endautoescape %}</p>
-            </div>
-        {% endif %}
-    </div>   
+    </div>
     
 {% endblock %}
 
