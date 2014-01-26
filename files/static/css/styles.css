@@ -303,6 +303,13 @@ a.white:hover {
     text-decoration : none; 
 }
 
+.well {
+    background-color : #333333;
+}
+.well:hover {
+    background-color : #303030;
+}
+
 .loading-dots {
     width: 20px;
     height: 20px;

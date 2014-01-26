@@ -15,7 +15,7 @@ from apps.events.models import Event, EventInstance, Credit
 from django.templatetags.static import static
 # Python
 import os
-
+    
 def events (request):
     eventspage = True
      
@@ -23,8 +23,10 @@ def events (request):
     event_category = 'Event'
     event_list = Event.objects.filter(category = event_category).filter(is_visible = True)
     
+    event = event_list[0]
+    
     return render_to_response('pages/events.html', locals(), context_instance= global_context(request))
-
+    
 def projects(request):
     projectspage = True
     
@@ -42,3 +44,4 @@ def winterns(request):
     wintern_list = Event.objects.filter(category = wintern_category).filter(is_visible = True)
     
     return render_to_response('pages/winterns.html', locals(), context_instance= global_context(request))
+    

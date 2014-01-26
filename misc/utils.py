@@ -31,16 +31,24 @@ def global_context(request):
     """
         Some basic variables useful in templates
     """
-    context =  RequestContext (request,
-            {'user':request.user,
-            'SITE_URL':settings.SITE_URL,
-            'MEDIA_URL':settings.MEDIA_URL,
-            'MEDIA_ROOT':settings.MEDIA_ROOT,
-            'STATIC_ROOT':settings.STATIC_ROOT,
-            'STATIC_URL':settings.STATIC_URL,
-            'DEBUG':settings.DEBUG,
-            'SETTINGS':settings,
-            })
+    vals = {
+        'user':request.user,
+        'SITE_URL':settings.SITE_URL,
+        'MEDIA_URL':settings.MEDIA_URL,
+        'MEDIA_ROOT':settings.MEDIA_ROOT,
+        'STATIC_ROOT':settings.STATIC_ROOT,
+        'STATIC_URL':settings.STATIC_URL,
+        'DEBUG':settings.DEBUG,
+        'SETTINGS':settings,
+    }
+    try:
+        userprofile = request.user.profile_set.first()
+        vals['userprofile'] = userprofile
+        print "userprofile got"
+    except:
+        pass
+        
+    context =  RequestContext (request, vals)
     return context
 
 # ------------------ FORM CUSTOMIZATIONS
@@ -112,7 +120,7 @@ def populate_test_data(MAX_USERS = 20, MAX_EVENTS = 10, MAX_EVENT_INSTANCES = 4)
         print "User " + roll_no + " created"
     print "Users done -----------------------------------------------"
         
-    # EVENT DETAILS 
+    # EVENTS
     for i in xrange(MAX_EVENTS):
         event_category_no = int( 1.0 * i / MAX_EVENTS * len(EVENT_CATEGORY_CHOICES) )
         event_category = EVENT_CATEGORY_CHOICES[int( 1.0 * i / MAX_EVENTS * len(EVENT_CATEGORY_CHOICES) )][0]
@@ -134,7 +142,7 @@ def populate_test_data(MAX_USERS = 20, MAX_EVENTS = 10, MAX_EVENT_INSTANCES = 4)
         event.save()
         print "Event " + event_name + " created"
     
-        # EVENTS 
+        # EVENT INSTANCES
         for i in xrange(MAX_EVENT_INSTANCES):
             event_name = "event_" + event.name + "_" + str(i).zfill(2)
             
@@ -149,5 +157,6 @@ def populate_test_data(MAX_USERS = 20, MAX_EVENTS = 10, MAX_EVENT_INSTANCES = 4)
             event.save()
             
             print "Event of " + event_name + " created"
+ 
     print "Event + Details done -----------------------------------------------"
     

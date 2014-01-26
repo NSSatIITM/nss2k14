@@ -23,7 +23,7 @@ class EventInstance(models.Model):
     
     # -------- Methods to handle basic data of the class
     def __unicode__(self):
-        return self.name + "::" + str(self.start_date) + "-" + str(self.end_data)
+        return self.event_set.first().name + "::" + str(self.start_date) + "-" + str(self.end_date)
     
     # -------- Methods to handle fields in the model
     

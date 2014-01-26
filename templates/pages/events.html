@@ -1,8 +1,8 @@
 {% extends 'pages/base.html' %}
 {% load staticfiles %}
-
+    
 {% block title %} Events | NSS IITM {% endblock %}
-
+    
 {% block content %}
     <div class='container pad-top'>
         <div class='row centered'>
@@ -12,71 +12,83 @@
             </div>
             <div class="col-xl-9">
                 <p>Sticking to the NSS motto of "Not me, but you", our events for the year would serve the larger goal of reaching out to the society and motivating the volunteers towards such endeavors. NSS Events will empower a volunteer with better skills for life, be it leadership or time management; enlighten with ideas for a lifetime; enrich as a person and expand possibilities and choices and finally rekindle the fire within.</p>
+                
             </div>
         </div>
     </div>
     <div class='container pad-top'>
         <div class='row centered'>
             <div class="col-md-12">
-                <div>
-                    <div class="z-slider-wrapper z-shadows" style="display: block; width: 1138px;">
-                        <article id="demo-accordion-01" class="z-demo-accordion transition z-accordion horizontal red z-grouped z-bordered z-shadows" data-role="z-accordion" data-options="{
-                            &quot;active&quot; : false,
-                            &quot;responsive&quot; : true,
-                            &quot;orientation&quot; : &quot;horizontal&quot;,  
-                            &quot;theme&quot; : &quot;red&quot;, 
-                            &quot;shadows&quot; : true,
-                            &quot;bordered&quot; : true, 
-                            &quot;slider&quot; : true, 
-                            &quot;rounded&quot; : false, 
-                            &quot;width&quot; : 1600, 
-                            &quot;height&quot; : 420, 
-                            &quot;dotNav&quot; : false, 
-                            &quot;containerHeight&quot; : 320, 
-                            &quot;headerSize&quot; : 68, 
-                            &quot;animation&quot; : { 
-                                &quot;duration&quot; : 500
-                            }, 
-                            &quot;showIcons&quot; : true,
-                            &quot;headerFontSize &quot; : 1.6, 
-                            &quot;autoplay&quot; : { 
-                                &quot;interval&quot; : 1000000 
-                            } 
-                        }" role="tablist" style="width: 1138px; height : 298px;">
-                            {% for ev in event_list %}
-                                <section class="z-section" aria-hidden="true" aria-expanded="false" aria-selected="false">
-                                    <h3 class="z-link" role="tab" tabindex="-1">
-                                        <span class="z-title">{{ ev.name }}</span>
-                                        <span class="z-arrow"></span>
-                                    </h3>
-                                    <div class="z-content" role="tabpanel" aria-hidden="true" aria-expanded="false">
-                                        <div class="z-auto-g">
-                                            {{ ev.description }}
-                                            <br />
-                                            <br />
-                                            <a href='#' class='pull-right'>Get more details ...</a>
-                                        
-                                        </div>
+                <div class="z-slider-wrapper z-shadows" style="display: block; width: 1138px;">
+                    <article id="demo-accordion-01" class="z-demo-accordion transition z-accordion horizontal red z-grouped z-bordered z-shadows" data-role="z-accordion" data-options="{
+                        &quot;active&quot; : false,
+                        &quot;responsive&quot; : true,
+                        &quot;orientation&quot; : &quot;horizontal&quot;,  
+                        &quot;theme&quot; : &quot;red&quot;, 
+                        &quot;shadows&quot; : true,
+                        &quot;bordered&quot; : true, 
+                        &quot;slider&quot; : true, 
+                        &quot;rounded&quot; : false, 
+                        &quot;width&quot; : 1600, 
+                        &quot;height&quot; : 420, 
+                        &quot;dotNav&quot; : false, 
+                        &quot;containerHeight&quot; : 320, 
+                        &quot;headerSize&quot; : 68, 
+                        &quot;animation&quot; : { 
+                            &quot;duration&quot; : 500
+                        }, 
+                        &quot;showIcons&quot; : true,
+                        &quot;headerFontSize &quot; : 1.6, 
+                        &quot;autoplay&quot; : { 
+                            &quot;interval&quot; : 1000000 
+                        } 
+                    }" role="tablist" style="width: 1138px; height : 298px;">
+                        {% for ev in event_list %}
+                            <section class="z-section" aria-hidden="true" aria-expanded="false" aria-selected="false">
+                                <h3 class="z-link" role="tab" tabindex="-1">
+                                    <span class="z-title">{{ ev.name }}</span>
+                                    <span class="z-arrow"></span>
+                                </h3>
+                                <div class="z-content" role="tabpanel" aria-hidden="true" aria-expanded="false">
+                                    <div class="z-auto-g">
+                                        {{ ev.description }}
+                                        <br />
+                                        <br />
+                                        <a href='#' class='pull-right'>Get more details ...</a>
+                                    
                                     </div>
-                                </section>
-                            {% endfor %}
-                        </article>
-                    </div>
+                                </div>
+                            </section>
+                        {% endfor %}
+                    </article>
                 </div>
             </div>
         </div>
     </div>
-
+    <div class='container pad-top'>
+        <div class='row centered'>
+            <div class="col-md-12">
+                Number of times the event was conducted : {{ event.instances.count }}
+            </div>
+        </div>
+        <div class='row centered'>
+            <div class="col-md-12">
+                {% for event_i in event.instances.all %}
+                    <div class='well'>{{ event_i }}</div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
 {% endblock %}
-
+    
 {% block extra_css %}
 {{ block.super }}
 <link href="{% static 'css/z-accordion.css' %}" rel="stylesheet" media="screen">
 <style type='text/css'>
 </style>
 {% endblock %}
-
-
+    
+    
 {% block extra_js %}
 {{ block.super }}
 <script type="text/javascript" src="{% static 'js/z-accordion.js' %}"></script>
@@ -84,3 +96,4 @@
 <script type='text/javascript'>
 </script>
 {% endblock %}
+    

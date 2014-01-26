@@ -28,7 +28,7 @@ USERTYPE_CHOICES = (
 
 class UserProfile(models.Model):
     # Foreign Key for the User class
-    user            = models.ForeignKey(User, unique = True)
+    user            = models.ForeignKey(User, unique = True, related_name = 'profile_set')
 
     # Identification number
     roll_no         = models.CharField(max_length = 10, blank = False, null = True)
@@ -72,7 +72,10 @@ class UserProfile(models.Model):
         if self.roll_no != None and self.roll_no != "":
             unknown_data.append("Roll Number")
         return unknown_data
-                
+        
+    def is_manager(self):
+        return self.usertype == 4
+        
     class Admin:
         pass
 
