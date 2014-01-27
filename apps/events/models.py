@@ -23,7 +23,18 @@ class EventInstance(models.Model):
     
     # -------- Methods to handle basic data of the class
     def __unicode__(self):
-        return self.name + "::" + str(self.start_date) + "-" + str(self.end_data)
+        return self.event_set.all()[0].name + "::" + str(self.start_date) + "-" + str(self.end_date)
+        
+    def construct_dir_path(self):
+        try:
+            return settings.PROJECT_DIR + 'project_' + str(self.id) + '/'
+        except AttributeError:
+            return 'projects/project_' + str(self.id) + '/'
+    
+    @models.permalink
+    def get_absolute_url(self):
+        return ('instance_details', (), { 'instance_id' : self.id, } )
+    
     
     # -------- Methods to handle fields in the model
     
@@ -60,6 +71,17 @@ class Event(models.Model):
     # -------- Methods to handle basic data of the class
     def __unicode__(self):
         return self.name
+    
+    def construct_dir_path(self):
+        try:
+            return settings.PROJECT_DIR + 'project_' + str(self.id) + '/'
+        except AttributeError:
+            return 'projects/project_' + str(self.id) + '/'
+    
+    @models.permalink
+    def get_absolute_url(self):
+        return ('event_details', (), { 'event_id' : self.id, } )
+   
     
 class Credit(models.Model):
     # people involved in the credit allotment
